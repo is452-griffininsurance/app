@@ -1,6 +1,7 @@
 # app
 
-https://app.netlify.com/sites/is452-g1t2/settings/general
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2fa0c734-866e-40fa-bbc4-01d647cdb640/deploy-status)](https://app.netlify.com/sites/is452-g1t2/deploys)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
