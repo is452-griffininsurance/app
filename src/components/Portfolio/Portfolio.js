@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 function Portfolio() {
   return (
@@ -6,12 +6,8 @@ function Portfolio() {
       <section className="hero is-dark">
         <div className="hero-body">
           <div className="container">
-            <h1 className="title">
-              Portfolio
-          </h1>
-            <h2 className="subtitle">
-              Overview
-          </h2>
+            <h1 className="title">Portfolio</h1>
+            <h2 className="subtitle">Overview</h2>
           </div>
         </div>
       </section>
@@ -19,7 +15,7 @@ function Portfolio() {
         <table className="table">
           <thead>
             <tr>
-              <th></th>
+              <th />
               <th>Stock Code</th>
               <th>Side</th>
               <th>Date</th>
@@ -30,7 +26,7 @@ function Portfolio() {
           </thead>
           <tfoot>
             <tr>
-              <th></th>
+              <th />
               <th>Stock Code</th>
               <th>Side</th>
               <th>Date</th>
@@ -39,9 +35,7 @@ function Portfolio() {
               <th>Shares</th>
             </tr>
           </tfoot>
-          <tbody>
-            
-          </tbody>
+          <tbody />
         </table>
       </div>
     </div>

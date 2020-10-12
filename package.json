@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "bulma": "^0.9.1",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-bulma-components": "^3.4.0",
@@ -20,15 +21,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint . --ext .js",
-    "lint:fix": "npm run lint -- --fix"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "prettier",
-      "prettier/react"
-    ]
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "precommit": "lint-staged"
   },
   "browserslist": {
     "production": [
@@ -43,6 +38,20 @@
     ]
   },
   "devDependencies": {
-    "eslint-config-prettier": "^6.12.0"
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.4",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.0",
+    "prettier": "^2.1.2"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier — single-quote — write",
+      "git add"
+    ]
   }
 }
