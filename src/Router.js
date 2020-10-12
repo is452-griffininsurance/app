@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import PortfolioRecords from "./components/Portfolio/PortfolioRecords";
 import TopNavbar from "./components/UI/TopNavbar";
 import Stocks from "./components/Stocks";
+import Block from "./components/Blockchain/Block";
 
 export default function Router() {
   return (
@@ -21,6 +22,9 @@ export default function Router() {
           </Route>
           <Route path="/stocks">
             <Stocks />
+          </Route>
+          <Route path="/block">
+            <Block />
           </Route>
         </Switch>
       </div>
