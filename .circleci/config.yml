@@ -9,8 +9,5 @@ jobs:
           name: install
           command: npm install
       - run:
-          name: lint
-          command: npm run lint
-      - run:
           name: build
           command: npm run build
