@@ -62,6 +62,9 @@ function TopNavbar() {
             <Link to="/stocks" className="navbar-item">
               Stocks
             </Link>
+            <Link to="/block" className="navbar-item">
+              Blockchain
+            </Link>
           </div>
           <div className="navbar-end">
             <div className="navbar-item">
