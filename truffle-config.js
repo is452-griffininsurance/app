@@ -78,8 +78,8 @@ module.exports = {
   mocha: {
     timeout: 100000,
   },
-  contracts_directory: "./blockchain/contracts/",
-  contracts_build_directory: "./blockchain/abis/",
+  contracts_directory: "./src/blockchain/contracts/",
+  contracts_build_directory: "./src/blockchain/abis/",
   // Configure your compilers
   compilers: {
     solc: {

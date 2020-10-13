@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Web3 from "web3";
+import CreditLetterFactory from "../../blockchain/abi";
 
 function Block() {
   const [block, setBlock] = useState([]);
   useEffect(() => {
     const web3 = new Web3(
       new Web3.providers.HttpProvider(
-        "https://mainnet.infura.io/v3/962df9d540344f349b3ca4c976f68d0d"
+        "http://127.0.0.1:7545" // "https://mainnet.infura.io/v3/962df9d540344f349b3ca4c976f68d0d"
       )
     );
 
     web3.eth.getBlock("latest").then(setBlock);
+    const PAAddress = "0xf25186b5081ff5ce73482ad761db0eb0d25abfbf";
+    const PA = web3.eth.Contract(new CreditLetterFactory()).at(PAAddress);
+    console.log(PA);
   }, []);
   return (
     <div>
