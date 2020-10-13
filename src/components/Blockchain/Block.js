@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Web3 from "web3";
-import CreditLetterFactory from "../../blockchain/abis/CreditLetterFactory.json";
 
 function Block() {
   const [block, setBlock] = useState([]);
