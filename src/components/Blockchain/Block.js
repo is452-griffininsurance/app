@@ -4,6 +4,8 @@ import Web3 from "web3";
 function Block() {
   const [block, setBlock] = useState([]);
   const [averageGasPrice, setAverageGasPrice] = useState(0);
+  const web3 = new Web3(Web3.givenProvider);
+
   // const [contract, setContract] = useState();
 
   useEffect(() => {
@@ -13,8 +15,6 @@ function Block() {
     //     "http://127.0.0.1:7545" // "https://mainnet.infura.io/v3/962df9d540344f349b3ca4c976f68d0d"
     //   )
     // );
-
-    const web3 = new Web3(Web3.givenProvider);
 
     // Get average gas price
     web3.eth
@@ -32,7 +32,7 @@ function Block() {
       const defaultAccount = account[0];
       web3.eth.defaultAccount = defaultAccount;
     });
-  }, []);
+  }, [web3.eth]);
 
   return (
     <div>
@@ -61,7 +61,7 @@ function Block() {
               </div>
             </div>
             Current Ethereum block is {block.number}. Current average gas price
-            is {averageGasPrice}.
+            is {averageGasPrice}.{web3.eth.defaultAccount}
           </div>
         </div>
       </div>
