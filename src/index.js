@@ -9,8 +9,8 @@ import "./index.css";
 ReactDOM.render(
   <React.StrictMode>
     <Auth0Provider
-      domain="pixely.us.auth0.com"
-      clientId="PjNkui0vm62Wt3WatdYERY7HxH6ZqCwp"
+      domain="is452.us.auth0.com"
+      clientId="zS3kwlOGPAq1lGo4g0MemUPMOW840taY"
       redirectUri={window.location.origin}
     >
       <App />
