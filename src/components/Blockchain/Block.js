@@ -5,7 +5,7 @@ import CreditLetterFactory from "../../blockchain/abis/CreditLetterFactory.json"
 function Block() {
   const [block, setBlock] = useState([]);
   const [averageGasPrice, setAverageGasPrice] = useState(0);
-  const [contract, setContract] = useState();
+  // const [contract, setContract] = useState();
 
   useEffect(() => {
     // Web3 server-side provider
@@ -27,7 +27,7 @@ function Block() {
       .catch(console.error);
     // Get latest block
     web3.eth.getBlock("latest").then(setBlock);
-    const creditLetter = new web3.eth.Contract(CreditLetterFactory.abi);
+    // const creditLetter = new web3.eth.Contract(CreditLetterFactory.abi);
     console.log(window.ethereum);
     window.ethereum.enable().then((account) => {
       const defaultAccount = account[0];
