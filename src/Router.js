@@ -5,6 +5,7 @@ import PortfolioRecords from "./components/Portfolio/PortfolioRecords";
 import TopNavbar from "./components/UI/TopNavbar";
 import Stocks from "./components/Stocks";
 import Block from "./components/Blockchain/Block";
+import ProtectedRoute from "./auth/ProtectedRoute";
 
 export default function Router() {
   return (
@@ -17,15 +18,12 @@ export default function Router() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/portfolio/records">
-            <PortfolioRecords />
-          </Route>
-          <Route path="/stocks">
-            <Stocks />
-          </Route>
-          <Route path="/block">
-            <Block />
-          </Route>
+          <ProtectedRoute
+            path="/portfolio/records"
+            component={PortfolioRecords}
+          />
+          <Route path="/stocks" component={Stocks} />
+          <ProtectedRoute path="/block" component={Block} />
         </Switch>
       </div>
     </BrowserRouter>

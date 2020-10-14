@@ -1,20 +1,16 @@
 import "bulma/css/bulma.min.css";
 import React from "react";
 import ReactDOM from "react-dom";
-import { Auth0Provider } from "@auth0/auth0-react";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./index.css";
+import Auth0ProviderWithHistory from "./auth/Auth0ProviderWithHistory";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Auth0Provider
-      domain="is452.us.auth0.com"
-      clientId="zS3kwlOGPAq1lGo4g0MemUPMOW840taY"
-      redirectUri={window.location.origin}
-    >
+    <Auth0ProviderWithHistory>
       <App />
-    </Auth0Provider>
+    </Auth0ProviderWithHistory>
   </React.StrictMode>,
   document.getElementById("root")
 );
