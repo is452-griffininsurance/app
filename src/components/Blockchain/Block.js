@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Web3 from "web3";
+import CreditLetterFactory from "../../blockchain/abis/CreditLetterFactory.json";
 
 function Block() {
   const [block, setBlock] = useState([]);
@@ -26,13 +27,28 @@ function Block() {
       .catch(console.error);
     // Get latest block
     web3.eth.getBlock("latest").then(setBlock);
-    // const creditLetter = new web3.eth.Contract(CreditLetterFactory.abi);
-    console.log(window.ethereum);
     window.ethereum.enable().then((account) => {
       const defaultAccount = account[0];
       web3.eth.defaultAccount = defaultAccount;
     });
-  }, [web3.eth]);
+
+    // Deploying L/C from the frontend (think for us, we do on backend instead)
+    const creditLetter = new web3.eth.Contract(CreditLetterFactory.abi);
+    creditLetter
+      .deploy({
+        data: `${CreditLetterFactory.bytecode}`,
+        arguments: [
+          web3.eth.defaultAccount,
+          web3.utils.toHex(1000), // need to toHex
+          web3.utils.toHex(1),
+        ],
+      })
+      .send({
+        from: "0x6D9007d50950F2a8ddd44795082AAA4fEBb5Cb73",
+        gasPrice: "1000",
+        gas: 2310334,
+      });
+  }, []);
 
   return (
     <div>
