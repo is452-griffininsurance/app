@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Web3 from "web3";
 import CreditLetter from "../../blockchain/abis/CreditLetter.json";
-import OnboardingButton from "./OnboardingButton";
+import OnboardingButton from "../Blockchain/OnboardingButton";
 
 function Block() {
   const [block, setBlock] = useState([]);
