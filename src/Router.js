@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
-import PortfolioRecords from "./components/Portfolio/PortfolioRecords";
+import PortfolioRecords from "./components/Pages/PortfolioRecords";
 import TopNavbar from "./components/UI/TopNavbar";
-import Stocks from "./components/Stocks";
-import Block from "./components/Blockchain/Block";
+import Stocks from "./components/Pages/Stocks";
+import Block from "./components/Pages/Block";
 import ProtectedRoute from "./auth/ProtectedRoute";
 
 export default function Router() {
@@ -18,12 +18,13 @@ export default function Router() {
           <Route exact path="/">
             <Home />
           </Route>
+          <Route path="/stocks" component={Stocks} />
           <ProtectedRoute
             path="/portfolio/records"
             component={PortfolioRecords}
           />
-          <Route path="/stocks" component={Stocks} />
           <ProtectedRoute path="/block" component={Block} />
+          <ProtectedRoute path="/profile" component={Block} />
         </Switch>
       </div>
     </BrowserRouter>
