@@ -12,6 +12,8 @@ ReactDOM.render(
       domain="is452.us.auth0.com"
       clientId="zS3kwlOGPAq1lGo4g0MemUPMOW840taY"
       redirectUri={window.location.origin}
+      audience="https://api.is452.cloud/"
+      scope="read:profile write:profile read:bids create:bids"
     >
       <App />
     </Auth0Provider>
