@@ -3,7 +3,7 @@ import React from "react";
 function Portfolio() {
   return (
     <div>
-      <section className="hero is-dark">
+      <section className="hero is-dark mb-4">
         <div className="hero-body">
           <div className="container">
             <h1 className="title">Portfolio</h1>
