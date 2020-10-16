@@ -1,59 +1,106 @@
-import React, { useEffect, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-function Profile() {
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-  const [userMetadata, setUserMetadata] = useState(null);
+const cardEqualHeight = {
+  display: "flex",
+  flexDirection: "column",
+  height: "100%",
+};
 
-  useEffect(() => {
-    const getUserMetadata = async () => {
-      const domain = "api.is452.cloud";
-
-      try {
-        const accessToken = await getAccessTokenSilently();
-        const userDetails = `https://${domain}/users`;
-        const metadataResponse = await fetch(userDetails, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-
-        // eslint-disable-next-line camelcase
-        // const { user_metadata } = await metadataResponse.json();
-        console.log(await metadataResponse.json());
-
-        // setUserMetadata(user_metadata);
-      } catch (e) {
-        console.log(e.message);
-      }
-    };
-
-    getUserMetadata();
-  }, [getAccessTokenSilently, user]);
-
-  return (
-    isAuthenticated && (
-      <div>
-        <img src={user.picture} alt={user.name} />
-        <p>{user.email}</p>
-        <p>{userMetadata}</p>
-      </div>
-    )
-  );
-}
+const cardFooter = {
+  marginTop: "auto",
+};
 
 function Home() {
   return (
     <>
-      <section className="hero is-dark">
+      <section className="hero is-dark mb-4">
         <div className="hero-body">
           <div className="container">
-            <h1 className="title">Home</h1>
+            <h1 className="title">Make Insurance Fair and Accessible</h1>
+            <p>
+              Decentralized insurance protocol to collectively build insurance
+              products.
+            </p>
           </div>
         </div>
       </section>
       <div className="container is-fluid">
-        <Profile />
+        <div className="columns">
+          <div className="column">
+            <div className="card" style={cardEqualHeight}>
+              <div className="card-content">
+                <div className="content">
+                  <h2>
+                    <span role="img" aria-label="airplane">
+                      🛫
+                    </span>{" "}
+                    Flight Insurance
+                  </h2>
+                  First decentralized insurance. Payouts are automatic and
+                  almost instant. Now fully licensed.{" "}
+                </div>
+              </div>
+              <footer className="card-footer" style={cardFooter}>
+                <Link to="/" className="card-footer-item">
+                  Buy
+                </Link>
+                <a href="https://t.me/is452_smu" className="card-footer-item">
+                  Join the Community
+                </a>
+              </footer>
+            </div>
+          </div>
+          <div className="column">
+            <div className="card" style={cardEqualHeight}>
+              <div className="card-content">
+                <div className="content">
+                  <h2>
+                    <span role="img" aria-label="rain">
+                      🌧️
+                    </span>{" "}
+                    Rain Insurance
+                  </h2>
+                  Protect yourself against price surge when it rains! Get back
+                  60% of your fare on Grab, Ryde & GOJEK.
+                </div>
+              </div>
+              <footer className="card-footer" style={cardFooter}>
+                <Link to="/" className="card-footer-item">
+                  Buy
+                </Link>
+                <a href="https://t.me/is452_smu" className="card-footer-item">
+                  Join the Community
+                </a>
+              </footer>
+            </div>
+          </div>
+          <div className="column">
+            <div className="card" style={cardEqualHeight}>
+              <div className="card-content">
+                <div className="content">
+                  <h2>
+                    <span role="img" aria-label="airplane">
+                      🌾
+                    </span>{" "}
+                    Crop Insurance
+                  </h2>
+                  Select your crop and the location of your field. Automated
+                  payouts are triggered by drought or flood events reported by
+                  government agencies.
+                </div>
+              </div>
+              <footer className="card-footer" style={cardFooter}>
+                <Link to="/" className="card-footer-item">
+                  Buy
+                </Link>
+                <a href="https://t.me/is452_smu" className="card-footer-item">
+                  Join the Community
+                </a>
+              </footer>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
