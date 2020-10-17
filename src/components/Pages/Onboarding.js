@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import JWTDecode from "jwt-decode";
 
+export const API_URL = "https://api.is452.cloud";
+// export const API_URL = "http://localhost:5000";
+
 const initialFormData = Object.freeze({
   name: "",
 });
@@ -27,12 +30,12 @@ function Onboarding() {
     // e.preventDefault();
 
     // Set final post data to include email, not very secure but ok
-    // Should send bearer token instead
+    // Should send bearer token instead, then check serverside!
     const data = { ...formData, email: jwtClaims.email };
 
     // Post to API
     console.log(data);
-    fetch("https://api.is452.cloud/users/onboarding", {
+    fetch(`${API_URL}/users/onboarding`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -60,41 +63,40 @@ function Onboarding() {
             <div className="field">
               <label className="label" htmlFor="name">
                 Name
-              </label>
-              <div className="control">
                 <input
-                  className="input"
+                  className="control input"
                   name="name"
                   type="text"
                   placeholder="Johnny Appleseed"
                   onChange={handleChange}
                 />
-              </div>
+              </label>
             </div>
 
             <div className="field">
               <div className="control">
-                <label className="checkbox" id="checkbox">
+                <label className="checkbox" id="checkbox" htmlFor="checkbox">
                   <input type="checkbox" /> I agree to the{" "}
                   <a
                     href="https://is452.cloud/terms-and-conditions"
                     target="noopener noreferrer"
                   >
-                    terms and conditions
+                    Terms and Conditions
                   </a>
+                  .
                 </label>
               </div>
             </div>
 
             <div className="field is-grouped">
               <div className="control">
-                <span
-                  role="button"
+                <button
+                  type="submit"
                   className="button is-link"
                   onClick={() => handleSubmit()}
                 >
                   Submit
-                </span>
+                </button>
               </div>
               <div className="control">
                 <button type="button" className="button is-link is-light">

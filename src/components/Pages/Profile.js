@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 
+export const API_URL = "https://api.is452.cloud";
+// export const API_URL = "http://localhost:5000";
+
 function Profile() {
   const { user, getAccessTokenSilently } = useAuth0();
   const [userMetadata, setUserMetadata] = useState(null);
 
   useEffect(() => {
     const getUserMetadata = async () => {
-      const domain = "api.is452.cloud";
-
       try {
         const accessToken = await getAccessTokenSilently();
-        const userDetails = `https://${domain}/users`;
+        const userDetails = `${API_URL}/users`;
         const metadataResponse = await fetch(userDetails, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -20,7 +21,6 @@ function Profile() {
         });
         const metadata = await metadataResponse.json();
         setUserMetadata(metadata);
-        console.log(accessToken);
       } catch (e) {
         console.error(e.message);
       }
@@ -34,7 +34,7 @@ function Profile() {
       <section className="hero is-dark mb-4">
         <div className="hero-body">
           <div className="container">
-            <h1 className="title">Profile of {userMetadata?.nickname}</h1>
+            <h1 className="title">Profile of {userMetadata?.full_name}</h1>
             <h2 className="subtitle">My profile</h2>
           </div>
         </div>
