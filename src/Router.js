@@ -6,6 +6,8 @@ import TopNavbar from "./components/UI/TopNavbar";
 import Stocks from "./components/Pages/Stocks";
 import Block from "./components/Pages/Block";
 import ProtectedRoute from "./auth/ProtectedRoute";
+import Profile from "./components/Pages/Profile";
+import Onboarding from "./components/Pages/Onboarding";
 
 export default function Router() {
   return (
@@ -24,7 +26,8 @@ export default function Router() {
             component={PortfolioRecords}
           />
           <ProtectedRoute path="/block" component={Block} />
-          <ProtectedRoute path="/profile" component={Block} />
+          <ProtectedRoute path="/profile" component={Profile} />
+          <Route path="/onboarding" component={Onboarding} />
         </Switch>
       </div>
     </BrowserRouter>
