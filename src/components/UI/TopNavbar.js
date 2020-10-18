@@ -56,14 +56,14 @@ function TopNavbar() {
             <Link to="/" className="navbar-item">
               Home
             </Link>
-            <Link to="/portfolio/records" className="navbar-item">
-              Portfolio
-            </Link>
             <Link to="/stocks" className="navbar-item">
               Stocks
             </Link>
             <Link to="/block" className="navbar-item">
-              Blockchain
+              Insurance
+            </Link>
+            <Link to="/profile" className="navbar-item">
+              Profile
             </Link>
           </div>
           <div className="navbar-end">

@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
-import PortfolioRecords from "./components/Pages/PortfolioRecords";
 import TopNavbar from "./components/UI/TopNavbar";
 import Stocks from "./components/Pages/Stocks";
 import Block from "./components/Pages/Block";
@@ -21,10 +20,6 @@ export default function Router() {
             <Home />
           </Route>
           <Route path="/stocks" component={Stocks} />
-          <ProtectedRoute
-            path="/portfolio/records"
-            component={PortfolioRecords}
-          />
           <ProtectedRoute path="/block" component={Block} />
           <ProtectedRoute path="/profile" component={Profile} />
           <Route path="/onboarding" component={Onboarding} />
