@@ -26,7 +26,7 @@ class TopNavbar extends React.Component {
               Home
               <Link to="/"></Link>
             </Menu.Item>
-            <Menu.Item key="Insurance" >
+            <Menu.Item key="Insurance">
               Insurance
               <Link to="/insurance"></Link>
             </Menu.Item>
