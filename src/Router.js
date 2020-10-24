@@ -7,6 +7,8 @@ import Block from "./components/Pages/Block";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import Profile from "./components/Pages/Profile";
 import Onboarding from "./components/Pages/Onboarding";
+import Insurance from "./components/Pages/Insurance";
+
 
 export default function Router() {
   return (
@@ -23,6 +25,7 @@ export default function Router() {
           <ProtectedRoute path="/block" component={Block} />
           <ProtectedRoute path="/profile" component={Profile} />
           <Route path="/onboarding" component={Onboarding} />
+          <Route path="/insurance" component={Insurance} />
         </Switch>
       </div>
     </BrowserRouter>
