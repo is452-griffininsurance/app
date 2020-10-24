@@ -1,81 +1,45 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { Menu, Layout } from 'antd';
+import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 
-function SignupButton() {
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
-  return (
-    !isAuthenticated && (
-      // eslint-disable-next-line react/button-has-type
-      <button className="button is-success" onClick={loginWithRedirect}>
-        <strong>Sign up</strong>
-      </button>
-    )
-  );
-}
+const { Header } = Layout;
 
-function LoginButton() {
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
-  return (
-    !isAuthenticated && (
-      // eslint-disable-next-line react/button-has-type
-      <button className="button is-light" onClick={loginWithRedirect}>
-        Log in
-      </button>
-    )
-  );
-}
+const { SubMenu } = Menu;
 
-function LogoutButton() {
-  const { isAuthenticated, logout } = useAuth0();
-  return (
-    isAuthenticated && (
-      // eslint-disable-next-line react/button-has-type
-      <button
-        className="button is-light"
-        onClick={() => logout({ returnTo: window.location.origin })}
-      >
-        Log out
-      </button>
-    )
-  );
-}
+class TopNavbar extends React.Component {
+  state = {
+    current: 'Home',
+  };
 
-function TopNavbar() {
-  return (
-    <>
-      <nav className="navbar" role="navigation" aria-label="main navigation">
-        <div className="navbar-brand">
-          <Link to="/" className="navbar-item">
-            dApp
-          </Link>
-          <Link to="/" className="navbar-burger burger" />
-        </div>
-        <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-start">
-            <Link to="/" className="navbar-item">
+  handleClick = e => {
+    console.log('click ', e);
+    this.setState({ current: e.key });
+  };
+
+  render() {
+    const { current } = this.state;
+    return (
+      <Layout>
+        <Header>
+          <Menu theme="dark" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
+            <Menu.Item key="Home" icon={<MailOutlined />}>
               Home
-            </Link>
-            <Link to="/stocks" className="navbar-item">
-              Stocks
-            </Link>
-            <Link to="/insurance" className="navbar-item">
+              <Link to="/"></Link>
+            </Menu.Item>
+            <Menu.Item key="Insurance" icon={<MailOutlined />}>
               Insurance
-            </Link>
-          </div>
-          <div className="navbar-end">
-            <div className="navbar-item">
-              <div className="buttons">
-                <SignupButton />
-                <LoginButton />
-                <LogoutButton />
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </>
-  );
+              <Link to="/insurance"></Link>
+            </Menu.Item>
+            <Menu.Item key="Stocks" icon={<AppstoreOutlined />}>
+              Stocks
+              <Link to="/stocks"></Link>
+            </Menu.Item>
+          </Menu>
+        </Header>
+      </Layout>
+    );
+  }
 }
 
 export default TopNavbar;
