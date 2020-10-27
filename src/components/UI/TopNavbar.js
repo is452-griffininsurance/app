@@ -34,6 +34,10 @@ class TopNavbar extends React.Component {
               Stocks
               <Link to="/stocks"></Link>
             </Menu.Item>
+            <Menu.Item key="Regulator" >
+              Regulator Home (temp)
+              <Link to="/regulators"></Link>
+            </Menu.Item>
           </Menu>
         </Header>
       </Layout>
