@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Menu, Layout } from 'antd';
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 
 const { Header } = Layout;
 
@@ -23,15 +22,15 @@ class TopNavbar extends React.Component {
       <Layout>
         <Header>
           <Menu theme="dark" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
-            <Menu.Item key="Home" icon={<MailOutlined />}>
+            <Menu.Item key="Home" >
               Home
               <Link to="/"></Link>
             </Menu.Item>
-            <Menu.Item key="Insurance" icon={<MailOutlined />}>
+            <Menu.Item key="Insurance" >
               Insurance
               <Link to="/insurance"></Link>
             </Menu.Item>
-            <Menu.Item key="Stocks" icon={<AppstoreOutlined />}>
+            <Menu.Item key="Stocks" >
               Stocks
               <Link to="/stocks"></Link>
             </Menu.Item>
