@@ -20,7 +20,7 @@ contract SmartInsurance {
     mapping(address => uint256) public balances;
     
     // Our address, not sure if we need this
-    address payable public owner = payable(0xfeB87197aBd18dDaBD28B58b205936dfB4569B17);
+    address payable public escrow = payable(0xfeB87197aBd18dDaBD28B58b205936dfB4569B17);
     
     string public flightCode;
     string public flightDate;
@@ -30,16 +30,18 @@ contract SmartInsurance {
         _;
     }
     
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Only contract owner can call this method");
+    modifier onlyEscrow() {
+        require(msg.sender == escrow, "Only GriffinInsurance's escrow service can call this method");
         _;
     }
     
-    constructor(address payable _insured, string memory _flightCode, string memory _flightDate) public {
-        insured = _insured;
+    constructor(string memory _flightCode, string memory _flightDate) payable public {
+        require(msg.value > 0, "Your premium must be at least 1 wei.");
+        insured = msg.sender;
         flightCode = _flightCode;
         flightDate = _flightDate;
-        status = Status.AWAITING_PREMIUM;
+        premium = premium.add(msg.value);
+        status = Status.AWAITING_FUNDING;
     }
     
     function insure() payable public {
@@ -47,14 +49,6 @@ contract SmartInsurance {
         insurers.push(msg.sender);
         balances[msg.sender] = balances[msg.sender].add(msg.value);
     }
-
-    function payPremium() payable onlyInsured public {
-        require(msg.value > 0, "Your premium must be at least 1 wei.");
-        premium = premium.add(msg.value);
-        status = Status.AWAITING_FUNDING;
-    }
-    
-    
 
     function getBalance() public view returns(uint256) {
         return address(this).balance;
@@ -69,7 +63,7 @@ contract SmartInsurance {
     }
     
     // Only we can control this function
-    function payout(uint8 _hours) onlyOwner public {
+    function payout(uint8 _hours) onlyEscrow public {
         if (_hours >= 3) {
             insured.transfer(address(this).balance);
         } else {

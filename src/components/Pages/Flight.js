@@ -1,45 +1,44 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
-import { Table, Button, Space, Layout, Tag, Input, Row, Col } from 'antd';
-import Highlighter from 'react-highlight-words';
-import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
-
+import { Table, Button, Space, Layout, Tag, Input, Row, Col } from "antd";
+import Highlighter from "react-highlight-words";
+import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
 
 const { Content, Footer } = Layout;
 
 const data = [
   {
-    id: 'John Brown',
+    id: "John Brown",
     premium: 32,
-    flightNo: 'BA2490',
-    status: 'Closed',
+    flightNo: "BA2490",
+    status: "Closed",
     percentage: 1,
-    departureDate: '31/12/2020',
+    departureDate: "31/12/2020",
   },
   {
-    id: 'Jim Green',
+    id: "Jim Green",
     premium: 42,
-    flightNo: 'BA2491A',
-    status: 'Closed',
+    flightNo: "BA2491A",
+    status: "Closed",
     percentage: 1,
-    departureDate: '1/12/2020',
+    departureDate: "1/12/2020",
   },
   {
-    id: 'Joe Black',
+    id: "Joe Black",
     premium: 32,
-    flightNo: 'BA2491A',
-    status: 'Open',
+    flightNo: "BA2491A",
+    status: "Open",
     percentage: 0.5,
-    departureDate: '31/1/2022',
+    departureDate: "31/1/2022",
   },
   {
-    id: 'Jim Red',
+    id: "Jim Red",
     premium: 32,
-    flightNo: 'BA2490',
-    status: 'Open',
+    flightNo: "BA2490",
+    status: "Open",
     percentage: 0.3,
-    departureDate: '3/8/2021',
+    departureDate: "3/8/2021",
   },
 ];
 
@@ -47,23 +46,32 @@ class Insurance extends React.Component {
   state = {
     filteredInfo: null,
     sortedInfo: null,
-    searchText: '',
-    searchedColumn: '',
+    searchText: "",
+    searchedColumn: "",
   };
 
   // Table
-  getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+  getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => (
       <div style={{ padding: 8 }}>
         <Input
-          ref={node => {
+          ref={(node) => {
             this.searchInput = node;
           }}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
+          onPressEnter={() =>
+            this.handleSearch(selectedKeys, confirm, dataIndex)
+          }
+          style={{ width: 188, marginBottom: 8, display: "block" }}
         />
         <Space>
           <Button
@@ -75,33 +83,42 @@ class Insurance extends React.Component {
           >
             Search
           </Button>
-          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+          <Button
+            onClick={() => this.handleReset(clearFilters)}
+            size="small"
+            style={{ width: 90 }}
+          >
             Reset
           </Button>
         </Space>
       </div>
     ),
-    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    filterIcon: (filtered) => (
+      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
+    ),
     onFilter: (value, record) =>
       record[dataIndex]
-        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
-        : '',
-    onFilterDropdownVisibleChange: visible => {
+        ? record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase())
+        : "",
+    onFilterDropdownVisibleChange: (visible) => {
       if (visible) {
         setTimeout(() => this.searchInput.select(), 100);
       }
     },
-    render: text =>
+    render: (text) =>
       this.state.searchedColumn === dataIndex ? (
         <Highlighter
-          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
           searchWords={[this.state.searchText]}
           autoEscape
-          textToHighlight={text ? text.toString() : ''}
+          textToHighlight={text ? text.toString() : ""}
         />
       ) : (
-          text
-        ),
+        text
+      ),
   });
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -112,13 +129,13 @@ class Insurance extends React.Component {
     });
   };
 
-  handleReset = clearFilters => {
+  handleReset = (clearFilters) => {
     clearFilters();
-    this.setState({ searchText: '' });
+    this.setState({ searchText: "" });
   };
 
   handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
+    console.log("Various parameters", pagination, filters, sorter);
     this.setState({
       filteredInfo: filters,
       sortedInfo: sorter,
@@ -153,116 +170,119 @@ class Insurance extends React.Component {
     filteredInfo = filteredInfo || {};
     const columns = [
       {
-        title: 'Insurance ID',
-        dataIndex: 'id',
-        key: 'id',
+        title: "Insurance ID",
+        dataIndex: "id",
+        key: "id",
         filteredValue: filteredInfo.id || null,
         onFilter: (value, record) => record.id.includes(value),
         sorter: (a, b) => a.id.localeCompare(b.id),
-        sortOrder: sortedInfo.columnKey === 'id' && sortedInfo.order,
-        ...this.getColumnSearchProps('id'),
+        sortOrder: sortedInfo.columnKey === "id" && sortedInfo.order,
+        ...this.getColumnSearchProps("id"),
         ellipsis: true,
       },
       {
-        title: 'Premium',
-        dataIndex: 'premium',
-        key: 'premium',
+        title: "Premium",
+        dataIndex: "premium",
+        key: "premium",
         sorter: (a, b) => a.premium - b.premium,
-        sortOrder: sortedInfo.columnKey === 'premium' && sortedInfo.order,
+        sortOrder: sortedInfo.columnKey === "premium" && sortedInfo.order,
         ellipsis: true,
       },
       {
-        title: 'Flight no.',
-        dataIndex: 'flightNo',
-        key: 'flightNo',
+        title: "Flight no.",
+        dataIndex: "flightNo",
+        key: "flightNo",
         filters: [
-          { text: 'London', value: 'London' },
-          { text: 'New York', value: 'New York' },
+          { text: "London", value: "London" },
+          { text: "New York", value: "New York" },
         ],
         filteredValue: filteredInfo.flightNo || null,
         onFilter: (value, record) => record.flightNo.includes(value),
         sorter: (a, b) => a.flightNo.localeCompare(b.flightNo),
-        sortOrder: sortedInfo.columnKey === 'flightNo' && sortedInfo.order,
-        render: flightNo => {
-          return (
-            <Tag> {flightNo} </Tag>
-          );
+        sortOrder: sortedInfo.columnKey === "flightNo" && sortedInfo.order,
+        render: (flightNo) => {
+          return <Tag> {flightNo} </Tag>;
         },
-        ...this.getColumnSearchProps('flightNo'),
+        ...this.getColumnSearchProps("flightNo"),
         ellipsis: true,
       },
       {
-        title: 'Departure Date',
-        dataIndex: 'departureDate',
-        key: 'departureDate',
+        title: "Departure Date",
+        dataIndex: "departureDate",
+        key: "departureDate",
         sorter: (a, b) => a.departureDate - b.departureDate,
-        sortOrder: sortedInfo.columnKey === 'departureDate' && sortedInfo.order,
+        sortOrder: sortedInfo.columnKey === "departureDate" && sortedInfo.order,
         ellipsis: true,
       },
       {
-        title: 'Percentage',
-        dataIndex: 'percentage',
-        key: 'percentage',
+        title: "Percentage",
+        dataIndex: "percentage",
+        key: "percentage",
         sorter: (a, b) => a.percentage - b.percentage,
-        sortOrder: sortedInfo.columnKey === 'percentage' && sortedInfo.order,
-        render: percentage => {
-          return (
-            percentage * 100 + '%'
-          );
+        sortOrder: sortedInfo.columnKey === "percentage" && sortedInfo.order,
+        render: (percentage) => {
+          return `${percentage * 100}%`;
         },
         ellipsis: true,
       },
       {
-        title: 'Status',
-        dataIndex: 'status',
-        key: 'status',
+        title: "Status",
+        dataIndex: "status",
+        key: "status",
         filters: [
-          { text: 'Open', value: 'Open' },
-          { text: 'Closed', value: 'Closed' },
+          { text: "Open", value: "Open" },
+          { text: "Closed", value: "Closed" },
         ],
         filteredValue: filteredInfo.status || null,
         onFilter: (value, record) => record.status.includes(value),
         sorter: (a, b) => a.status.localeCompare(b.status),
-        sortOrder: sortedInfo.columnKey === 'status' && sortedInfo.order,
-        render: status => {
+        sortOrder: sortedInfo.columnKey === "status" && sortedInfo.order,
+        render: (status) => {
           let color = "#87d068";
-          if (status === 'Closed') {
-            color = '#FF0000';
+          if (status === "Closed") {
+            color = "#FF0000";
           }
-          return (
-            <Tag color={color}>{status.toUpperCase()}</Tag>
-          );
+          return <Tag color={color}>{status.toUpperCase()}</Tag>;
         },
-        ellipsis: true
+        ellipsis: true,
       },
       {
-        title: '',
-        key: 'action',
+        title: "",
+        key: "action",
         render: (status, record) => (
-          <Link to = '/investflight'><Button>Invest</Button></Link>
+          <Link to="/investflight">
+            <Button>Invest</Button>
+          </Link>
         ),
       },
-
     ];
 
     return (
       <>
         <Layout className="layout">
-          <Content style={{ padding: '0 50px' }}>
+          <Content style={{ padding: "0 50px" }}>
             <h1 style={{ marginTop: 10 }}>Flight Insurance ✈️</h1>
             <Row style={{ marginBottom: 10 }} justify="space-between">
               <Col>
-                <Button onClick={this.clearAll}>Clear filters and sorters</Button>
+                <Button onClick={this.clearAll}>
+                  Clear filters and sorters
+                </Button>
               </Col>
               <Col>
                 <Link to="/createflight">
-                  <Button type="primary" shape="circle"><PlusOutlined /></Button>
+                  <Button type="primary" shape="circle">
+                    <PlusOutlined />
+                  </Button>
                 </Link>
               </Col>
             </Row>
-            <Table columns={columns} dataSource={data} onChange={this.handleChange} />
+            <Table
+              columns={columns}
+              dataSource={data}
+              onChange={this.handleChange}
+            />
           </Content>
-          <Footer></Footer>
+          <Footer />
         </Layout>
       </>
     );
