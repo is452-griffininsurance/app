@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Web3 from "web3";
-import CreditLetter from "../../blockchain/abis/CreditLetter.json";
+import SmartInsurance from "../../blockchain/abis/SmartInsurance.json";
 import OnboardingButton from "../Blockchain/OnboardingButton";
 
 function Block() {
@@ -11,12 +11,6 @@ function Block() {
 
   // Web3 client-side provider
   const web3 = new Web3(Web3.givenProvider);
-  // Web3 server-side provider
-  // const web3 = new Web3(
-  //   new Web3.providers.HttpProvider(
-  //     "http://127.0.0.1:7545" // "https://mainnet.infura.io/v3/962df9d540344f349b3ca4c976f68d0d"
-  //   )
-  // );
   useEffect(() => {
     // Get average gas price
     web3.eth
@@ -39,10 +33,10 @@ function Block() {
   function DeployContractButton() {
     const deployLC = () => {
       // Deploying contract should be done through our backend service
-      const creditLetter = new web3.eth.Contract(CreditLetter.abi);
+      const creditLetter = new web3.eth.Contract(SmartInsurance.abi);
       creditLetter
         .deploy({
-          data: `${CreditLetter.bytecode}`,
+          data: `${SmartInsurance.bytecode}`,
           arguments: [
             currentAddress,
             currentAddress,

@@ -8,7 +8,6 @@ import Flight from "./components/Pages/Flight";
 import CreateFlight from "./components/Pages/CreateFlight";
 import InvestFlight from "./components/Pages/InvestFlight";
 
-
 export default function Router() {
   return (
     <BrowserRouter>
