@@ -9,9 +9,10 @@ const { Content, Footer } = Layout;
 const { TextArea } = Input;
 
 const initialFormData = Object.freeze({
-  flightCode: "",
+  flightCode: "SQ306",
   flightDate: "2020-11-30",
   walletAddress: "0x00",
+  premium: 0,
 });
 
 function Insurance() {
@@ -23,6 +24,7 @@ function Insurance() {
   const [formStatus, setFormStatus] = useState(null);
 
   const handleChange = (e) => {
+    console.log(e.target.name, e.target.value);
     setFormData({
       ...formData,
       // Trimming any whitespace
@@ -64,7 +66,13 @@ function Insurance() {
         })
         .send({
           from: currentAddress,
-          gas: 1588000,
+          gas: 1500000,
+          value: web3.utils.toWei(formData.premium, "ether"),
+        })
+        .on("confirmation", (confirmationNumber, receipt) => {
+          console.log("Success!")
+          console.log(confirmationNumber);
+          console.log(receipt);
         });
     };
     return (
@@ -110,14 +118,22 @@ function Insurance() {
                             </Form.Item> */}
 
             <Form.Item label="Premium">
-              <InputNumber
+              <Input
+                name="premium"
                 defaultValue={0}
                 min={0}
-                formatter={(value) =>
-                  `${value} ETH`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                }
-                parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+                onChange={handleChange}
               />
+              {/* <input
+                defaultValue={0}
+                min={0}
+                // formatter={(value) =>
+                //   `${value} ETH`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                // }
+                // parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+                name="premium"
+                onChange={handleChange}
+              /> */}
             </Form.Item>
 
             <Form.Item label="Ratio">
