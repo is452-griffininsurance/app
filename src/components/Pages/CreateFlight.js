@@ -17,8 +17,6 @@ const initialFormData = Object.freeze({
 
 function Insurance() {
   const [visible, setVisible] = useState(false);
-  const [block, setBlock] = useState([]);
-  const [averageGasPrice, setAverageGasPrice] = useState(0);
   const [currentAddress, setCurrentAddress] = useState(0x00);
   const [formData, setFormData] = useState(initialFormData);
   const [formStatus, setFormStatus] = useState(null);
@@ -34,16 +32,6 @@ function Insurance() {
 
   const web3 = new Web3(Web3.givenProvider);
   useEffect(() => {
-    // Get average gas price
-    web3.eth
-      .getGasPrice()
-      .then((price) => {
-        console.log(`Average gas price: ${price}`);
-        setAverageGasPrice(price);
-      })
-      .catch(console.error);
-    // Get latest block
-    web3.eth.getBlock("latest").then(setBlock);
     window.ethereum.enable().then((account) => {
       const defaultAccount = account[0];
       web3.eth.defaultAccount = defaultAccount;
@@ -55,8 +43,8 @@ function Insurance() {
   function DeployContractButton() {
     const deploySmartFlightInsurance = () => {
       // Deploying contract should be done through our backend service
-      const creditLetter = new web3.eth.Contract(SmartInsurance.abi);
-      creditLetter
+      const smartInsurance = new web3.eth.Contract(SmartInsurance.abi);
+      smartInsurance
         .deploy({
           data: `${SmartInsurance.bytecode}`,
           arguments: [
@@ -66,7 +54,6 @@ function Insurance() {
         })
         .send({
           from: currentAddress,
-          gas: 1500000,
           value: web3.utils.toWei(formData.premium, "ether"),
         })
         .on("confirmation", (confirmationNumber, receipt) => {
@@ -143,8 +130,8 @@ function Insurance() {
             <Form.Item label="Premium">
               <Input
                 name="premium"
-                defaultValue={0}
-                min={0}
+                defaultValue={0.0001}
+                min={0.0001}
                 onChange={handleChange}
               />
               {/* <input

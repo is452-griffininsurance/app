@@ -23,7 +23,7 @@ export default function Router() {
           <Route path="/insurance" component={Insurance} />
           <Route path="/flight" component={Flight} />
           <Route path="/createflight" component={CreateFlight} />
-          <Route path="/investflight" component={InvestFlight} />
+          <Route path="/investflight/:id" component={InvestFlight} />
         </Switch>
       </div>
     </BrowserRouter>

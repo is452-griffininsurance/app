@@ -263,7 +263,8 @@ class Insurance extends React.Component {
         title: "",
         key: "action",
         render: (status, record) => {
-          const urlPath = `/investflight/${status.contract_address}`;
+          // eslint-disable-next-line no-underscore-dangle
+          const urlPath = `/investflight/${status._id}`;
           return (
             <Link to={urlPath}>
               <Button>Invest</Button>
