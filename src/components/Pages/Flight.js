@@ -192,6 +192,21 @@ class Insurance extends React.Component {
         ellipsis: true,
       },
       {
+        title: "Contract Address",
+        key: "contract_address",
+        render: (status) => {
+          const rinkebyUrl = `https://rinkeby.etherscan.io/address/${status.contract_address}`;
+          return (
+            <a href={rinkebyUrl} target="_blank" rel="noopener noreferrer">
+              {status.contract_address}
+            </a>
+          );
+        },
+        filteredValue: filteredInfo.id || null,
+        onFilter: (value, record) => record.id.includes(value),
+        ellipsis: true,
+      },
+      {
         title: "Premium",
         dataIndex: "premium_amount",
         key: "premium_amount",
