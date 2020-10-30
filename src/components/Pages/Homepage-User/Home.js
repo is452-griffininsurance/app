@@ -13,13 +13,13 @@ const { Title } = Typography;
 
 const gridStyleInsuranceTable = {
   textAlign: 'center',
-  height: '530px',
+  height: '100%',
 };
 
 const gridStyleTransactionTable = {
   width: '100%',
   textAlign: 'center',
-  height: '460px',
+  // height: '460px',
 };
 
 const iconCardStyle = {
@@ -36,13 +36,12 @@ class Home extends Component {
   render() {
     return (
       <>
-        <Layout className="layout" style={{ height: "140vh" }} >
+        <Layout className="layout" style={{minHeight:'100vh', height: '100%'}} >
           <Content style={{ padding: '0 50px' }}>
             <h1 style={{ marginTop: 10 }}>Homepage - User</h1>
             <div className="site-card-wrapper">
-              <Row gutter={8} style={{ marginBottom: 16, width: '100%', align: 'center' }}>
-                <Col style={{ width: '5%' }}></Col>
-                <Col style={{ width: '30%', textAlign: 'center' }}>
+              <Row gutter={5} style={{ marginBottom: 16, width: '100%',  display:'justify' }}>
+                <Col style={{ width:'33.5%', textAlign: 'center' }}>
                   <Card style={iconCardStyle} hoverable='true'>
                     <Meta
                       avatar={
@@ -53,7 +52,7 @@ class Home extends Component {
                     />
                   </Card>
                 </Col>
-                <Col style={{ width: '30%', textAlign: 'center' }}>
+                <Col style={{width:'33.5%',textAlign: 'center' }}>
                   <Card style={iconCardStyle} hoverable='true' >
                     <Meta
                       avatar={
@@ -64,7 +63,7 @@ class Home extends Component {
                     />
                   </Card>
                 </Col>
-                <Col style={{ width: '30%', textAlign: 'center' }}>
+                <Col style={{ width:'33%', textAlign: 'center' }}>
                   <Card style={iconCardStyle} hoverable='true'>
                     <Meta
                       avatar={
@@ -75,16 +74,15 @@ class Home extends Component {
                     />
                   </Card>
                 </Col>
-                <Col style={{ width: '5%' }}></Col>
               </Row>
-              <Row gutter={16} style={{ height: "480px" }}>
+              <Row gutter={16} style={{ marginBottom: 16 }}>
                 <Col>
                   <Card style={gridStyleTransactionTable} title="Transactions" bordered={false} hoverable={true}>
                     <TransactionTable />
                   </Card>
                 </Col>
               </Row>
-              <Row gutter={16} style={{ height: "500px" }}>
+              <Row gutter={16} style={{  marginBottom: 16}}>
                 <Col span={12}>
                   <Card style={gridStyleInsuranceTable} title="Insurance Owned" bordered={false} hoverable={true}>
                     <InsuranceOwnedTable />
@@ -97,7 +95,6 @@ class Home extends Component {
                 </Col>
               </Row>
             </div>
-
           </Content>
         </Layout>
       </>

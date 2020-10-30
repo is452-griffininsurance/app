@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Table, Tag, Modal, Button } from 'antd';
+import { getAllInsurance } from '../../api';
+
 
 
 
@@ -145,7 +147,7 @@ class InsuranceInvestedTable extends Component {
                 },
             },
             {
-                title: 'Action',
+                title: '',
                 dataIndex: '',
                 key: '',
                 render: (record) => <Button type="link" onClick={() => this.showModal(record)}>More</Button>,

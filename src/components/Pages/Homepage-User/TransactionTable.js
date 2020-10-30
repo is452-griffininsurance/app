@@ -1,54 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Table, Tag } from 'antd';
+import { getAllTransactions } from '../../api'
 
-const transactionData = [
-    {
-        transactionID: 1234345,
-        insuranceID: 1234345,
-        amount: 32,
-        transactionType: 'Paying',
-    },
-    {
-        transactionID: 1234345,
-        insuranceID: 9876543,
-        amount: 32,
-        transactionType: 'Receiving',
-    },
-    {
-        transactionID: 1234345,
-        insuranceID: 9876543,
-        amount: 100,
-        transactionType: 'Receiving',
-    },
-    {
-        transactionID: 1234345,
-        insuranceID: 9876543,
-        amount: 2,
-        transactionType: 'Paying',
-    },
-    {
-        transactionID: 1234345,
-        insuranceID: 1234345,
-        amount: 20,
-        transactionType: 'Paying',
-    },
-    {
-        transactionID: 1234345,
-        insuranceID: 1234345,
-        amount: 32,
-        transactionType: 'Paying',
-    },
-];
 
 const typeTransactionList = [
     { text: 'Paying', value: 'Paying' },
     { text: 'Receiving', value: 'Receiving' },
-
-]
-const insuranceIDList = [
-    { text: '1234345', value: '1234345' },
-    { text: '9876543', value: '9876543' },
 
 ]
 
@@ -56,9 +14,37 @@ class TransactionTable extends Component {
     state = {
         FilteredInfo: null,
         sortedInfo: null,
+        transactionApiData: [],
+        transactionData: []
 
     };
+    async componentWillMount() {
+        await this.loadDBData()
+    }
+    async loadDBData() {
+        let temp = await getAllTransactions()
+        this.setState({
+            transactionApiData: temp
+        });
+        this.cleanData()
+    }
+    cleanData(){
+        let paying = this.state.transactionApiData.paying_transactions
+        let receiving = this.state.transactionApiData.receiving_transactions
+        let tempDictionary = []
 
+        for (let i = 0; i < paying.length; i++) {
+            paying[i]['transactionType'] = 'Paying'
+            tempDictionary.push(paying[i])
+        }
+        for (let i = 0; i < receiving.length; i++) {
+            receiving[i]['transactionType'] = 'Receiving'
+            tempDictionary.push(receiving[i])
+        }
+        this.setState({
+            transactionData: tempDictionary
+        });
+    }
     pagination = {
         defaultPageSize: 5,
         size: "small"
@@ -87,6 +73,7 @@ class TransactionTable extends Component {
         console.log(key);
     }
 
+
     render() {
         let { sortedInfo, FilteredInfo } = this.state;
         sortedInfo = sortedInfo || {};
@@ -94,28 +81,42 @@ class TransactionTable extends Component {
         const columns = [
             {
                 title: 'Transaction ID',
-                dataIndex: 'transactionID',
-                key: 'transactionID',
+                dataIndex: '_id',
+                key: '_id',
                 sorter: (a, b) => a.transactionID - b.transactionID,
                 sortOrder: sortedInfo.columnKey === 'transactionID' && sortedInfo.order,
                 ellipsis: true,
             },
             {
-                title: 'Insurance ID',
-                dataIndex: 'insuranceID',
-                key: 'insuranceID',
-                // filters: insuranceIDList,
-                // onFilter: (value, record) => record.insuranceID.includes(value),
-                sorter: (a, b) => a.insuranceID - b.insuranceID,
-                sortOrder: sortedInfo.columnKey === 'insuranceID' && sortedInfo.order,
+                title: 'Date',
+                dataIndex: 'date',
+                key: 'date',
+                sorter: (a, b) => a.date - b.date,
+                sortOrder: sortedInfo.columnKey === 'date' && sortedInfo.order,
+                ellipsis: true,
+            },
+            {
+                title: 'Send',
+                dataIndex: 'sending_wallet_addr',
+                key: 'sending_wallet_addr',
+                sorter: (a, b) => a.amount - b.amount,
+                sortOrder: sortedInfo.columnKey === 'sending_wallet_addr' && sortedInfo.order,
+                ellipsis: true,
+            },
+            {
+                title: 'Receiving',
+                dataIndex: 'receiving_wallet_addr',
+                key: 'receiving_wallet_addr',
+                sorter: (a, b) => a.amount - b.amount,
+                sortOrder: sortedInfo.columnKey === 'receiving_wallet_addr' && sortedInfo.order,
                 ellipsis: true,
             },
             {
                 title: 'Amount',
-                dataIndex: 'amount',
-                key: 'amount',
+                dataIndex: 'transfer_amount',
+                key: 'transfer_amount',
                 sorter: (a, b) => a.amount - b.amount,
-                sortOrder: sortedInfo.columnKey === 'amount' && sortedInfo.order,
+                sortOrder: sortedInfo.columnKey === 'transfer_amount' && sortedInfo.order,
                 ellipsis: true,
             },
             {
@@ -139,7 +140,7 @@ class TransactionTable extends Component {
         ];
         return (
             <>
-                <Table columns={columns} dataSource={transactionData} pagination={this.pagination} onChange={this.handleChange} />
+                <Table columns={columns} dataSource={this.state.transactionData} pagination={this.pagination} onChange={this.handleChange} />
             </>
         );
     }
