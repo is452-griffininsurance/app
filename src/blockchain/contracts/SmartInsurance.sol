@@ -5,7 +5,7 @@ import "./SafeMath.sol";
 contract SmartInsurance {
     using SafeMath for uint256;
 
-    enum Status { AWAITING_PREMIUM, AWAITING_FUNDING, FUNDED, IN_FORCE, PAID_OUT, EXPIRED }
+    enum Status { AWAITING_PREMIUM, AWAITING_FUNDING, FUNDED, IN_FORCE, PAID_OUT, EXPIRED_AND_NO_CLAIMS }
     
     // Status the current Status of the insurance contract
     Status public status;
@@ -16,11 +16,12 @@ contract SmartInsurance {
     
     // As there can be many insurers, we use an array
     // It's also payable in case it expires
-    address payable[] public insurers;
+    // address payable[] public insurers;
+    mapping(address => address payable) public insurers;
     mapping(address => uint256) public balances;
     
-    // Our address, not sure if we need this
-    address payable public escrow = payable(0xfeB87197aBd18dDaBD28B58b205936dfB4569B17);
+    // Our address as escrow 0xfeB87197aBd18dDaBD28B58b205936dfB4569B17
+    address payable public escrow = payable(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4);
     
     string public flightCode;
     string public flightDate;
@@ -46,7 +47,7 @@ contract SmartInsurance {
     
     function insure() payable public {
         require(msg.value > 0, "You must insure this insurance with at least 1 wei.");
-        insurers.push(msg.sender);
+        insurers[msg.sender] = msg.sender;
         balances[msg.sender] = balances[msg.sender].add(msg.value);
     }
 
@@ -58,24 +59,26 @@ contract SmartInsurance {
         return status;
     }
     
-    function setState(uint8 _status) public {
+    function setState(Status _status) public {
+        status = _status;
+    }
+    
+    // Only we can control who to payout to, but not to ourselves
+    function payout(address payable to, uint256 amount) onlyEscrow payable public {
+        // The payable to address cannot be the escrow
+        require(escrow != to, "You cannot transfer money that doesn't belong to you!");
+        // The payable to address must either be the insured or the insurers
+        require(insurers[to] == to || insured == to, "This insurance contract can only payout to registered insurers or the insured.");
+        
+        // TODO
+        if (insured == to) {
+            status = Status.PAID_OUT;
+        }
+        if (insurers[to] == to) {
+            status = Status.EXPIRED_AND_NO_CLAIMS;
+        }
+        
+        to.transfer(amount);
         
     }
-    
-    // Only we can control this function
-    function payout(uint8 _hours) onlyEscrow public {
-        if (_hours >= 3) {
-            insured.transfer(address(this).balance);
-        } else {
-            // TODO
-        }
-    }
-    
-    // function percentOfPool(address _insurer) public view returns(uint256) {
-    //     // We exclude premium from the calculation
-    //     uint256 balance = address(this).balance;
-    //     uint256 insurersPool = balance.sub(premium);
-    //     uint256 insurerShare = balances[_insurer];
-    //     return insurerShare / insurersPool;
-    // }
 }
