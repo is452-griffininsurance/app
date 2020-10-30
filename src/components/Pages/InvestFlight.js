@@ -3,7 +3,7 @@ import Web3 from "web3";
 import "antd/dist/antd.css";
 import { Layout, Form, Input, Button, Card, InputNumber, Progress } from "antd";
 import { useParams } from "react-router-dom";
-import SmartInsurance from "../../blockchain/abis/SmartInsurance.json";
+import FlightInsurance from "../../blockchain/abis/FlightInsurance.json";
 import { API_URL } from "../../utils/utils";
 
 const { Content, Footer } = Layout;
@@ -50,12 +50,13 @@ function InvestFlight() {
   function InsureButton() {
     const insureFlightInsurance = () => {
       // Deploying contract should be done through our backend service
-      const smartInsurance = new web3.eth.Contract(
-        SmartInsurance.abi,
+      const flightInsurance = new web3.eth.Contract(
+        FlightInsurance.abi,
         contractDetails.contract_address
       );
 
-      smartInsurance.methods["insure"]()
+      flightInsurance.methods
+        .insure()
         .send({
           from: currentAddress,
           value: web3.utils.toWei(formData.insure_amount.toString(), "ether"),
