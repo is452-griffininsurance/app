@@ -54,7 +54,7 @@ function Insurance() {
         })
         .send({
           from: currentAddress,
-          value: web3.utils.toWei(formData.premium, "ether"),
+          value: web3.utils.toWei(formData.premium.toString(), "ether"),
         })
         .on("confirmation", (confirmationNumber, receipt) => {
           console.log("Success!");
