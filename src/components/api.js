@@ -24,3 +24,5 @@ export const getAllInsurance = () => {
             console.log(err)
         })
 }
+
+
