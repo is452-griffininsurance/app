@@ -12,7 +12,7 @@ const { TextArea } = Input;
 const initialFormData = Object.freeze({
   flightCode: "SQ306",
   flightDate: "2020-11-30",
-  premium: 0,
+  premium: 0.0001,
 });
 
 function Insurance() {
@@ -108,15 +108,9 @@ function Insurance() {
 
             <Form.Item label="Flight Details">
               <Card border="true" size="small">
-                <Form
-                  labelCol={{ span: 8 }}
-                  wrapperCol={{ span: 14 }}
-                  layout="horizontal"
-                >
-                  <Form.Item label="Date of Departure">31/12/2020</Form.Item>
-                  <Form.Item label="From">Singapore</Form.Item>
-                  <Form.Item label="To">Hong Kong</Form.Item>
-                </Form>
+                <Form.Item label="Date of Departure">31/12/2020</Form.Item>
+                <Form.Item label="From">Singapore</Form.Item>
+                <Form.Item label="To">Hong Kong</Form.Item>
               </Card>
             </Form.Item>
 
