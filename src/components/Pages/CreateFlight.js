@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Web3 from "web3";
 import "antd/dist/antd.css";
 import { Layout, Form, Input, Button, Card, InputNumber, Modal } from "antd";
-import SmartInsurance from "../../blockchain/abis/SmartInsurance.json";
+import FlightInsurance from "../../blockchain/abis/FlightInsurance.json";
 import { API_URL } from "../../utils/utils";
 
 const { Content, Footer } = Layout;
@@ -43,10 +43,10 @@ function Insurance() {
   function DeployContractButton() {
     const deploySmartFlightInsurance = () => {
       // Deploying contract should be done through our backend service
-      const smartInsurance = new web3.eth.Contract(SmartInsurance.abi);
-      smartInsurance
+      const flightInsurance = new web3.eth.Contract(FlightInsurance.abi);
+      flightInsurance
         .deploy({
-          data: `${SmartInsurance.bytecode}`,
+          data: `${FlightInsurance.bytecode}`,
           arguments: [
             web3.utils.toHex(formData.flightCode), // need to toHex
             web3.utils.toHex(formData.flightDate),
