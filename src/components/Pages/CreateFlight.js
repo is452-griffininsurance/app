@@ -3,6 +3,7 @@ import Web3 from "web3";
 import "antd/dist/antd.css";
 import { Layout, Form, Input, Button, Card, InputNumber, Modal } from "antd";
 import SmartInsurance from "../../blockchain/abis/SmartInsurance.json";
+import { API_URL } from "../../utils/utils";
 
 const { Content, Footer } = Layout;
 
@@ -11,7 +12,6 @@ const { TextArea } = Input;
 const initialFormData = Object.freeze({
   flightCode: "SQ306",
   flightDate: "2020-11-30",
-  walletAddress: "0x00",
   premium: 0,
 });
 
@@ -70,9 +70,32 @@ function Insurance() {
           value: web3.utils.toWei(formData.premium, "ether"),
         })
         .on("confirmation", (confirmationNumber, receipt) => {
-          console.log("Success!")
-          console.log(confirmationNumber);
-          console.log(receipt);
+          console.log("Success!");
+          if (confirmationNumber === 0) {
+            console.log(receipt);
+            const data = {
+              contract_address: receipt.contractAddress,
+              flight_no: formData.flightCode,
+              flight_date: formData.flightDate,
+              insured_wallet_addr: currentAddress,
+              premium_amount: formData.premium,
+              coverage_amount: 0,
+            };
+
+            fetch(`${API_URL}/create_insurance`, {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            })
+              .then((response) => response.json())
+              .then((json) => {
+                setFormStatus(json);
+                console.log(json);
+              });
+          }
         });
     };
     return (
