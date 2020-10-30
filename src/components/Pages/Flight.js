@@ -4,6 +4,7 @@ import "antd/dist/antd.css";
 import { Table, Button, Space, Layout, Tag, Input, Row, Col } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
+import { API_URL } from "../../utils/utils";
 
 const { Content, Footer } = Layout;
 
@@ -48,7 +49,17 @@ class Insurance extends React.Component {
     sortedInfo: null,
     searchText: "",
     searchedColumn: "",
+    data: [],
   };
+
+  componentDidMount() {
+    fetch(`${API_URL}/get_all_insurances`)
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({ data: json?.insurance });
+        console.log(json?.insurance);
+      });
+  }
 
   // Table
   getColumnSearchProps = (dataIndex) => ({
@@ -171,47 +182,49 @@ class Insurance extends React.Component {
     const columns = [
       {
         title: "Insurance ID",
-        dataIndex: "id",
-        key: "id",
+        dataIndex: "_id",
+        key: "_id",
         filteredValue: filteredInfo.id || null,
         onFilter: (value, record) => record.id.includes(value),
         sorter: (a, b) => a.id.localeCompare(b.id),
-        sortOrder: sortedInfo.columnKey === "id" && sortedInfo.order,
-        ...this.getColumnSearchProps("id"),
+        sortOrder: sortedInfo.columnKey === "_id" && sortedInfo.order,
+        ...this.getColumnSearchProps("_id"),
         ellipsis: true,
       },
       {
         title: "Premium",
-        dataIndex: "premium",
-        key: "premium",
+        dataIndex: "premium_amount",
+        key: "premium_amount",
         sorter: (a, b) => a.premium - b.premium,
-        sortOrder: sortedInfo.columnKey === "premium" && sortedInfo.order,
+        sortOrder:
+          sortedInfo.columnKey === "premium_amount" && sortedInfo.order,
         ellipsis: true,
       },
       {
         title: "Flight no.",
-        dataIndex: "flightNo",
-        key: "flightNo",
+        dataIndex: "flight_no",
+        key: "flight_no",
         filters: [
+          // what's this ah?
           { text: "London", value: "London" },
           { text: "New York", value: "New York" },
         ],
         filteredValue: filteredInfo.flightNo || null,
         onFilter: (value, record) => record.flightNo.includes(value),
         sorter: (a, b) => a.flightNo.localeCompare(b.flightNo),
-        sortOrder: sortedInfo.columnKey === "flightNo" && sortedInfo.order,
+        sortOrder: sortedInfo.columnKey === "flight_no" && sortedInfo.order,
         render: (flightNo) => {
           return <Tag> {flightNo} </Tag>;
         },
-        ...this.getColumnSearchProps("flightNo"),
+        ...this.getColumnSearchProps("flight_no"),
         ellipsis: true,
       },
       {
         title: "Departure Date",
-        dataIndex: "departureDate",
-        key: "departureDate",
+        dataIndex: "flight_date",
+        key: "flight_date",
         sorter: (a, b) => a.departureDate - b.departureDate,
-        sortOrder: sortedInfo.columnKey === "departureDate" && sortedInfo.order,
+        sortOrder: sortedInfo.columnKey === "flight_date" && sortedInfo.order,
         ellipsis: true,
       },
       {
@@ -249,11 +262,14 @@ class Insurance extends React.Component {
       {
         title: "",
         key: "action",
-        render: (status, record) => (
-          <Link to="/investflight">
-            <Button>Invest</Button>
-          </Link>
-        ),
+        render: (status, record) => {
+          const urlPath = `/investflight/${status.contract_address}`;
+          return (
+            <Link to={urlPath}>
+              <Button>Invest</Button>
+            </Link>
+          );
+        },
       },
     ];
 
@@ -278,7 +294,7 @@ class Insurance extends React.Component {
             </Row>
             <Table
               columns={columns}
-              dataSource={data}
+              dataSource={this.state.data}
               onChange={this.handleChange}
             />
           </Content>
