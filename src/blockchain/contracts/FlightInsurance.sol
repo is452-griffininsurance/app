@@ -20,7 +20,7 @@ contract FlightInsurance is ISmartInsurance {
     mapping(address => uint256) public balances;
     
     // Our address as escrow 0xfeB87197aBd18dDaBD28B58b205936dfB4569B17
-    address payable public escrow = payable(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4);
+    address payable public escrow = payable(0xfeB87197aBd18dDaBD28B58b205936dfB4569B17);
     
     string public flightCode;
     string public flightDate;
