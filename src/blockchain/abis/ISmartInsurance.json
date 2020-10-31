@@ -66,15 +66,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.0+commit.26b70077\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"getBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getStatus\",\"outputs\":[{\"internalType\":\"enum ISmartInsurance.Status\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"insure\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"payout\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"enum ISmartInsurance.Status\",\"name\":\"_status\",\"type\":\"uint8\"}],\"name\":\"setStatus\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/jiajian/Documents/GitHub/app/src/blockchain/contracts/ISmartInsurance.sol\":\"ISmartInsurance\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/jiajian/Documents/GitHub/app/src/blockchain/contracts/ISmartInsurance.sol\":{\"keccak256\":\"0xa6a0e1d7ed28d65fd897a182a6b78038339ce472ada149e8e4541071e6be953b\",\"urls\":[\"bzz-raw://46ca91ff3dc3fa19dcdb62292cc192903e1d773f08e409dbdea77c8e4a6f6884\",\"dweb:/ipfs/QmdRL2YDjkyFjoUczErhAz99zWfzv87xf3ryUVt4WvqkLY\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.0+commit.26b70077\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"getBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getStatus\",\"outputs\":[{\"internalType\":\"enum ISmartInsurance.Status\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"insure\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"payout\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"enum ISmartInsurance.Status\",\"name\":\"_status\",\"type\":\"uint8\"}],\"name\":\"setStatus\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/jiajian/Documents/GitHub/is452/app/src/blockchain/contracts/ISmartInsurance.sol\":\"ISmartInsurance\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/jiajian/Documents/GitHub/is452/app/src/blockchain/contracts/ISmartInsurance.sol\":{\"keccak256\":\"0xa6a0e1d7ed28d65fd897a182a6b78038339ce472ada149e8e4541071e6be953b\",\"urls\":[\"bzz-raw://46ca91ff3dc3fa19dcdb62292cc192903e1d773f08e409dbdea77c8e4a6f6884\",\"dweb:/ipfs/QmdRL2YDjkyFjoUczErhAz99zWfzv87xf3ryUVt4WvqkLY\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.6.0;\n\ninterface ISmartInsurance {\n    enum Status { AWAITING_PREMIUM, AWAITING_FUNDING, FUNDED, IN_FORCE, PAID_OUT, EXPIRED_AND_NO_CLAIMS }\n    function insure() payable external;\n    function getBalance() external view returns (uint256);\n    function getStatus() external view returns (Status);\n    function setStatus(Status _status) external;\n    function payout(address payable to, uint256 amount) payable external;\n}",
-  "sourcePath": "/Users/jiajian/Documents/GitHub/app/src/blockchain/contracts/ISmartInsurance.sol",
+  "sourcePath": "/Users/jiajian/Documents/GitHub/is452/app/src/blockchain/contracts/ISmartInsurance.sol",
   "ast": {
-    "absolutePath": "/Users/jiajian/Documents/GitHub/app/src/blockchain/contracts/ISmartInsurance.sol",
+    "absolutePath": "/Users/jiajian/Documents/GitHub/is452/app/src/blockchain/contracts/ISmartInsurance.sol",
     "exportedSymbols": {
       "ISmartInsurance": [
         262
@@ -450,7 +450,7 @@
     "src": "0:439:1"
   },
   "legacyAST": {
-    "absolutePath": "/Users/jiajian/Documents/GitHub/app/src/blockchain/contracts/ISmartInsurance.sol",
+    "absolutePath": "/Users/jiajian/Documents/GitHub/is452/app/src/blockchain/contracts/ISmartInsurance.sol",
     "exportedSymbols": {
       "ISmartInsurance": [
         262
@@ -831,7 +831,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.0",
-  "updatedAt": "2020-10-30T16:48:49.527Z",
+  "updatedAt": "2020-10-31T07:33:30.252Z",
   "devdoc": {
     "methods": {}
   },
