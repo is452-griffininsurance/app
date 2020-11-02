@@ -53,7 +53,7 @@ class Insurance extends React.Component {
   };
 
   componentDidMount() {
-    fetch(`${API_URL}/get_all_insurances`)
+    fetch(`${API_URL}/get_all_insurances?insurance_type=flight_delay`)
       .then((response) => response.json())
       .then((json) => {
         this.setState({ data: json?.insurance });
