@@ -115,6 +115,7 @@ class CreateFlight extends React.Component {
         })
         .on("confirmation", (confirmationNumber, receipt) => {
           console.log("Success!");
+
           if (confirmationNumber === 0) {
             console.log(receipt);
             const data = {
