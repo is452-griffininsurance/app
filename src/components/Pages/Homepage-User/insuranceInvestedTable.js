@@ -5,8 +5,6 @@ import { getAllInsurance } from '../../api';
 
 
 
-
-
 const insuranceData = [
     {
         insuranceID: '1',
@@ -60,6 +58,30 @@ class InsuranceInvestedTable extends Component {
         defaultPageSize: 5,
         size: "small"
     };
+    async componentWillMount() {
+        await this.loadDBData()
+    }
+    async loadDBData() {
+        let temp = await getAllInsurance()
+        console.log(temp)
+        this.setState({
+            insuranceData: temp.insuring_insurances
+        });
+        this.cleanData()
+        console.log(this.state.insuranceData)
+    }
+    cleanData() {
+        let temp = []
+        for (let i = 0; i < this.state.insuranceData.length; i++) {
+            this.state.insuranceData[i]['key'] = i
+            this.state.insuranceData[i]['insuranceType'] = 'Flight'
+            temp.push(this.state.insuranceData[i])
+        }
+        this.setState({
+            insuranceData: temp
+        })
+    }
+
 
     showModal = (record) => {
         this.setState({
@@ -162,7 +184,7 @@ class InsuranceInvestedTable extends Component {
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
                 >
-                    <p>Insurance ID: {this.state.selectedID}</p>                    
+                    <p>Insurance ID: {this.state.selectedID}</p>
                     <p>Insurance Type: {this.state.selectedInsuranceType}</p>
                     <p>Payout Amount: {this.state.selectedPayoutAmount}</p>
                     <p>THE REST OF THE INSURANCE INFORMATION</p>

@@ -104,7 +104,7 @@ function TopNavbar() {
         >
           <Menu.Item key="Home">
             Home
-            <Link to="/" />
+            <Link to="/home" />
           </Menu.Item>
           <Menu.Item key="Insurance">
             Insurance
@@ -118,6 +118,9 @@ function TopNavbar() {
             <MetaMaskWalletConnection />
           </Menu.Item>
           <Menu.Item key="WalletAmount">
+            <MetaMaskWalletAmount />
+          </Menu.Item>
+          <Menu.Item key="Logout">
             <MetaMaskWalletAmount />
           </Menu.Item>
         </Menu>
