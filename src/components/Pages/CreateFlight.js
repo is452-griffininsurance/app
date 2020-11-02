@@ -24,6 +24,7 @@ class CreateFlight extends React.Component {
       currentAddress: "0x00",
       formData: initialFormData,
       formStatus: null,
+      formMessage: "",
     };
   }
 
@@ -54,6 +55,8 @@ class CreateFlight extends React.Component {
     const { visible, currentAddress, formData, formStatus } = this.state;
 
     const deploySmartFlightInsurance = () => {
+      // This is our event
+      this.setState({ loading: true }); // Show loading spinner or something
       // Deploying contract should be done through our backend service
       const flightInsurance = new web3.eth.Contract(FlightInsurance.abi);
       flightInsurance
@@ -95,10 +98,21 @@ class CreateFlight extends React.Component {
             })
               .then((response) => response.json())
               .then((json) => {
-                this.setState({ formStatus: json });
+                this.setState({ loading: false }); // Stop loading spinner
+                this.setState({
+                  formStatus: "success",
+                  formMessage: "Insurance created!",
+                });
+
                 console.log(json);
+                // this part u can redirect to idk where
               });
           }
+        })
+        .on("error", (error) => {
+          console.log(error);
+          this.setState({ loading: false }); // Stop loading spinner
+          this.setState({ formStatus: "error", formMessage: error });
         });
     };
 
@@ -127,6 +141,19 @@ class CreateFlight extends React.Component {
               wrapperCol={{ span: 8 }}
               layout="horizontal"
             >
+              {this.state.loading ? (
+                <>True, show loading spinner</>
+              ) : (
+                <>False, stop loading spinner</>
+              )}
+
+              {this.state.formMessage ? (
+                <>
+                  {this.state.formStatus}, {this.state.formMessage}
+                </>
+              ) : (
+                <></>
+              )}
               <Form.Item label="Flight Number">
                 <Input name="flightCode" onChange={this.handleChange} />
               </Form.Item>
