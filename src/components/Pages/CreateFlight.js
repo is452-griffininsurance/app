@@ -16,18 +16,29 @@ const initialFormData = Object.freeze({
 });
 
 function Insurance() {
+// class createFlight extends React.Component {
   const [visible, setVisible] = useState(false);
   const [currentAddress, setCurrentAddress] = useState(0x00);
   const [formData, setFormData] = useState(initialFormData);
   const [formStatus, setFormStatus] = useState(null);
+  // state = {
+  //   visible = false, 
+  //   currentAddress = "0x00",
+  //   formData = initialFormData,
+  //   formStatus = null, 
+  // }
+
+  var tempFlightCode = '';
 
   const handleChange = (e) => {
+  // handleChange = (e) => {
     console.log(e.target.name, e.target.value);
     setFormData({
       ...formData,
       // Trimming any whitespace
       [e.target.name]: e.target.value.trim(),
     });
+    tempFlightCode = e.target.value;
   };
 
   const web3 = new Web3(Web3.givenProvider);
@@ -58,6 +69,7 @@ function Insurance() {
         })
         .on("confirmation", (confirmationNumber, receipt) => {
           console.log("Success!");
+
           if (confirmationNumber === 0) {
             console.log(receipt);
             const data = {
@@ -86,13 +98,14 @@ function Insurance() {
         });
     };
     return (
-      <Button type="primary" onClick={deploySmartFlightInsurance}>
+      <Button type="primary" onClick={deploySmartFlightInsurance} >
         Create Flight Insurance
       </Button>
     );
   }
 
   return (
+  // render(){
     <>
       <Layout className="layout">
         <Content style={{ padding: "0 50px" }}>
@@ -107,11 +120,13 @@ function Insurance() {
             </Form.Item>
 
             <Form.Item label="Flight Details">
-              <Card border="true" size="small">
+              
+
+              {/* <Card border="true" size="small">
                 <Form.Item label="Date of Departure">31/12/2020</Form.Item>
                 <Form.Item label="From">Singapore</Form.Item>
                 <Form.Item label="To">Hong Kong</Form.Item>
-              </Card>
+              </Card> */}
             </Form.Item>
 
             {/* <Form.Item label="Pax">
@@ -127,31 +142,19 @@ function Insurance() {
                 defaultValue={0.0001}
                 min={0.0001}
                 onChange={handleChange}
+                suffix="ETH"
               />
-              {/* <input
-                defaultValue={0}
-                min={0}
-                // formatter={(value) =>
-                //   `${value} ETH`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                // }
-                // parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                name="premium"
-                onChange={handleChange}
-              /> */}
             </Form.Item>
 
             <Form.Item label="Ratio">
-              <InputNumber defaultValue={0} min={1} />
+              <Input defaultValue={0.0001} min={0.0001} max={1}/>
             </Form.Item>
 
             <Form.Item label="Payout Coverage">
-              <InputNumber
+              <Input
                 defaultValue={0}
                 min={0}
-                formatter={(value) =>
-                  `${value} ETH`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                }
-                parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+                suffix="ETH"
               />
             </Form.Item>
 
@@ -167,7 +170,7 @@ function Insurance() {
           >
             <p>
               You are about to make a payment of $2000 from your wallet
-              (0x29D7d1dd5B6f9C864d9db560D72a247c178aE86B)
+              (0xfeB87197aBd18dDaBD28B58b205936dfB4569B17)
             </p>
             <p>Do you want to proceed?</p>
           </Modal>
@@ -176,6 +179,7 @@ function Insurance() {
       </Layout>
     </>
   );
+  // }
 }
 
 export default Insurance;
