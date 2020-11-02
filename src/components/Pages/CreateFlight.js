@@ -32,11 +32,13 @@ function Insurance() {
 
   const web3 = new Web3(Web3.givenProvider);
   useEffect(() => {
-    window.ethereum.enable().then((account) => {
-      const defaultAccount = account[0];
-      web3.eth.defaultAccount = defaultAccount;
-      setCurrentAddress(defaultAccount);
-    });
+    if (window.ethereum) {
+      window.ethereum.enable().then((account) => {
+        const defaultAccount = account[0];
+        web3.eth.defaultAccount = defaultAccount;
+        setCurrentAddress(defaultAccount);
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -85,11 +87,20 @@ function Insurance() {
           }
         });
     };
-    return (
-      <Button type="primary" onClick={deploySmartFlightInsurance}>
-        Create Flight Insurance
-      </Button>
-    );
+
+    if (window.ethereum) {
+      return (
+        <Button type="primary" onClick={deploySmartFlightInsurance}>
+          Create Flight Insurance
+        </Button>
+      );
+    } else {
+      return (
+        <Button type="primary" disabled>
+          You do not have MetaMask installed.
+        </Button>
+      );
+    }
   }
 
   return (

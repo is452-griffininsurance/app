@@ -30,11 +30,13 @@ function InvestFlight() {
 
   const web3 = new Web3(Web3.givenProvider);
   useEffect(() => {
-    window.ethereum.enable().then((account) => {
-      const defaultAccount = account[0];
-      web3.eth.defaultAccount = defaultAccount;
-      setCurrentAddress(defaultAccount); // User's wallet address
-    });
+    if (window.ethereum) {
+      window.ethereum.enable().then((account) => {
+        const defaultAccount = account[0];
+        web3.eth.defaultAccount = defaultAccount;
+        setCurrentAddress(defaultAccount); // User's wallet address
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -90,11 +92,19 @@ function InvestFlight() {
           }
         });
     };
-    return (
-      <Button type="primary" onClick={insureFlightInsurance}>
-        Insure
-      </Button>
-    );
+    if (window.ethereum) {
+      return (
+        <Button type="primary" onClick={insureFlightInsurance}>
+          Insure
+        </Button>
+      );
+    } else {
+      return (
+        <Button type="primary" disabled>
+          You do not have MetaMask installed.
+        </Button>
+      );
+    }
   }
 
   return (
