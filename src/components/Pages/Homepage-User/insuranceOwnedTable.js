@@ -199,12 +199,6 @@ class InsuranceOwnedTable extends Component {
                 },
                 width: '10%'
             },
-            // {
-            //     title: 'Action',
-            //     dataIndex: '',
-            //     key: '',
-            //     render: (record) => <><Button type="link" onClick={() => this.showModal(record)}>More</Button></>,
-            // },
         ];
         return (
             <>

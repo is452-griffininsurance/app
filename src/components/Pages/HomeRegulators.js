@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Table, Button, Modal, Layout, Card, Col, Row, Tag } from 'antd';
-
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 const { Content } = Layout;
+const { confirm } = Modal;
 
 
 const gridStyleReviewTable = {
   width: '100%',
   textAlign: 'center',
-  height: 'auto',
 };
 
 
@@ -19,7 +19,7 @@ const reviewData = [
     insuranceID: '1',
     reviewDate: '10/10/2020',
     reviewType: 'Report',
-    reviewIssue: 'Shady',
+    reviewIssue: 'Terms and condition',
   },
   {
     reviewID: '2',
@@ -46,43 +46,43 @@ const reviewData = [
     reviewID: '5',
     insuranceID: '5',
     reviewDate: '06/10/2020',
-    reviewType: 'Report',
-    reviewIssue: 'Shady',
+    reviewType: 'Verification',
+    reviewIssue: '',
   },
   {
     reviewID: '6',
     insuranceID: '6',
     reviewDate: '05/10/2020',
-    reviewType: 'Report',
-    reviewIssue: 'Shady',
+    reviewType: 'Verification',
+    reviewIssue: '',
   },
   {
     reviewID: '7',
     insuranceID: '7',
     reviewDate: '04/10/2020',
     reviewType: 'Report',
-    reviewIssue: 'Shady',
+    reviewIssue: 'Price',
   },
   {
     reviewID: '8',
     insuranceID: '8',
     reviewDate: '03/10/2020',
-    reviewType: 'Report',
-    reviewIssue: 'Shady',
+    reviewType: 'Verification',
+    reviewIssue: '',
   },
   {
     reviewID: '9',
     insuranceID: '9',
     reviewDate: '02/10/2020',
-    reviewType: 'Report',
-    reviewIssue: 'Shady',
+    reviewType: 'Verification',
+    reviewIssue: '',
   },
   {
     reviewID: '10',
     insuranceID: '10',
     reviewDate: '01/10/2020',
-    reviewType: 'Report',
-    reviewIssue: 'Shady',
+    reviewType: 'Verification',
+    reviewIssue: '',
   },
 ];
 
@@ -97,9 +97,10 @@ class HomeRegulator extends Component {
     filteredInfo: null,
     sortedInfo: null,
     selectedID: null,
-    selectedInsuranceType: null,
-    selectedPayoutAmount: null
-
+    reviewID: null,
+    reviewDate: null,
+    reviewType: null,
+    reviewIssue: null
   };
 
   pagination = {
@@ -113,32 +114,38 @@ class HomeRegulator extends Component {
     this.setState({
       visible: true,
       selectedID: record.insuranceID,
-      selectedInsuranceType: record.insuranceType,
-      selectedPayoutAmount: record.payoutAmount
+      reviewID: record.reviewID,
+      reviewDate: record.reviewDate,
+      reviewType: record.reviewType,
+      reviewIssue: record.reviewIssue
     });
   };
 
   handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
     this.setState({
       filteredInfo: filters,
       sortedInfo: sorter,
     });
   };
 
-  clearFilters = () => {
-    this.setState({ filteredInfo: null });
-  };
-
-  clearAll = () => {
+  handleOk = e => {
     this.setState({
-      filteredInfo: null,
-      sortedInfo: null,
+      visible: false,
     });
   };
 
-  callback(key) {
-    console.log(key);
+  handleCancel = e => {
+    this.setState({
+      visible: false,
+    });
+  };
+
+  showConfirm(content) {
+    confirm({
+      title: 'Confirm',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Do you want to approve Contract ID ' + content.insuranceID,
+    });
   }
 
   render() {
@@ -155,7 +162,7 @@ class HomeRegulator extends Component {
         ellipsis: true,
       },
       {
-        title: 'Insurance ID',
+        title: 'Contract ID',
         dataIndex: 'insuranceID',
         key: 'insuranceID',
         sorter: (a, b) => a.insuranceID - b.insuranceID,
@@ -201,16 +208,17 @@ class HomeRegulator extends Component {
         title: 'Action',
         dataIndex: '',
         key: '',
-        render: (record) => <><Button type="link" onClick={() => this.showModal(record)}>Approve</Button><Button type="link" onClick={() => this.showModal(record)}>More</Button></>,
+        render: (record) =>
+          <><Button type="link" onClick={() => this.showConfirm(record)}>Approve</Button><Button type="link" onClick={() => this.showModal(record)}>More</Button></>,
       },
     ];
     return (
       <>
-        <Layout className="layout" style={{ height: "100vh", overflow: "auto" }}>
+        <Layout className="layout">
           <Content style={{ padding: '0 50px' }} >
             <h1 style={{ marginTop: 10 }}>Homepage - Regulators</h1>
             <div className="site-card-wrapper">
-              <Row gutter={16} style={{ height: "480px" }}>
+              <Row gutter={16}>
                 <Col>
                   <Card style={gridStyleReviewTable} title="Transactions" bordered={false} hoverable={true}>
                     <Table columns={columns} dataSource={reviewData} pagination={this.pagination} onChange={this.handleChange} />
@@ -219,15 +227,13 @@ class HomeRegulator extends Component {
               </Row>
             </div>
             <Modal
-              title="Basic Modal"
+              title={this.state.reviewType}
               visible={this.state.visible}
               onOk={this.handleOk}
               onCancel={this.handleCancel}
             >
-              <p>Insurance ID: {this.state.selectedID}</p>
-              <p>Insurance Type: {this.state.selectedInsuranceType}</p>
-              <p>Payout Amount: {this.state.selectedPayoutAmount}</p>
-              <p>THE REST OF THE INSURANCE INFORMATION</p>
+              <p>Review ID: {this.state.reviewID}</p>
+              <p>Contract ID: {this.state.selectedID}</p>
             </Modal>
           </Content>
         </Layout>
