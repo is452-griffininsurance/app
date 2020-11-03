@@ -20,19 +20,22 @@ class Login extends Component {
 
 
     onFinish(values) {
+        localStorage.clear();
+        localStorage.setItem('username', values.username);
         if (values.username == "griffin" && values.password == "123") {
             this.props.history.push("/home");
+            localStorage.setItem('userType', 'user');
         }
         else if (values.username == "admin" && values.password == "123") {
             this.props.history.push("/regulators");
+            localStorage.setItem('userType', 'admin');
         }
+        window.location.reload();
     };
     render() {
         return (
             <>
                 <Layout className="layout" style={{ minHeight: '100vh' }}>
-                    {/* <Content style={{ padding: '50px 50px' }}> */}
-                    {/* style={{ verticalAlign: 'middle'}} */}
                     <Content style={{ justify: "center" }}>
                         <div className="site-card-wrapper" style={{ justify: "center"}}>
                             <Row style={{ justify: "center", marginTop:'100px'}}>
@@ -77,5 +80,4 @@ class Login extends Component {
         );
     }
 }
-// export default Login;
 export default withRouter(Login);

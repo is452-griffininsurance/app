@@ -6,7 +6,7 @@ import Insurance from "./components/Pages/Insurance";
 import Flight from "./components/Pages/Flight";
 import CreateFlight from "./components/Pages/CreateFlight";
 import InvestFlight from "./components/Pages/InvestFlight";
-import Regulators from "./components/Pages/HomeRegulators";
+import Regulators from "./components/Pages//Homepage-Regulator/HomeRegulators";
 import Login from "./components/Pages/Login";
 
 
