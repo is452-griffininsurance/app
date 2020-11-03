@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Web3 from "web3";
 import "antd/dist/antd.css";
-import { Layout, Form, Input, Button, Card, InputNumber, Modal } from "antd";
+import { Layout, Form, Input, Button, Card, Spin, Alert } from "antd";
 import FlightInsurance from "../../blockchain/abis/FlightInsurance.json";
 import { API_URL } from "../../utils/utils";
+// import { Link } from "react-router-dom";
 
 const { Content, Footer } = Layout;
 
@@ -25,6 +26,7 @@ class CreateFlight extends React.Component {
       formData: initialFormData,
       formStatus: null,
       formMessage: "",
+      loading: false,
     };
   }
 
@@ -105,7 +107,7 @@ class CreateFlight extends React.Component {
                 });
 
                 console.log(json);
-                // this part u can redirect to idk where
+                // <Link to="/insurance"></Link>
               });
           }
         })
@@ -134,6 +136,7 @@ class CreateFlight extends React.Component {
     return (
       <>
         <Layout className="layout">
+        <Spin spinning = {this.state.loading} tip="Loading..." size="large">
           <Content style={{ padding: "0 50px" }}>
             <h1 style={{ marginTop: 10 }}>Create Flight Insurance ✈️</h1>
             <Form
@@ -141,29 +144,30 @@ class CreateFlight extends React.Component {
               wrapperCol={{ span: 8 }}
               layout="horizontal"
             >
-              {this.state.loading ? (
+              {/* {this.state.loading ? (
                 <>True, show loading spinner</>
               ) : (
-                <>False, stop loading spinner</>
-              )}
+                  <>False, stop loading spinner</>
+                )} */}
 
               {this.state.formMessage ? (
                 <>
                   {this.state.formStatus}, {this.state.formMessage}
                 </>
               ) : (
-                <></>
-              )}
+                  <></>
+                )}
               <Form.Item label="Flight Number">
                 <Input name="flightCode" onChange={this.handleChange} />
               </Form.Item>
 
               <Form.Item label="Flight Details">
-                <Card border="true" size="small">
+                <Input hidden />
+                {/* <Card border="true" size="small">
                   <Form.Item label="Date of Departure">31/12/2020</Form.Item>
                   <Form.Item label="From">Singapore</Form.Item>
                   <Form.Item label="To">Hong Kong</Form.Item>
-                </Card>
+                </Card> */}
               </Form.Item>
 
               {/* <Form.Item label="Pax">
@@ -179,31 +183,20 @@ class CreateFlight extends React.Component {
                   defaultValue={0.0001}
                   min={0.0001}
                   onChange={this.handleChange}
+                  suffix="ETH"
                 />
-                {/* <input
-                  defaultValue={0}
-                  min={0}
-                  // formatter={(value) =>
-                  //   `${value} ETH`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  // }
-                  // parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                  name="premium"
-                  onChange={handleChange}
-                /> */}
               </Form.Item>
 
               <Form.Item label="Ratio">
-                <InputNumber defaultValue={0} min={1} />
+                <Input defaultValue={0.0001} min={0.0001} max={1} />
               </Form.Item>
 
               <Form.Item label="Payout Coverage">
-                <InputNumber
+                {/* premium * ratio */}
+                <Input
                   defaultValue={0}
                   min={0}
-                  formatter={(value) =>
-                    `${value} ETH`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  }
-                  parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+                  suffix="ETH"
                 />
               </Form.Item>
 
@@ -211,19 +204,20 @@ class CreateFlight extends React.Component {
                 <this.DeployContractButton />
               </Form.Item>
             </Form>
-            <Modal
+            {/* <Modal
               title="⚠️ Proceed Payment"
               visible={this.visible}
-              // onOk={this.handleOk}
-              // onCancel={this.handleCancel}
+            // onOk={this.handleOk}
+            // onCancel={this.handleCancel}
             >
               <p>
                 You are about to make a payment of $2000 from your wallet
                 (0x29D7d1dd5B6f9C864d9db560D72a247c178aE86B)
               </p>
               <p>Do you want to proceed?</p>
-            </Modal>
+            </Modal> */}
           </Content>
+          </Spin>
           <Footer />
         </Layout>
       </>

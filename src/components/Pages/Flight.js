@@ -6,42 +6,9 @@ import Highlighter from "react-highlight-words";
 import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
 import { API_URL } from "../../utils/utils";
 
-const { Content, Footer } = Layout;
+import { getAllFlightInsurances } from '../api.js'
 
-const data = [
-  {
-    id: "John Brown",
-    premium: 32,
-    flightNo: "BA2490",
-    status: "Closed",
-    percentage: 1,
-    departureDate: "31/12/2020",
-  },
-  {
-    id: "Jim Green",
-    premium: 42,
-    flightNo: "BA2491A",
-    status: "Closed",
-    percentage: 1,
-    departureDate: "1/12/2020",
-  },
-  {
-    id: "Joe Black",
-    premium: 32,
-    flightNo: "BA2491A",
-    status: "Open",
-    percentage: 0.5,
-    departureDate: "31/1/2022",
-  },
-  {
-    id: "Jim Red",
-    premium: 32,
-    flightNo: "BA2490",
-    status: "Open",
-    percentage: 0.3,
-    departureDate: "3/8/2021",
-  },
-];
+const { Content, Footer } = Layout;
 
 class Insurance extends React.Component {
   state = {
@@ -49,17 +16,33 @@ class Insurance extends React.Component {
     sortedInfo: null,
     searchText: "",
     searchedColumn: "",
+    insuranceData: [],
     data: [],
   };
 
-  componentDidMount() {
-    fetch(`${API_URL}/get_all_insurances?insurance_type=flight_delay`)
-      .then((response) => response.json())
-      .then((json) => {
-        this.setState({ data: json?.insurance });
-        console.log(json?.insurance);
-      });
+  // tempinsuranceData = [];
+
+  async componentWillMount(){
+    await this.loadDBdata()
+  }  
+
+  async loadDBdata(){
+    let data = await getAllFlightInsurances()
+    // console.log(data)
+    this.setState({
+      insuranceData : data.insurances,
+    });
+    console.log(this.state.insuranceData)
   }
+
+  // componentDidMount() {
+  //   fetch(`${API_URL} + /get_all_insurances?insurance_type=flight_delay&status=open`)
+  //     .then((response) => response.json())
+  //     .then((json) => {
+  //       this.setState({ data: json?.insurance });
+  //       console.log(json?.insurance);
+  //     });
+  // }
 
   // Table
   getColumnSearchProps = (dataIndex) => ({
@@ -184,9 +167,9 @@ class Insurance extends React.Component {
         title: "Insurance ID",
         dataIndex: "_id",
         key: "_id",
-        filteredValue: filteredInfo.id || null,
-        onFilter: (value, record) => record.id.includes(value),
-        sorter: (a, b) => a.id.localeCompare(b.id),
+        filteredValue: filteredInfo._id || null,
+        onFilter: (value, record) => record._id.includes(value),
+        sorter: (a, b) => a._id.localeCompare(b._id),
         sortOrder: sortedInfo.columnKey === "_id" && sortedInfo.order,
         ...this.getColumnSearchProps("_id"),
         ellipsis: true,
@@ -210,7 +193,7 @@ class Insurance extends React.Component {
         title: "Premium",
         dataIndex: "premium_amount",
         key: "premium_amount",
-        sorter: (a, b) => a.premium - b.premium,
+        sorter: (a, b) => a.premium_amount - b.premium_amount,
         sortOrder:
           sortedInfo.columnKey === "premium_amount" && sortedInfo.order,
         ellipsis: true,
@@ -219,17 +202,12 @@ class Insurance extends React.Component {
         title: "Flight no.",
         dataIndex: "flight_no",
         key: "flight_no",
-        filters: [
-          // what's this ah?
-          { text: "London", value: "London" },
-          { text: "New York", value: "New York" },
-        ],
-        filteredValue: filteredInfo.flightNo || null,
-        onFilter: (value, record) => record.flightNo.includes(value),
-        sorter: (a, b) => a.flightNo.localeCompare(b.flightNo),
+        filteredValue: filteredInfo.flight_no || null,
+        onFilter: (value, record) => record.flight_no.includes(value),
+        sorter: (a, b) => a.flight_no.localeCompare(b.flight_no),
         sortOrder: sortedInfo.columnKey === "flight_no" && sortedInfo.order,
-        render: (flightNo) => {
-          return <Tag> {flightNo} </Tag>;
+        render: (flight_no) => {
+          return <Tag> {flight_no} </Tag>;
         },
         ...this.getColumnSearchProps("flight_no"),
         ellipsis: true,
@@ -244,12 +222,12 @@ class Insurance extends React.Component {
       },
       {
         title: "Percentage",
-        dataIndex: "percentage",
-        key: "percentage",
-        sorter: (a, b) => a.percentage - b.percentage,
-        sortOrder: sortedInfo.columnKey === "percentage" && sortedInfo.order,
-        render: (percentage) => {
-          return `${percentage * 100}%`;
+        dataIndex: "percent_insured",
+        key: "percent_insured",
+        sorter: (a, b) => a.percent_insured - b.percent_insured,
+        sortOrder: sortedInfo.columnKey === "percent_insured" && sortedInfo.order,
+        render: (percent_insured) => {
+          return `${percent_insured * 100}%`;
         },
         ellipsis: true,
       },
@@ -294,6 +272,7 @@ class Insurance extends React.Component {
         <Layout className="layout">
           <Content style={{ padding: "0 50px" }}>
             <h1 style={{ marginTop: 10 }}>Flight Insurance ✈️</h1>
+            {this.insuranceData}
             <Row style={{ marginBottom: 10 }} justify="space-between">
               <Col>
                 <Button onClick={this.clearAll}>
@@ -302,15 +281,15 @@ class Insurance extends React.Component {
               </Col>
               <Col>
                 <Link to="/createflight">
-                  <Button type="primary" shape="circle">
-                    <PlusOutlined />
+                  <Button >
+                    Create New <PlusOutlined />
                   </Button>
                 </Link>
               </Col>
             </Row>
             <Table
               columns={columns}
-              dataSource={this.state.data}
+              dataSource={this.state.insuranceData}
               onChange={this.handleChange}
             />
           </Content>
