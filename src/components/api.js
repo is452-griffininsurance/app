@@ -24,3 +24,17 @@ export const getAllInsurance = () => {
             console.log(err)
         })
 }
+
+export const getAllFlightInsurances = () => {
+    return axios
+        .get(server_url + 'get_all_insurances?insurance_type=flight_delay&status=open')
+        .then(response => {
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+
+

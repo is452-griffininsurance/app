@@ -12,6 +12,43 @@ const initialFormData = Object.freeze({
   insure_amount: 0.0001,
 });
 
+// const web3 = new Web3(Web3.givenProvider);
+// class InvestFlight extends React.Component {
+//   constructor(props){
+//     this.state = {
+//       id: useParams(),
+//       contractDetails = null,
+//       currentAddress = "0x00",
+//       formData = initialFormData,
+//       formStatus = null,
+//     };
+//   }
+
+//     componentDidMount() {
+//       if (window.ethereum) {
+//         window.ethereum.enable().then((account) => {
+//           const defaultAccount = account[0];
+//           web3.eth.defaultAccount = defaultAccount;
+//           this.setState({ currentAddress: defaultAccount });
+//         });
+//       }
+//     }
+
+//     handleChange = (e) => {
+//       const { formData } = this.state;
+//       console.log(e.target.name, e.target.value);
+//       this.seetState({
+//         ...formData,
+//         // Trimming any whitespace
+//         [e.target.name]: e.target.value.trim(),
+//       });
+//     };
+
+//     DeployInsureButton = () => {
+
+//     }
+  
+// }
 function InvestFlight() {
   const { id } = useParams();
   const [contractDetails, setContractDetails] = useState(null);
@@ -48,6 +85,7 @@ function InvestFlight() {
         console.log(json?.request_record);
       });
   }, [id]);
+
 
   function InsureButton() {
     const insureFlightInsurance = () => {
@@ -111,7 +149,7 @@ function InvestFlight() {
     <>
       <Layout className="layout">
         <Content style={{ padding: "0 50px" }}>
-          <h1 style={{ marginTop: 10 }}>Create Flight Insurance ✈️</h1>
+          <h1 style={{ marginTop: 10 }}>Invest in Flight Insurance ✈️</h1>
           <Form
             labelCol={{ span: 2 }}
             wrapperCol={{ span: 8 }}
