@@ -6,11 +6,9 @@ import InsuranceOwnedTable from './insuranceOwnedTable'
 import InsuranceInvestedTable from './insuranceInvestedTable'
 import { getAllTransactions, getAllInsurance } from '../../api'
 
-
 const { Content } = Layout;
 const { Meta } = Card;
 const { Title } = Typography;
-
 
 
 const gridStyleInsuranceTable = {
@@ -58,7 +56,7 @@ class Home extends Component {
       <>
         <Layout className="layout">
           <Content style={{ padding: '0 50px' }}>
-            <h1 style={{ marginTop: 10 }}>Homepage</h1>
+            <h1 style={{ marginTop: 10 }}>Welcome, {localStorage.getItem('username')}!</h1>
             <div className="site-card-wrapper">
               <Row gutter={5} style={{ marginBottom: 16, width: '100%', display: 'justify' }}>
                 <Col style={{ width: '33.5%', textAlign: 'center' }}>

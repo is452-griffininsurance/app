@@ -92,7 +92,6 @@ function TopNavbar() {
     }
     return <></>;
   }
-
   return (
     <Layout>
       <Header>
@@ -102,26 +101,30 @@ function TopNavbar() {
           selectedKeys={[current]}
           mode="horizontal"
         >
-          <Menu.Item key="Home">
+          <img src={require('../Assets/Picture1.png')} style={{height:'50px'}}/>
+          <Menu.Item key="Home" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
             Home
-            <Link to="/home" />
           </Menu.Item>
-          <Menu.Item key="Insurance">
+          <Menu.Item key="Insurance" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
             Insurance
             <Link to="/insurance" />
           </Menu.Item>
-          <Menu.Item key="Regulator">
-            Regulator Home (temp)
+          <Menu.Item key="Regulator" style={localStorage.getItem('userType') === 'admin' ? {} : {display: 'none'}}>
+            Home
             <Link to="/regulators" />
           </Menu.Item>
-          <Menu.Item key="WalletConnection">
+          <Menu.Item key="WalletConnection" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
             <MetaMaskWalletConnection />
           </Menu.Item>
-          <Menu.Item key="WalletAmount">
+          <Menu.Item key="WalletAmount" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
+            <MetaMaskWalletAmount />
+          </Menu.Item>
+          <Menu.Item key="Logout" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
             <MetaMaskWalletAmount />
           </Menu.Item>
           <Menu.Item key="Logout">
-            <MetaMaskWalletAmount />
+            Logout 
+            <Link to="/" />
           </Menu.Item>
         </Menu>
       </Header>

@@ -1,46 +1,75 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Table, Tag, Modal, Button } from 'antd';
+import { Table, Tag, Tooltip, Row, Col, Divider } from 'antd';
 import { getAllInsurance } from '../../api';
+import '../../../App.css';
 
+const DescriptionItem = ({ title, content }) => (
+    <div className="site-description-item-profile-wrapper">
+        <p className="site-description-item-profile-p-label">{title}:</p>
+        {content}
+    </div>
+);
 
 
 const insuranceData = [
+    // {
+    // "insuring_insurances": 
+    // [
     {
-        insuranceID: '1',
-        insuranceType: 'Car',
-        payoutAmount: 32,
+        "key": 1,
+        "_id": "5f9b02ef07c1008333c9ec27",
+        "contract_address": "0x023mc0912mdsq0",
+        "coverage_amount": 1234.56,
+        "flight_date": "2020-12-12",
+        "flight_no": "SQ123",
+        "insurance_type": "flight_delay",
+        "insured_wallet_addr": "0xa012312310",
+        "insurers": [
+            {
+                "insuring_amount": 123,
+                "wallet_addr": "0x1u23jsd89askn"
+            }
+        ],
+        "max_insured_amount": 1234.56,
+        "min_insured_amount": 1234.56,
+        "percent_insured": 0.09963063763608088,
+        "premium_amount": 1234.56,
+        "status": "open"
     },
     {
-        insuranceID: '2',
-        insuranceType: 'Flight',
-        payoutAmount: 32,
-    },
-    {
-        insuranceID: '3',
-        insuranceType: 'Flight',
-        payoutAmount: 100,
-    },
-    {
-        insuranceID: '4',
-        insuranceType: 'Car',
-        payoutAmount: 2,
-    },
-    {
-        insuranceID: '5',
-        insuranceType: 'Car',
-        payoutAmount: 20,
-    },
-    {
-        insuranceID: '6',
-        insuranceType: 'Flight',
-        payoutAmount: 32,
-    },
+        "key": 2,
+        "_id": "5f9b0603c79b6c43b7319059",
+        "contract_address": "0xasdaw1231232",
+        "coverage_amount": 1234.56,
+        "flight_date": "2020-12-23",
+        "flight_no": "SQ565",
+        "insurance_type": "flight_delay",
+        "insured_wallet_addr": "0xkwkwi120",
+        "insurers": [
+            {
+                "insuring_amount": 123,
+                "wallet_addr": "0x1u23jsd89askn"
+            }
+        ],
+        "max_insured_amount": 1234.56,
+        "min_insured_amount": 1234.56,
+        "percent_insured": 0.09963063763608088,
+        "premium_amount": 1234.56,
+        "status": "open"
+    }
+    //     ]
+    // }
+
 ];
 
 const typeInsuranceList = [
     { text: 'Car', value: 'Car' },
-    { text: 'Flight', value: 'Flight' }
+    { text: 'Flight Delay', value: 'flight_delay' }
+]
+const statusList = [
+    { text: 'Open', value: 'Open' },
+    { text: 'Close', value: 'Close' }
 ]
 
 
@@ -48,10 +77,7 @@ class InsuranceInvestedTable extends Component {
     state = {
         insuranceOwnedFilteredInfo: null,
         sortedInfo: null,
-        visible: false,
-        selectedID: null,
-        selectedInsuranceType: null,
-        selectedPayoutAmount: null
+        visible: false
     };
 
     pagination = {
@@ -82,52 +108,12 @@ class InsuranceInvestedTable extends Component {
         })
     }
 
-
-    showModal = (record) => {
-        this.setState({
-            visible: true,
-            selectedID: record.insuranceID,
-            selectedInsuranceType: record.insuranceType,
-            selectedPayoutAmount: record.payoutAmount
-        });
-    };
-    handleOk = e => {
-        console.log(e);
-        this.setState({
-            visible: false,
-        });
-    };
-
-    handleCancel = e => {
-        console.log(e);
-        this.setState({
-            visible: false,
-        });
-    };
-
-
     handleChange = (pagination, filters, sorter) => {
-        console.log('Various parameters', pagination, filters, sorter);
         this.setState({
             insuranceOwnedFilteredInfo: filters,
             sortedInfo: sorter,
         });
     };
-
-    clearFilters = () => {
-        this.setState({ insuranceOwnedFilteredInfo: null });
-    };
-
-    clearAll = () => {
-        this.setState({
-            insuranceOwnedFilteredInfo: null,
-            sortedInfo: null,
-        });
-    };
-
-    callback(key) {
-        console.log(key);
-    }
 
     render() {
         let { sortedInfo, insuranceOwnedFilteredInfo } = this.state;
@@ -136,59 +122,146 @@ class InsuranceInvestedTable extends Component {
         const columns = [
             {
                 title: 'Insurance ID',
-                dataIndex: 'insuranceID',
+                dataIndex: '_id',
                 key: 'insuranceID',
                 sorter: (a, b) => a.insuranceID - b.insuranceID,
                 sortOrder: sortedInfo.columnKey === 'insuranceID' && sortedInfo.order,
                 ellipsis: true,
+                render: _id => (
+                    <Tooltip placement="topLeft" title={_id}>
+                        {_id}
+                    </Tooltip>
+                ),
             },
             {
-                title: 'Payout Amount',
-                dataIndex: 'payoutAmount',
-                key: 'payoutAmount',
-                sorter: (a, b) => a.payoutAmount - b.payoutAmount,
-                sortOrder: sortedInfo.columnKey === 'payoutAmount' && sortedInfo.order,
+                title: 'Contract Address',
+                dataIndex: 'contract_address',
+                key: 'contract_address',
+                sorter: (a, b) => a.contract_address - b.contract_address,
+                sortOrder: sortedInfo.columnKey === 'contract_address' && sortedInfo.order,
                 ellipsis: true,
+                render: contract_address => (
+                    <Tooltip placement="topLeft" title={contract_address}>
+                        {contract_address}
+                    </Tooltip>
+                ),
             },
             {
                 title: 'Insurance Type',
-                dataIndex: 'insuranceType',
-                key: 'insuranceType',
+                dataIndex: 'insurance_type',
+                key: 'insurance_type',
                 filters: typeInsuranceList,
-                onFilter: (value, record) => record.insuranceType.includes(value),
-                sorter: (a, b) => a.insuranceType.length - b.insuranceType.length,
-                sortOrder: sortedInfo.columnKey === 'insuranceType' && sortedInfo.order,
+                onFilter: (value, record) => record.insurance_type.includes(value),
+                sortOrder: sortedInfo.columnKey === 'insurance_type' && sortedInfo.order,
                 ellipsis: true,
-                render: insuranceType => {
-                    if (insuranceType == 'Car') {
-                        return <Tag color="blue" key={insuranceType}>{insuranceType}</Tag>;
-                    } else if (insuranceType == 'Flight') {
-                        return <Tag color="orange" key={insuranceType}>{insuranceType}</Tag>;
+                render: insurance_type => {
+                    if (insurance_type == 'Car') {
+                        return <Tag color="blue" key={insurance_type}>{insurance_type}</Tag>;
+                    } else if (insurance_type == 'flight_delay') {
+                        return <Tag color="orange" key={insurance_type}><Tooltip placement="topLeft" title="Flight Delay">Flight Delay</Tooltip></Tag>;
                     }
-                    return insuranceType;
+                    return insurance_type;
                 },
             },
             {
-                title: '',
-                dataIndex: '',
-                key: '',
-                render: (record) => <Button type="link" onClick={() => this.showModal(record)}>More</Button>,
+                title: 'Status',
+                dataIndex: 'status',
+                key: 'status',
+                dataIndex: 'status',
+                filters: statusList,
+                onFilter: (value, record) => record.status.includes(value),
+                ellipsis: true,
+                render: status => {
+                    if (status == 'open') {
+                        return <Tag color="green" key={status}>{}<Tooltip placement="topLeft" title={status.toUpperCase()}>{status.toUpperCase()}</Tooltip></Tag>;
+                    } else if (status == 'close') {
+                        return <Tag color="red" key={status}><Tooltip placement="topLeft" title={status.toUpperCase()}>{status.toUpperCase()}</Tooltip></Tag>;
+                    }
+                    return <Tooltip placement="topLeft" title={status.toUpperCase()}>{status.toUpperCase()}</Tooltip>;
+                },
+                width: '10%'
+            }
+        ];
+
+        const columnsInsurers = [
+            {
+                title: <div style={{color:'rgb(61, 61, 61)'}}>Wallet Address</div>,
+                dataIndex: 'wallet_addr',
+                key: 'wallet_addr',
+                ellipsis: true,
+                render: wallet_addr => (
+                    <Tooltip placement="topLeft" title={wallet_addr}>
+                        <div style={{color:'rgb(121, 121, 121)'}}>{wallet_addr}</div>
+                    </Tooltip>
+                ),
+            },
+            {
+                title: <div style={{color:'rgb(61, 61, 61)'}}>Insuring Amount </div>,
+                dataIndex: 'insuring_amount',
+                key: 'insuring_amount',
+                ellipsis: true,
+                render: insuring_amount => (
+                    <Tooltip placement="topLeft" title={insuring_amount} >
+                        <div style={{color:'rgb(121, 121, 121)'}}>{insuring_amount}</div>
+                    </Tooltip>
+                ),
             },
         ];
         return (
             <>
-                <Table columns={columns} dataSource={insuranceData} pagination={this.pagination} onChange={this.handleChange} />
-                <Modal
-                    title="Basic Modal"
-                    visible={this.state.visible}
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
-                >
-                    <p>Insurance ID: {this.state.selectedID}</p>
-                    <p>Insurance Type: {this.state.selectedInsuranceType}</p>
-                    <p>Payout Amount: {this.state.selectedPayoutAmount}</p>
-                    <p>THE REST OF THE INSURANCE INFORMATION</p>
-                </Modal>
+                <Table columns={columns}
+                    dataSource={insuranceData}
+                    pagination={this.pagination}
+                    onChange={this.handleChange}
+                    size="small"
+                    expandable={{
+                        expandedRowRender: record =>
+                            <>
+                                <Row><Col span={15}><p className="site-description-item-profile-p">Insured Details</p></Col></Row>
+                                <Row>
+                                    <Col span={15}>
+                                        <DescriptionItem title="Insured Wallet Address" content={record.insured_wallet_addr} />
+                                    </Col>
+                                </Row>
+                                <Divider style={{ marginBottom: '5px', marginTop: '5px' }} />
+                                <Row><Col span={15}><p className="site-description-item-profile-p">Insurers</p></Col></Row>
+                                <Row>
+                                    <Col style={{ width: '90%' }}>
+                                        <Table columns={columnsInsurers} dataSource={record.insurers} size="small" pagination={false} bordered />
+                                    </Col>
+                                </Row>
+                                <Divider style={{ marginBottom: '5px', marginTop: '15px' }} />
+                                <Row><Col span={15}><p className="site-description-item-profile-p">Terms & Conditions</p></Col></Row>
+                                <Row>
+                                    <Col span={12}>
+                                        <DescriptionItem title="Coverage Amount" content={record.coverage_amount} />
+                                    </Col>
+                                    <Col span={12}>
+                                        <DescriptionItem title="Premium Amount" content={record.premium_amount} />
+                                    </Col>
+                                    <Col span={12}>
+                                        <DescriptionItem title="Max Insured Amount" content={record.max_insured_amount} />
+                                    </Col>
+                                    <Col span={12}>
+                                        <DescriptionItem title="Min Insured Amount" content={record.min_insured_amount} />
+                                    </Col>
+                                    <Col span={12}>
+                                        <DescriptionItem title="Percentage Insured" content={record.percent_insured} />
+                                    </Col>
+                                </Row>
+                                <Divider style={{ marginBottom: '5px', marginTop: '15px' }} />
+                                <Row><Col span={15}><p className="site-description-item-profile-p">Flight Information</p></Col></Row>
+                                <Row>
+                                    <Col span={12}>
+                                        <DescriptionItem title="Flight Date" content={record.flight_date} />
+                                    </Col>
+                                    <Col span={12}>
+                                        <DescriptionItem title="Flight Number" content={record.flight_no} />
+                                    </Col>
+                                </Row>
+                            </>
+                    }}
+                />
             </>
         );
     }

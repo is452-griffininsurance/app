@@ -40,3 +40,24 @@
     transform: rotate(360deg);
   }
 }
+
+
+.site-description-item-profile-wrapper {
+  margin-bottom: 0px;
+  color: rgb(121, 121, 121);
+  font-size: 14px;
+}
+
+.site-description-item-profile-p {
+  display: block;
+  color: rgb(61, 61, 61);
+  font-size: 16px;
+}
+
+.site-description-item-profile-p-label {
+  display: inline-block;
+  margin-right: 8px;
+  color: rgb(82, 82, 82);
+  font-size: 14px;
+  
+}
