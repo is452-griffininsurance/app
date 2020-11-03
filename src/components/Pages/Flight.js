@@ -23,7 +23,7 @@ class Insurance extends React.Component {
   // tempinsuranceData = [];
 
   async componentWillMount(){
-    await this.loadDBdata()
+    await this.loadDBdata();
   }  
 
   async loadDBdata(){
