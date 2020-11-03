@@ -36,5 +36,16 @@ export const getAllFlightInsurances = () => {
         })
 }
 
+export const getInsuranceByID = id => {
+    return axios
+        .get(server_url + 'get_insurance_by_id?insurance_id=' + id)
+        .then(response => {
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 
 
