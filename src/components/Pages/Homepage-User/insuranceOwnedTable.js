@@ -82,12 +82,10 @@ class InsuranceOwnedTable extends Component {
     }
     async loadDBData() {
         let temp = await getAllInsurance()
-        console.log(temp)
         this.setState({
             insuranceData: temp.insured_insurances
         });
         this.cleanData()
-        console.log(this.state.insuranceData)
     }
     cleanData() {
         let temp = []
@@ -115,14 +113,12 @@ class InsuranceOwnedTable extends Component {
         });
     };
     handleOk = e => {
-        console.log(e);
         this.setState({
             visible: false,
         });
     };
 
     handleCancel = e => {
-        console.log(e);
         this.setState({
             visible: false,
         });
@@ -130,7 +126,6 @@ class InsuranceOwnedTable extends Component {
 
 
     handleChange = (pagination, filters, sorter) => {
-        console.log('Various parameters', pagination, filters, sorter);
         this.setState({
             insuranceOwnedFilteredInfo: filters,
             sortedInfo: sorter,
