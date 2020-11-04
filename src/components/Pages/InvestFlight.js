@@ -283,9 +283,9 @@ class InvestFlight extends React.Component {
                   />
                 </Form.Item>
 
-                <Form.Item label="Ratio">
+                {/* <Form.Item label="Ratio">
                   <Input defaultValue={0} type="number" min={1} />
-                </Form.Item>
+                </Form.Item> */}
 
                 <Form.Item label="Insure Amount">
                   {/* how much investors wanna cover */}
