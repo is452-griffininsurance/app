@@ -118,9 +118,6 @@ function TopNavbar() {
           <Menu.Item key="WalletAmount" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
             <MetaMaskWalletAmount />
           </Menu.Item>
-          <Menu.Item key="Logout" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
-            <MetaMaskWalletAmount />
-          </Menu.Item>
           <Menu.Item key="Logout">
             Logout 
             <Link to="/" />
