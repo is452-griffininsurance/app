@@ -39,6 +39,10 @@ export default function Router() {
         <Switch>
           <Route exact path="/" component={LoginContainer} />
           <Route component={DefaultContainer} />
+          <Route path="/insurance" component={Insurance} />
+          <Route path="/flight" component={Flight} />
+          <Route path="/createflight" component={CreateFlight} />
+          <Route exact path="/investflight/:id" component={InvestFlight} />
         </Switch>
       </div>
     </BrowserRouter>
