@@ -69,7 +69,7 @@ class CreateFlight extends React.Component {
   calculatePayout = e => {
     var inputPremium = parseFloat(document.getElementById('premium_amount').value)
     var inputRatio = parseFloat(document.getElementById('ratio').value)
-    document.getElementById('payout_coverage').value = inputPremium / inputRatio
+    document.getElementById('payout_coverage').value = inputPremium * inputRatio
   }
 
   DeployContractButton = () => {
@@ -166,7 +166,9 @@ class CreateFlight extends React.Component {
 
                 {this.state.formMessage ? (
                   <>
-                    {this.state.formStatus}, {this.state.formMessage}
+                  <Alert message={this.state.formStatus, this.state.formMessage} type="success" showIcon />
+
+                    {/* {this.state.formStatus}, {this.state.formMessage} */}
                   </>
                 ) : (
                     <></>
