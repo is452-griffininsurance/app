@@ -11,58 +11,6 @@ const DescriptionItem = ({ title, content }) => (
     </div>
 );
 
-
-const insuranceData = [
-    // {
-    // "insuring_insurances": 
-    // [
-    {
-        "key": 1,
-        "_id": "5f9b02ef07c1008333c9ec27",
-        "contract_address": "0x023mc0912mdsq0",
-        "coverage_amount": 1234.56,
-        "flight_date": "2020-12-12",
-        "flight_no": "SQ123",
-        "insurance_type": "flight_delay",
-        "insured_wallet_addr": "0xa012312310",
-        "insurers": [
-            {
-                "insuring_amount": 123,
-                "wallet_addr": "0x1u23jsd89askn"
-            }
-        ],
-        "max_insured_amount": 1234.56,
-        "min_insured_amount": 1234.56,
-        "percent_insured": 0.09963063763608088,
-        "premium_amount": 1234.56,
-        "status": "open"
-    },
-    {
-        "key": 2,
-        "_id": "5f9b0603c79b6c43b7319059",
-        "contract_address": "0xasdaw1231232",
-        "coverage_amount": 1234.56,
-        "flight_date": "2020-12-23",
-        "flight_no": "SQ565",
-        "insurance_type": "flight_delay",
-        "insured_wallet_addr": "0xkwkwi120",
-        "insurers": [
-            {
-                "insuring_amount": 123,
-                "wallet_addr": "0x1u23jsd89askn"
-            }
-        ],
-        "max_insured_amount": 1234.56,
-        "min_insured_amount": 1234.56,
-        "percent_insured": 0.09963063763608088,
-        "premium_amount": 1234.56,
-        "status": "open"
-    }
-    //     ]
-    // }
-
-];
-
 const typeInsuranceList = [
     { text: 'Car', value: 'Car' },
     { text: 'Flight Delay', value: 'flight_delay' }
@@ -89,12 +37,10 @@ class InsuranceInvestedTable extends Component {
     }
     async loadDBData() {
         let temp = await getAllInsurance()
-        console.log(temp)
         this.setState({
             insuranceData: temp.insuring_insurances
         });
         this.cleanData()
-        console.log(this.state.insuranceData)
     }
     cleanData() {
         let temp = []
@@ -210,7 +156,7 @@ class InsuranceInvestedTable extends Component {
         return (
             <>
                 <Table columns={columns}
-                    dataSource={insuranceData}
+                    dataSource={this.state.insuranceData}
                     pagination={this.pagination}
                     onChange={this.handleChange}
                     size="small"

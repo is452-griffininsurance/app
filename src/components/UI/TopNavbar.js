@@ -15,7 +15,6 @@ function TopNavbar() {
   const [chainId, setChainId] = useState(0);
 
   const handleClick = (e) => {
-    console.log("click ", e);
     setCurrent({ current: e.key });
   };
 
@@ -101,7 +100,7 @@ function TopNavbar() {
           selectedKeys={[current]}
           mode="horizontal"
         >
-          <img src={require('../Assets/Picture1.png')} style={{height:'50px'}}/>
+          <img src={require('../Assets/LogoName.png')} style={{height:'50px'}}/>
           <Menu.Item key="Home" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
             Home
           </Menu.Item>

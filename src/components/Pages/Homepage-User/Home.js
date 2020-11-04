@@ -44,7 +44,6 @@ class Home extends Component {
     let transactionData = await getAllTransactions()
     let numTransaction = transactionData.paying_transactions.length + transactionData.receiving_transactions.length
     let insuranceData = await getAllInsurance()
-    console.log(insuranceData)
     this.setState({
       numTransactionData: numTransaction,
       numInsuredData: insuranceData.insured_insurances.length,

@@ -133,21 +133,6 @@ class HomeRegulator extends Component {
     });
   };
 
-  handleClick = e => {
-    console.log(e.key)
-    this.setState({
-      current: e.key,
-    });
-    if (e.key == 'verfication') {
-      this.setState({
-        reviewData: verification,
-      });
-    } else if (e.key == 'reports') {
-      this.setState({
-        reviewData: reports,
-      });
-    }
-  };
   callback(key) {
     console.log(key);
   }
