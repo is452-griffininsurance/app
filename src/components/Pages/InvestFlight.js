@@ -252,7 +252,7 @@ class InvestFlight extends React.Component {
               >
                 <Form.Item label="Percentage insured">
                   <Progress
-                    percent={this.state.contractDetails.percent_insured}
+                    percent={this.state.contractDetails.percent_insured * 100}
                     status="active"
                   />
                 </Form.Item>
