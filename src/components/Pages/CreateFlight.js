@@ -124,8 +124,8 @@ class CreateFlight extends React.Component {
               flight_date: formData.flightDate,
               insured_wallet_addr: currentAddress,
               premium_amount: formData.premium_amount,
-              min_insure_amount: 0.25 * formData.premium_amount,
-              max_insure_amount: 10 * formData.premium_amount,
+              min_insured_amount: 0.25 * formData.premium_amount,
+              max_insured_amount: 10 * formData.premium_amount,
               coverage_amount: 0,
             };
             console.log(data); // Data to be POSTed to API
