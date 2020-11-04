@@ -109,7 +109,7 @@ class InvestFlight extends React.Component {
             };
 
             fetch(
-              `${API_URL}/add_insurer/${contractDetails.contract_address}`,
+              `${API_URL}/add_insurer?contract_address=${contractDetails.contract_address}`,
               {
                 method: "POST",
                 headers: {
