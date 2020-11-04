@@ -112,6 +112,10 @@ function TopNavbar() {
             Home
             <Link to="/regulators" />
           </Menu.Item>
+          <Menu.Item key="RegulatorTriggerPayout" style={localStorage.getItem('userType') === 'admin' ? {} : {display: 'none'}}>
+            Trigger Payout
+            <Link to="/triggerpayout" />
+          </Menu.Item>
           <Menu.Item key="WalletConnection" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
             <MetaMaskWalletConnection />
           </Menu.Item>
