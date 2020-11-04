@@ -1,7 +1,17 @@
 import React from "react";
 import Web3 from "web3";
 import "antd/dist/antd.css";
-import { Layout, Form, Input, Button, Card, Spin, Alert, Modal, Tag } from "antd";
+import {
+  Layout,
+  Form,
+  Input,
+  Button,
+  Card,
+  Spin,
+  Alert,
+  Modal,
+  Tag,
+} from "antd";
 import FlightInsurance from "../../blockchain/abis/FlightInsurance.json";
 import { API_URL } from "../../utils/utils";
 // import { Link } from "react-router-dom";
@@ -60,17 +70,20 @@ class CreateFlight extends React.Component {
     });
   };
 
-  handleCancel = e => {
+  handleCancel = (e) => {
     this.setState({
       visible: false,
     });
   };
 
-  calculatePayout = e => {
-    var inputPremium = parseFloat(document.getElementById('premium_amount').value)
-    var inputRatio = parseFloat(document.getElementById('ratio').value)
-    document.getElementById('payout_coverage').value = inputPremium * inputRatio
-  }
+  calculatePayout = (e) => {
+    const inputPremium = parseFloat(
+      document.getElementById("premium_amount").value
+    );
+    const inputRatio = parseFloat(document.getElementById("ratio").value);
+    document.getElementById("payout_coverage").value =
+      inputPremium * inputRatio;
+  };
 
   DeployContractButton = () => {
     const { visible, currentAddress, formData, formStatus } = this.state;
@@ -86,6 +99,14 @@ class CreateFlight extends React.Component {
           arguments: [
             web3.utils.toHex(formData.flightCode), // need to toHex
             web3.utils.toHex(formData.flightDate),
+            web3.utils.toWei(
+              (0.25 * formData.premium_amount).toString(),
+              "ether"
+            ),
+            web3.utils.toWei(
+              (10 * formData.premium_amount).toString(),
+              "ether"
+            ),
           ],
         })
         .send({
@@ -163,38 +184,43 @@ class CreateFlight extends React.Component {
                 wrapperCol={{ span: 8 }}
                 layout="horizontal"
               >
-
                 {this.state.formMessage ? (
                   <>
-                  <Alert message={this.state.formStatus, this.state.formMessage} type="success" showIcon />
+                    <Alert
+                      message={(this.state.formStatus, this.state.formMessage)}
+                      type="success"
+                      showIcon
+                    />
 
                     {/* {this.state.formStatus}, {this.state.formMessage} */}
                   </>
                 ) : (
-                    <></>
-                  )}
+                  <></>
+                )}
                 <Form.Item label="Flight Number">
                   <Input name="flightCode" onChange={this.handleChange} />
                 </Form.Item>
 
                 <Form.Item label="Flight Details">
-                  <Tag color="green" onClick={this.showModal}>Show Flight Details</Tag>
+                  <Tag color="green" onClick={this.showModal}>
+                    Show Flight Details
+                  </Tag>
                   <Modal
                     title="Flight details"
                     visible={this.state.visible}
                     footer={null}
-                    closable={true}
+                    closable
                     onCancel={this.handleCancel}
                   >
-                    <Card border="true" size="small" >
-                      <Form.Item label="Date of Departure">31/12/2020</Form.Item>
+                    <Card border="true" size="small">
+                      <Form.Item label="Date of Departure">
+                        31/12/2020
+                      </Form.Item>
                       <Form.Item label="From">Singapore</Form.Item>
                       <Form.Item label="To">Hong Kong</Form.Item>
                     </Card>
                   </Modal>
                 </Form.Item>
-
-
 
                 <Form.Item label="Premium">
                   <Input
@@ -208,12 +234,13 @@ class CreateFlight extends React.Component {
                 </Form.Item>
 
                 <Form.Item label="Ratio">
-                  <Input 
+                  <Input
                     name="ratio"
                     id="ratio"
-                    defaultValue={0.0001} 
-                    min={0.0001} 
+                    defaultValue={10}
+                    min={10}
                     max={1}
+                    disabled
                   />
                 </Form.Item>
 
@@ -227,7 +254,7 @@ class CreateFlight extends React.Component {
                   /> */}
                   <Search
                     id="payout_coverage"
-                    placeholder="calculate payout coverage"
+                    placeholder="Calculate max payout coverage"
                     enterButton="Calculate"
                     onSearch={this.calculatePayout}
                     suffix="ETH"
