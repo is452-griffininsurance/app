@@ -14,26 +14,12 @@ const initialFormData = Object.freeze({
   insure_amount: 0.0001,
 });
 
-// window.onload = function() {
-//   try{
-//     var url_string = (window.location.href);
-//     console.log(url_string)
-//     var url = new URL(url_string)
-//     var id = url.searchParams.get("id");
-//     console.log(id)
-//   }
-//   catch (err){
-//     console.log(err)
-//   }
-// };
-
-
 const web3 = new Web3(Web3.givenProvider);
 class InvestFlight extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
+      id: null,
       currentAddress: "0x00",
       formData: initialFormData,
       formStatus: null,
@@ -43,28 +29,17 @@ class InvestFlight extends React.Component {
   }
 
   async componentWillMount(){
-    this.getTID();
+    this.loadDBdata();
   }
 
   async loadDBdata(){
-    let data = await getInsuranceByID(this.state.id)
+    let data = await getInsuranceByID(this.props.match.params.id)
     console.log(data)
     this.setState({
       contractDetails : data.insurance,
+      id : data.insurance._id
     });
-    console.log(this.state.contractDetails)
-  }
-
-  getTID = () => {
-    var url_string = (window.location.href);
-    var url = new URL(url_string);
-    var pathname = url.pathname;
-    console.log(pathname)
-    var tid = pathname.slice(14,);
-    this.setState({ id: tid });
-    console.log(this.state.id);
-
-    this.loadDBdata();
+    console.log(this.state.id)
   }
 
   componentDidMount() {
