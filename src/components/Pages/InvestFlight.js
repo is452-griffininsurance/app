@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Web3 from "web3";
 import "antd/dist/antd.css";
-import { Layout, Form, Input, Button, Card, InputNumber, Progress, Tag, Spin } from "antd";
+import {
+  Layout,
+  Form,
+  Input,
+  Button,
+  Card,
+  InputNumber,
+  Progress,
+  Tag,
+  Spin,
+} from "antd";
 import { useParams } from "react-router-dom";
 import FlightInsurance from "../../blockchain/abis/FlightInsurance.json";
 import { API_URL } from "../../utils/utils";
 
-import { getInsuranceByID } from '../api.js'
+import { getInsuranceByID } from "../api.js";
 
 const { Content, Footer } = Layout;
 
@@ -28,18 +38,19 @@ class InvestFlight extends React.Component {
     };
   }
 
-  async componentWillMount(){
+  async componentWillMount() {
     this.loadDBdata();
   }
 
-  async loadDBdata(){
-    let data = await getInsuranceByID(this.props.match.params.id)
-    console.log(data)
+  async loadDBdata() {
+    const data = await getInsuranceByID(this.props.match.params.id);
+    console.log(data);
     this.setState({
-      contractDetails : data.insurance,
-      id : data.insurance._id
+      contractDetails: data.insurance,
+      id: data.insurance._id,
     });
-    console.log(this.state.id)
+    console.log(this.state.id);
+    console.log(this.state.contractDetails);
   }
 
   componentDidMount() {
@@ -56,15 +67,24 @@ class InvestFlight extends React.Component {
     const { formData } = this.state;
     console.log(e.target.name, e.target.value);
     this.setState({
-      ...formData,
-      // Trimming any whitespace
-      [e.target.name]: e.target.value.trim(),
+      formData: {
+        ...formData,
+        // Trimming any whitespace
+        [e.target.name]: e.target.value.trim(),
+      }
     });
   };
 
   InsureButton = () => {
-    const { formData, currentAddress, contractDetails, formStatus } = this.state;
+    const {
+      formData,
+      currentAddress,
+      contractDetails,
+      formStatus,
+    } = this.state;
     const insureFlightInsurance = () => {
+      console.log("FormData", formData);
+      console.log(contractDetails.contract_address);
       this.setState({ loading: true });
       const flightInsurance = new web3.eth.Contract(
         FlightInsurance.abi,
@@ -79,7 +99,7 @@ class InvestFlight extends React.Component {
         })
         .on("confirmation", (confirmationNumber, receipt) => {
           console.log("Insure success!");
-          this.setState({ loading: false});
+          this.setState({ loading: false });
           if (confirmationNumber === 0) {
             console.log(receipt);
 
@@ -101,10 +121,10 @@ class InvestFlight extends React.Component {
             )
               .then((response) => response.json())
               .then((json) => {
-                this.setState({ loading: false});
+                this.setState({ loading: false });
                 this.setState({
                   formStatus: "success",
-                  formMessage: "Insured!"
+                  formMessage: "Insured!",
                 });
                 // setFormStatus(json);
                 console.log(json);
@@ -130,10 +150,7 @@ class InvestFlight extends React.Component {
         You do not have MetaMask installed.
       </Button>
     );
-
   };
-
-
 
   // function InvestFlight() {
   //   const { id } = useParams();
@@ -169,7 +186,6 @@ class InvestFlight extends React.Component {
   //         console.log(json?.request_record);
   //       });
   //   }, [id]);
-
 
   // }
   // function InsureButton() {
@@ -221,68 +237,76 @@ class InvestFlight extends React.Component {
   //     </Button>
   //   );
   // };
-
   render() {
     return (
       <>
         <Layout className="layout">
-        <Spin spinning = {this.state.loading} tip="Loading..." size="large">
-          <Content style={{ padding: "0 50px", height: "100vh" }}>
-            <h1 style={{ marginTop: 10 }}>Invest in <Tag>{this.state.id}</Tag> ✈️</h1>
-            <Form
-              labelCol={{ span: 2 }}
-              wrapperCol={{ span: 8 }}
-              layout="horizontal"
-            >
-              <Form.Item label="Percentage insured">
-                <Progress percent={this.state.contractDetails.percent_insured} status="active" />
-              </Form.Item>
+          <Spin spinning={this.state.loading} tip="Loading..." size="large">
+            <Content style={{ padding: "0 50px", height: "100vh" }}>
+              <h1 style={{ marginTop: 10 }}>
+                Invest in <Tag>{this.state.contractDetails?.contract_address}</Tag> ✈️
+              </h1>
+              <Form
+                labelCol={{ span: 2 }}
+                wrapperCol={{ span: 8 }}
+                layout="horizontal"
+              >
+                <Form.Item label="Percentage insured">
+                  <Progress
+                    percent={this.state.contractDetails.percent_insured}
+                    status="active"
+                  />
+                </Form.Item>
 
-              <Form.Item label="Flight Number">
-                <Input value={this.state.contractDetails?.flight_no} disabled />
-              </Form.Item>
+                <Form.Item label="Flight Number">
+                  <Input
+                    value={this.state.contractDetails?.flight_no}
+                    disabled
+                  />
+                </Form.Item>
 
-              <Form.Item label="Flight Details">
-                <Card border="true" size="small">
-                  <Form.Item label="Date of Departure">
-                    {this.state.contractDetails?.flight_date}
-                  </Form.Item>
-                  <Form.Item label="From">Singapore</Form.Item>
-                  <Form.Item label="To">Hong Kong</Form.Item>
-                </Card>
-              </Form.Item>
+                <Form.Item label="Flight Details">
+                  <Card border="true" size="small">
+                    <Form.Item label="Date of Departure">
+                      {this.state.contractDetails?.flight_date}
+                    </Form.Item>
+                    <Form.Item label="From">Singapore</Form.Item>
+                    <Form.Item label="To">Hong Kong</Form.Item>
+                  </Card>
+                </Form.Item>
 
-              <Form.Item label="Premium Paid">
-                {/* this is how much money they will get, so it should be calculated */}
-                <Input
-                  value={this.state.contractDetails?.premium_amount}
-                  disable
-                />
-              </Form.Item>
+                <Form.Item label="Premium Paid">
+                  {/* this is how much money they will get, so it should be calculated */}
+                  <Input
+                    value={this.state.contractDetails?.premium_amount}
+                    disable
+                  />
+                </Form.Item>
 
-              <Form.Item label="Ratio">
-                <Input defaultValue={0} type="number" min={1} />
-              </Form.Item>
+                {/* <Form.Item label="Ratio">
+                  <Input defaultValue={0} type="number" min={1} />
+                </Form.Item> */}
 
-              <Form.Item label="Insure Amount">
-                {/* how much investors wanna cover */}
-                <Input
-                  name="insure_amount"
-                  defaultValue={0.0001}
-                  type="number"
-                  min={0.0001}
-                  onChange={this.handleChange}
-                />
-              </Form.Item>
+                <Form.Item label="Insure Amount">
+                  {/* how much investors wanna cover */}
+                  <Input
+                    name="insure_amount"
+                    defaultValue={this.state.contractDetails?.min_insure_amount}
+                    type="number"
+                    min={this.state.contractDetails?.min_insure_amount}
+                    max={this.state.contractDetails?.max_insure_amount}
+                    onChange={this.handleChange}
+                  />
+                </Form.Item>
 
-              <Form.Item>
-                <this.InsureButton />
-                <Button type="primary" danger>
-                  Report
-                </Button>
-              </Form.Item>
-            </Form>
-          </Content>
+                <Form.Item>
+                  <this.InsureButton />
+                  <Button type="primary" danger>
+                    Report
+                  </Button>
+                </Form.Item>
+              </Form>
+            </Content>
           </Spin>
           <Footer />
         </Layout>
