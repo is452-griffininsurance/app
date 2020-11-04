@@ -33,7 +33,7 @@ class InvestFlight extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '5fa01c6137335e93945fcaad',
+      id: '',
       currentAddress: "0x00",
       formData: initialFormData,
       formStatus: null,
@@ -48,6 +48,7 @@ class InvestFlight extends React.Component {
 
   async loadDBdata(){
     let data = await getInsuranceByID(this.state.id)
+    console.log(data)
     this.setState({
       contractDetails : data.insurance,
     });
@@ -58,10 +59,11 @@ class InvestFlight extends React.Component {
     var url_string = (window.location.href);
     var url = new URL(url_string);
     var pathname = url.pathname;
+    console.log(pathname)
     var tid = pathname.slice(14,);
     this.setState({ id: tid });
     console.log(this.state.id);
-    
+
     this.loadDBdata();
   }
 
@@ -102,6 +104,7 @@ class InvestFlight extends React.Component {
         })
         .on("confirmation", (confirmationNumber, receipt) => {
           console.log("Insure success!");
+          this.setState({ loading: false});
           if (confirmationNumber === 0) {
             console.log(receipt);
 
@@ -249,7 +252,7 @@ class InvestFlight extends React.Component {
       <>
         <Layout className="layout">
         <Spin spinning = {this.state.loading} tip="Loading..." size="large">
-          <Content style={{ padding: "0 50px" }}>
+          <Content style={{ padding: "0 50px", height: "100vh" }}>
             <h1 style={{ marginTop: 10 }}>Invest in <Tag>{this.state.id}</Tag> ✈️</h1>
             <Form
               labelCol={{ span: 2 }}

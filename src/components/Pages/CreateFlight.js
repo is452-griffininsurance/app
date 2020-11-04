@@ -1,14 +1,14 @@
 import React from "react";
 import Web3 from "web3";
 import "antd/dist/antd.css";
-import { Layout, Form, Input, Button, Card, Spin, Alert } from "antd";
+import { Layout, Form, Input, Button, Card, Spin, Alert, Modal, Tag } from "antd";
 import FlightInsurance from "../../blockchain/abis/FlightInsurance.json";
 import { API_URL } from "../../utils/utils";
 // import { Link } from "react-router-dom";
 
 const { Content, Footer } = Layout;
 
-const { TextArea } = Input;
+const { Search } = Input;
 
 const initialFormData = Object.freeze({
   flightCode: "SQ306",
@@ -27,6 +27,7 @@ class CreateFlight extends React.Component {
       formStatus: null,
       formMessage: "",
       loading: false,
+      visible: false,
     };
   }
 
@@ -52,6 +53,24 @@ class CreateFlight extends React.Component {
       },
     });
   };
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleCancel = e => {
+    this.setState({
+      visible: false,
+    });
+  };
+
+  calculatePayout = e => {
+    var inputPremium = parseFloat(document.getElementById('premium_amount').value)
+    var inputRatio = parseFloat(document.getElementById('ratio').value)
+    document.getElementById('payout_coverage').value = inputPremium / inputRatio
+  }
 
   DeployContractButton = () => {
     const { visible, currentAddress, formData, formStatus } = this.state;
@@ -136,75 +155,88 @@ class CreateFlight extends React.Component {
     return (
       <>
         <Layout className="layout">
-        <Spin spinning = {this.state.loading} tip="Loading..." size="large">
-          <Content style={{ padding: "0 50px" }}>
-            <h1 style={{ marginTop: 10 }}>Create Flight Insurance ✈️</h1>
-            <Form
-              labelCol={{ span: 2 }}
-              wrapperCol={{ span: 8 }}
-              layout="horizontal"
-            >
-              {/* {this.state.loading ? (
-                <>True, show loading spinner</>
-              ) : (
-                  <>False, stop loading spinner</>
-                )} */}
+          <Spin spinning={this.state.loading} tip="Loading..." size="large">
+            <Content style={{ padding: "0 50px", height: "100vh" }}>
+              <h1 style={{ marginTop: 10 }}>Create Flight Insurance ✈️</h1>
+              <Form
+                labelCol={{ span: 2 }}
+                wrapperCol={{ span: 8 }}
+                layout="horizontal"
+              >
 
-              {this.state.formMessage ? (
-                <>
-                  {this.state.formStatus}, {this.state.formMessage}
-                </>
-              ) : (
-                  <></>
-                )}
-              <Form.Item label="Flight Number">
-                <Input name="flightCode" onChange={this.handleChange} />
-              </Form.Item>
+                {this.state.formMessage ? (
+                  <>
+                    {this.state.formStatus}, {this.state.formMessage}
+                  </>
+                ) : (
+                    <></>
+                  )}
+                <Form.Item label="Flight Number">
+                  <Input name="flightCode" onChange={this.handleChange} />
+                </Form.Item>
 
-              <Form.Item label="Flight Details">
-                <Input hidden />
-                {/* <Card border="true" size="small">
-                  <Form.Item label="Date of Departure">31/12/2020</Form.Item>
-                  <Form.Item label="From">Singapore</Form.Item>
-                  <Form.Item label="To">Hong Kong</Form.Item>
-                </Card> */}
-              </Form.Item>
+                <Form.Item label="Flight Details">
+                  <Tag color="green" onClick={this.showModal}>Show Flight Details</Tag>
+                  <Modal
+                    title="Flight details"
+                    visible={this.state.visible}
+                    footer={null}
+                    closable={true}
+                    onCancel={this.handleCancel}
+                  >
+                    <Card border="true" size="small" >
+                      <Form.Item label="Date of Departure">31/12/2020</Form.Item>
+                      <Form.Item label="From">Singapore</Form.Item>
+                      <Form.Item label="To">Hong Kong</Form.Item>
+                    </Card>
+                  </Modal>
+                </Form.Item>
 
-              {/* <Form.Item label="Pax">
-                                  <InputNumber
-                                      defaultValue={1}
-                                      min={1}
-                                  />
-                              </Form.Item> */}
 
-              <Form.Item label="Premium">
-                <Input
-                  name="premium_amount"
-                  defaultValue={0.0001}
-                  min={0.0001}
-                  onChange={this.handleChange}
-                  suffix="ETH"
-                />
-              </Form.Item>
 
-              <Form.Item label="Ratio">
-                <Input defaultValue={0.0001} min={0.0001} max={1} />
-              </Form.Item>
+                <Form.Item label="Premium">
+                  <Input
+                    name="premium_amount"
+                    id="premium_amount"
+                    defaultValue={0.0001}
+                    min={0.0001}
+                    onChange={this.handleChange}
+                    suffix="ETH"
+                  />
+                </Form.Item>
 
-              <Form.Item label="Payout Coverage">
-                {/* premium * ratio */}
-                <Input
-                  defaultValue={0}
-                  min={0}
-                  suffix="ETH"
-                />
-              </Form.Item>
+                <Form.Item label="Ratio">
+                  <Input 
+                    name="ratio"
+                    id="ratio"
+                    defaultValue={0.0001} 
+                    min={0.0001} 
+                    max={1}
+                  />
+                </Form.Item>
 
-              <Form.Item>
-                <this.DeployContractButton />
-              </Form.Item>
-            </Form>
-            {/* <Modal
+                <Form.Item label="Payout Coverage">
+                  {/* premium * ratio */}
+
+                  {/* <Input
+                    defaultValue={0}
+                    min={0}
+                    suffix="ETH"
+                  /> */}
+                  <Search
+                    id="payout_coverage"
+                    placeholder="calculate payout coverage"
+                    enterButton="Calculate"
+                    onSearch={this.calculatePayout}
+                    suffix="ETH"
+                  />
+                </Form.Item>
+
+                <Form.Item>
+                  <this.DeployContractButton />
+                </Form.Item>
+              </Form>
+              {/* <Modal
               title="⚠️ Proceed Payment"
               visible={this.visible}
             // onOk={this.handleOk}
@@ -216,7 +248,7 @@ class CreateFlight extends React.Component {
               </p>
               <p>Do you want to proceed?</p>
             </Modal> */}
-          </Content>
+            </Content>
           </Spin>
           <Footer />
         </Layout>
