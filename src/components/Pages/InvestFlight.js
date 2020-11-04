@@ -290,10 +290,10 @@ class InvestFlight extends React.Component {
                   {/* how much investors wanna cover */}
                   <Input
                     name="insure_amount"
-                    defaultValue={this.state.contractDetails?.min_insure_amount}
+                    defaultValue={this.state.contractDetails?.min_insured_amount}
                     type="number"
-                    min={this.state.contractDetails?.min_insure_amount}
-                    max={this.state.contractDetails?.max_insure_amount}
+                    min={this.state.contractDetails?.min_insured_amount}
+                    max={this.state.contractDetails?.max_insured_amount}
                     onChange={this.handleChange}
                   />
                 </Form.Item>
