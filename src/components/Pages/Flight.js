@@ -270,7 +270,7 @@ class Insurance extends React.Component {
     return (
       <>
         <Layout className="layout">
-          <Content style={{ padding: "0 50px" }}>
+          <Content style={{ padding: "0 50px", height: "100vh" }}>
             <h1 style={{ marginTop: 10 }}>Flight Insurance ✈️</h1>
             {this.insuranceData}
             <Row style={{ marginBottom: 10 }} justify="space-between">
