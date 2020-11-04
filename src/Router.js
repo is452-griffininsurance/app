@@ -6,16 +6,16 @@ import Insurance from "./components/Pages/Insurance";
 import Flight from "./components/Pages/Flight";
 import CreateFlight from "./components/Pages/CreateFlight";
 import InvestFlight from "./components/Pages/InvestFlight";
-import Regulators from "./components/Pages//Homepage-Regulator/HomeRegulators";
+import Regulators from "./components/Pages/Homepage-Regulator/HomeRegulators";
 import Login from "./components/Pages/Login";
-
+import ManualTriggerPayout from "./components/Pages/Homepage-Regulator/ManualTriggerPayout";
 
 export default function Router() {
   const LoginContainer = () => (
     <div className="container">
       <Route exact path="/" component={Login} />
     </div>
-  )
+  );
 
   const DefaultContainer = () => (
     <div>
@@ -27,9 +27,10 @@ export default function Router() {
         <Route path="/createflight" component={CreateFlight} />
         <Route path="/investflight/:id" component={InvestFlight} />
         <Route path="/regulators" component={Regulators} />
+        <Route path="/triggerpayout" component={ManualTriggerPayout} />
       </div>
     </div>
-  )
+  );
 
   return (
     <BrowserRouter>
