@@ -50,6 +50,7 @@ class InvestFlight extends React.Component {
       id: data.insurance._id,
     });
     console.log(this.state.id);
+    console.log(this.state.contractDetails);
   }
 
   componentDidMount() {
@@ -236,7 +237,6 @@ class InvestFlight extends React.Component {
   //     </Button>
   //   );
   // };
-
   render() {
     return (
       <>
@@ -244,7 +244,7 @@ class InvestFlight extends React.Component {
           <Spin spinning={this.state.loading} tip="Loading..." size="large">
             <Content style={{ padding: "0 50px", height: "100vh" }}>
               <h1 style={{ marginTop: 10 }}>
-                Invest in <Tag>{this.state.id}</Tag> ✈️
+                Invest in <Tag>{this.state.contractDetails?.contract_address}</Tag> ✈️
               </h1>
               <Form
                 labelCol={{ span: 2 }}
@@ -291,9 +291,10 @@ class InvestFlight extends React.Component {
                   {/* how much investors wanna cover */}
                   <Input
                     name="insure_amount"
-                    defaultValue={0.0001}
+                    defaultValue={this.state.contractDetails?.min_insure_amount}
                     type="number"
-                    min={0.0001}
+                    min={this.state.contractDetails?.min_insure_amount}
+                    max={this.state.contractDetails?.max_insure_amount}
                     onChange={this.handleChange}
                   />
                 </Form.Item>

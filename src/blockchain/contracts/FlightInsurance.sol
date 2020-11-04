@@ -54,7 +54,7 @@ contract FlightInsurance is ISmartInsurance {
     function insure() payable public override {
         require(msg.value > 0, "Your Insure Amount cannot be zero value.");
         require(msg.value >= minInsureAmount, "Your insure amount must be more than this Insurance contract's Minimum Insure Amount.");
-        require(insurersTotal.add(msg.value) < maxInsureAmount, "Your insure amount cannot exceed the Insurance contract's Insurers Pool Amount.");
+        require(insurersTotal.add(msg.value) <= maxInsureAmount, "Your insure amount cannot exceed the Insurance contract's Insurers Pool Amount.");
 
         insurers[msg.sender] = msg.sender;
         balances[msg.sender] = balances[msg.sender].add(msg.value);
