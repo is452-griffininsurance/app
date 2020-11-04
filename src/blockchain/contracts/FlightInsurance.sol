@@ -17,7 +17,12 @@ contract FlightInsurance is ISmartInsurance {
     // It's also payable in case it expires
     // address payable[] public insurers;
     mapping(address => address payable) public insurers;
-    mapping(address => uint256) public balances;
+    mapping(address => uint256) public balances; // Specific insurers total
+    uint256 public insurersTotal = 0; // Total amount ONLY for the insurers pool
+
+    // Minimum, maximum and total amount for the insurers pool
+    uint256 public minInsureAmount = 0;
+    uint256 public maxInsureAmount = 0;
     
     // Our address as escrow 0xfeB87197aBd18dDaBD28B58b205936dfB4569B17
     address payable public escrow = payable(0xfeB87197aBd18dDaBD28B58b205936dfB4569B17);
@@ -35,19 +40,25 @@ contract FlightInsurance is ISmartInsurance {
         _;
     }
     
-    constructor(string memory _flightCode, string memory _flightDate) payable public {
+    constructor(string memory _flightCode, string memory _flightDate, uint256 _minInsureAmount, uint256 _maxInsureAmount) payable public {
         require(msg.value > 0, "Your premium must be at least 1 wei.");
         insured = msg.sender;
         flightCode = _flightCode;
         flightDate = _flightDate;
+        minInsureAmount = _minInsureAmount;
+        maxInsureAmount = _maxInsureAmount;
         premium = premium.add(msg.value);
         status = Status.AWAITING_FUNDING;
     }
     
     function insure() payable public override {
-        require(msg.value > 0, "You must insure this insurance with at least 1 wei.");
+        require(msg.value > 0, "Your Insure Amount cannot be zero value.");
+        require(msg.value >= minInsureAmount, "Your insure amount must be more than this Insurance contract's Minimum Insure Amount.");
+        require(insurersTotal.add(msg.value) <= maxInsureAmount, "Your insure amount cannot exceed the Insurance contract's Insurers Pool Amount.");
+
         insurers[msg.sender] = msg.sender;
         balances[msg.sender] = balances[msg.sender].add(msg.value);
+        insurersTotal = insurersTotal.add(msg.value);
     }
 
     function getBalance() public view override returns (uint256) {
