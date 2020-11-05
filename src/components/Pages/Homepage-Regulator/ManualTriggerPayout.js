@@ -8,7 +8,8 @@ const { Content, Footer } = Layout;
 const { Search } = Input;
 
 const initialFormData = Object.freeze({
-  contract_address: "0x00",
+  id: "",
+  event: "INSURED_EVENT",
 });
 
 function ManualTriggerPayout() {
@@ -22,6 +23,30 @@ function ManualTriggerPayout() {
     });
   };
 
+  const TriggerPayoutButton = () => {
+    const triggerPayout = () => {
+      const data = formData;
+      fetch(`http://localhost:5001/contract/payout`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          // <Link to="/insurance"></Link>
+        });
+    };
+    return (
+      <Button type="primary" onClick={triggerPayout}>
+        Trigger Payout
+      </Button>
+    );
+  };
+
   return (
     <>
       <Layout className="layout">
@@ -32,16 +57,20 @@ function ManualTriggerPayout() {
             wrapperCol={{ span: 8 }}
             layout="horizontal"
           >
-            <Form.Item label="Contract Address">
-              <Input name="contract_address" onChange={handleChange} />
+            <Form.Item label="Internal ID">
+              <Input name="id" onChange={handleChange} />
             </Form.Item>
 
             <Form.Item label="Event">
-              <Input name="event" onChange={handleChange} />
+              <Input
+                name="event"
+                defaultValue={initialFormData.event}
+                onChange={handleChange}
+              />
             </Form.Item>
 
             <Form.Item>
-              <Button type="primary">Trigger Payout</Button>
+              <TriggerPayoutButton />
             </Form.Item>
           </Form>
           {/* <Modal
