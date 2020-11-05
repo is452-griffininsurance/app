@@ -187,7 +187,8 @@ class CreateFlight extends React.Component {
                 {this.state.formMessage ? (
                   <>
                     <Alert
-                      message={(this.state.formStatus, this.state.formMessage)}
+                      message={(this.state.formMessage)}
+                      description={<a href="https://is452.cloud/flight">Go back to flight</a>}
                       type="success"
                       showIcon
                     />
@@ -195,8 +196,8 @@ class CreateFlight extends React.Component {
                     {/* {this.state.formStatus}, {this.state.formMessage} */}
                   </>
                 ) : (
-                  <></>
-                )}
+                    <></>
+                  )}
                 <Form.Item label="Flight Number">
                   <Input name="flightCode" onChange={this.handleChange} />
                 </Form.Item>
@@ -240,7 +241,6 @@ class CreateFlight extends React.Component {
                     defaultValue={10}
                     min={10}
                     max={1}
-                    disabled
                   />
                 </Form.Item>
 
@@ -265,18 +265,6 @@ class CreateFlight extends React.Component {
                   <this.DeployContractButton />
                 </Form.Item>
               </Form>
-              {/* <Modal
-              title="⚠️ Proceed Payment"
-              visible={this.visible}
-            // onOk={this.handleOk}
-            // onCancel={this.handleCancel}
-            >
-              <p>
-                You are about to make a payment of $2000 from your wallet
-                (0x29D7d1dd5B6f9C864d9db560D72a247c178aE86B)
-              </p>
-              <p>Do you want to proceed?</p>
-            </Modal> */}
             </Content>
           </Spin>
           <Footer />

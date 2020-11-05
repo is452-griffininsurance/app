@@ -22,15 +22,15 @@ class Insurance extends React.Component {
 
   // tempinsuranceData = [];
 
-  async componentWillMount(){
+  async componentWillMount() {
     await this.loadDBdata();
-  }  
+  }
 
-  async loadDBdata(){
+  async loadDBdata() {
     let data = await getAllFlightInsurances()
     // console.log(data)
     this.setState({
-      insuranceData : data.insurances,
+      insuranceData: data.insurances,
     });
     console.log(this.state.insuranceData)
   }
@@ -52,50 +52,50 @@ class Insurance extends React.Component {
       confirm,
       clearFilters,
     }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={(node) => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() =>
-            this.handleSearch(selectedKeys, confirm, dataIndex)
-          }
-          style={{ width: 188, marginBottom: 8, display: "block" }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
+        <div style={{ padding: 8 }}>
+          <Input
+            ref={(node) => {
+              this.searchInput = node;
+            }}
+            placeholder={`Search ${dataIndex}`}
+            value={selectedKeys[0]}
+            onChange={(e) =>
+              setSelectedKeys(e.target.value ? [e.target.value] : [])
+            }
+            onPressEnter={() =>
+              this.handleSearch(selectedKeys, confirm, dataIndex)
+            }
+            style={{ width: 188, marginBottom: 8, display: "block" }}
+          />
+          <Space>
+            <Button
+              type="primary"
+              onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+              icon={<SearchOutlined />}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Search
           </Button>
-          <Button
-            onClick={() => this.handleReset(clearFilters)}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Reset
+            <Button
+              onClick={() => this.handleReset(clearFilters)}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Reset
           </Button>
-        </Space>
-      </div>
-    ),
+          </Space>
+        </div>
+      ),
     filterIcon: (filtered) => (
       <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
     ),
     onFilter: (value, record) =>
       record[dataIndex]
         ? record[dataIndex]
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase())
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
         : "",
     onFilterDropdownVisibleChange: (visible) => {
       if (visible) {
@@ -111,8 +111,8 @@ class Insurance extends React.Component {
           textToHighlight={text ? text.toString() : ""}
         />
       ) : (
-        text
-      ),
+          text
+        ),
   });
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -197,6 +197,9 @@ class Insurance extends React.Component {
         sortOrder:
           sortedInfo.columnKey === "premium_amount" && sortedInfo.order,
         ellipsis: true,
+        render: (premium_amount) => {
+          return premium_amount + " ETH"
+        }
       },
       {
         title: "Flight no.",
@@ -227,7 +230,7 @@ class Insurance extends React.Component {
         sorter: (a, b) => a.percent_insured - b.percent_insured,
         sortOrder: sortedInfo.columnKey === "percent_insured" && sortedInfo.order,
         render: (percent_insured) => {
-          return `${percent_insured * 100}%`;
+          return (percent_insured * 100).toFixed(2) + "%";
         },
         ellipsis: true,
       },
@@ -243,12 +246,14 @@ class Insurance extends React.Component {
         onFilter: (value, record) => record.status.includes(value),
         sorter: (a, b) => a.status.localeCompare(b.status),
         sortOrder: sortedInfo.columnKey === "status" && sortedInfo.order,
-        render: (status) => {
+        render: (status, record) => {
           let color = "#87d068";
-          if (status === "Closed") {
+          let tagValue = "Open"
+          if (record.percent_insured === 1) {
             color = "#FF0000";
+            tagValue = "Closed"
           }
-          return <Tag color={color}>{status.toUpperCase()}</Tag>;
+          return <Tag color={color}>{tagValue.toUpperCase()}</Tag>;
         },
         ellipsis: true,
       },
@@ -258,11 +263,13 @@ class Insurance extends React.Component {
         render: (status, record) => {
           // eslint-disable-next-line no-underscore-dangle
           const urlPath = `/investflight/${status._id}`;
-          return (
-            <Link to={urlPath}>
-              <Button>Invest</Button>
-            </Link>
-          );
+          if (record.percent_insured < 1) {
+            return (
+              <Link to={urlPath}>
+                <Button>Invest</Button>
+              </Link>
+            );
+          }
         },
       },
     ];

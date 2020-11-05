@@ -7,12 +7,12 @@ import {
   Input,
   Button,
   Card,
-  InputNumber,
   Progress,
   Tag,
   Spin,
+  Space,
+  Alert
 } from "antd";
-import { useParams } from "react-router-dom";
 import FlightInsurance from "../../blockchain/abis/FlightInsurance.json";
 import { API_URL } from "../../utils/utils";
 
@@ -39,7 +39,7 @@ class InvestFlight extends React.Component {
   }
 
   async componentWillMount() {
-    this.loadDBdata();
+    await this.loadDBdata();
   }
 
   async loadDBdata() {
@@ -250,9 +250,23 @@ class InvestFlight extends React.Component {
                 wrapperCol={{ span: 8 }}
                 layout="horizontal"
               >
+                {this.state.formMessage ? (
+                  <>
+                    <Alert
+                      message={(this.state.formMessage)}
+                      description={<a href="https://is452.cloud/flight">Go back to flight</a>}
+                      type="success"
+                      showIcon
+                    />
+
+                    {/* {this.state.formStatus}, {this.state.formMessage} */}
+                  </>
+                ) : (
+                    <></>
+                  )}
                 <Form.Item label="Percentage insured">
                   <Progress
-                    percent={this.state.contractDetails.percent_insured * 100}
+                    percent={(this.state.contractDetails.percent_insured * 100).toFixed(2)}
                     status="active"
                   />
                 </Form.Item>
@@ -296,13 +310,19 @@ class InvestFlight extends React.Component {
                     max={this.state.contractDetails?.max_insured_amount}
                     onChange={this.handleChange}
                   />
+                  <Space size="small">
+                    <Tag color="#87d068">Min amount to insure</Tag>{this.state.contractDetails.min_insured_amount}
+                    <Tag color="#f50">Max amount to insure</Tag>{this.state.contractDetails.max_insured_amount}
+                  </Space>
                 </Form.Item>
 
                 <Form.Item>
-                  <this.InsureButton />
-                  <Button type="primary" danger>
-                    Report
+                  <Space size="small">
+                    <this.InsureButton />
+                    <Button type="primary" danger>
+                      Report
                   </Button>
+                  </Space>
                 </Form.Item>
               </Form>
             </Content>
