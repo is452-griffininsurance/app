@@ -20,6 +20,8 @@ import { getInsuranceByID } from "../api.js";
 
 const { Content, Footer } = Layout;
 
+const { Search } = Input;
+
 const initialFormData = Object.freeze({
   insure_amount: 0.0001,
 });
@@ -48,6 +50,7 @@ class InvestFlight extends React.Component {
     this.setState({
       contractDetails: data.insurance,
       id: data.insurance._id,
+      minInsuredAmount: data.insurance.min_insured_amount
     });
     console.log(this.state.id);
     console.log(this.state.contractDetails);
@@ -73,6 +76,13 @@ class InvestFlight extends React.Component {
         [e.target.name]: e.target.value.trim(),
       }
     });
+  };
+
+  calculateEarning = (e) => {
+    const inputInsured = parseFloat(
+      document.getElementById("insure_amount").value
+    );
+    document.getElementById("premium_earned").value = inputInsured * 10; 
   };
 
   InsureButton = () => {
@@ -236,6 +246,7 @@ class InvestFlight extends React.Component {
   //     </Button>
   //   );
   // };
+  
   render() {
     return (
       <>
@@ -288,32 +299,30 @@ class InvestFlight extends React.Component {
                   </Card>
                 </Form.Item>
 
-                <Form.Item label="Premium Paid">
-                  {/* this is how much money they will get, so it should be calculated */}
-                  <Input
-                    value={this.state.contractDetails?.premium_amount}
-                    disable
-                  />
-                </Form.Item>
-
-                {/* <Form.Item label="Ratio">
-                  <Input defaultValue={0} type="number" min={1} />
-                </Form.Item> */}
-
                 <Form.Item label="Insure Amount">
                   {/* how much investors wanna cover */}
                   <Input
                     name="insure_amount"
-                    defaultValue={this.state.contractDetails?.min_insured_amount}
-                    type="number"
-                    min={this.state.contractDetails?.min_insured_amount}
-                    max={this.state.contractDetails?.max_insured_amount}
+                    id="insure_amount"
+                    defaultValue ={0}
                     onChange={this.handleChange}
+                    suffix="ETH"
                   />
                   <Space size="small">
                     <Tag color="#87d068">Min amount to insure</Tag>{this.state.contractDetails.min_insured_amount}
                     <Tag color="#f50">Max amount to insure</Tag>{this.state.contractDetails.max_insured_amount}
                   </Space>
+                </Form.Item>
+
+                <Form.Item label="Premium Earned">
+
+                  <Search 
+                    id="premium_earned"
+                    placeholder="Calculate premium earned"
+                    enterButton="Calculate"
+                    onSearch={this.calculateEarning}
+                    suffix="ETH"
+                  />
                 </Form.Item>
 
                 <Form.Item>
