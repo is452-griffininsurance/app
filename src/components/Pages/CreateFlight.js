@@ -241,6 +241,7 @@ class CreateFlight extends React.Component {
                     defaultValue={10}
                     min={10}
                     max={1}
+                    disabled
                   />
                 </Form.Item>
 
