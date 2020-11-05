@@ -26,7 +26,7 @@ function ManualTriggerPayout() {
   const TriggerPayoutButton = () => {
     const triggerPayout = () => {
       const data = formData;
-      fetch(`http://localhost:5001/contract/payout`, {
+      fetch(`https://api-contracts.is452.cloud/contract/payout`, {
         method: "POST",
         headers: {
           Accept: "application/json",
