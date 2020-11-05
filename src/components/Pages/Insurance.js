@@ -14,7 +14,7 @@ function Insurance() {
   return (
     <>
       <Layout className="layout">
-        <Content style={{ padding: "0 50px" }}>
+        <Content style={{ padding: "0 50px", height: "100vh" }}>
           <h1 style={{ marginTop: 10 }}>Insurance</h1>
           <div className="site-card-wrapper">
             <Row gutter={16}>
