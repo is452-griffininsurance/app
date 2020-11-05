@@ -1,54 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Table, Tag, Tooltip, Upload, Button, Row, Col, Divider } from 'antd';
+import { Table, Tag, Tooltip, Upload, Button, Row, Col, Divider, Progress } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { getAllInsurance } from '../../api';
 import '../../../App.css';
-
-const insuranceData = [
-    {
-        "key": 1,
-        "_id": "5f9b02ef07c1008333c9ec27",
-        "contract_address": "0x023mc0912mdsq0",
-        "coverage_amount": 1234.56,
-        "flight_date": "2020-12-12",
-        "flight_no": "SQ123",
-        "insurance_type": "flight_delay",
-        "insured_wallet_addr": "0xa012312310",
-        "insurers": [
-            {
-                "insuring_amount": 123,
-                "wallet_addr": "0x1u23jsd89askn"
-            }
-        ],
-        "max_insured_amount": 1234.56,
-        "min_insured_amount": 1234.56,
-        "percent_insured": 0.09963063763608088,
-        "premium_amount": 1234.56,
-        "status": "open"
-    },
-    {
-        "key": 2,
-        "_id": "5f9b0603c79b6c43b7319059",
-        "contract_address": "0xasdaw1231232",
-        "coverage_amount": 1234.56,
-        "flight_date": "2020-12-23",
-        "flight_no": "SQ565",
-        "insurance_type": "flight_delay",
-        "insured_wallet_addr": "0xkwkwi120",
-        "insurers": [
-            {
-                "insuring_amount": 123,
-                "wallet_addr": "0x1u23jsd89askn"
-            }
-        ],
-        "max_insured_amount": 1234.56,
-        "min_insured_amount": 1234.56,
-        "percent_insured": 0.09963063763608088,
-        "premium_amount": 1234.56,
-        "status": "open"
-    }
-]
 
 const DescriptionItem = ({ title, content }) => (
     <div className="site-description-item-profile-wrapper">
@@ -60,10 +15,6 @@ const DescriptionItem = ({ title, content }) => (
 const typeInsuranceList = [
     { text: 'Car', value: 'Car' },
     { text: 'Flight', value: 'Flight' }
-]
-const statusList = [
-    { text: 'Open', value: 'Open' },
-    { text: 'Close', value: 'Close' }
 ]
 
 
@@ -170,7 +121,7 @@ class InsuranceOwnedTable extends Component {
                 ),
             },
             {
-                title: 'Insurance Type',
+                title: <div>Insurance<br />Type</div>,
                 dataIndex: 'insurance_type',
                 key: 'insurance_type',
                 filters: typeInsuranceList,
@@ -190,19 +141,15 @@ class InsuranceOwnedTable extends Component {
                 title: 'Status',
                 dataIndex: 'status',
                 key: 'status',
-                dataIndex: 'status',
-                filters: statusList,
-                onFilter: (value, record) => record.status.includes(value),
                 ellipsis: true,
-                render: status => {
-                    if (status == 'open') {
-                        return <Tag color="green" key={status}>{}<Tooltip placement="topLeft" title={status.toUpperCase()}>{status.toUpperCase()}</Tooltip></Tag>;
-                    } else if (status == 'close') {
-                        return <Tag color="red" key={status}><Tooltip placement="topLeft" title={status.toUpperCase()}>{status.toUpperCase()}</Tooltip></Tag>;
-                    }
-                    return <Tooltip placement="topLeft" title={status.toUpperCase()}>{status.toUpperCase()}</Tooltip>;
+                render: (status, record) => {
+                    if (record.percent_insured === 1){
+                        return <Tag color="red" key='COMPLETED'><Tooltip placement="topLeft" title='COMPLETED'>COMPLETED</Tooltip></Tag>;
+                    } else if (record.status == 'open') {
+                        return <Tag color="green" key={record.status}><Tooltip placement="topLeft" title={record.status.toUpperCase()}>{record.status.toUpperCase()}</Tooltip></Tag>;
+                    } 
+                    return <Tooltip placement="topLeft" title={record.status}>{record.status}</Tooltip>;
                 },
-                width: '10%'
             }
         ];
         const columnsInsurers = [
@@ -216,9 +163,10 @@ class InsuranceOwnedTable extends Component {
                         <div style={{ color: 'rgb(121, 121, 121)' }}>{wallet_addr}</div>
                     </Tooltip>
                 ),
+                width: '80%'
             },
             {
-                title: <div style={{ color: 'rgb(61, 61, 61)' }}>Insuring Amount </div>,
+                title: <div style={{ color: 'rgb(61, 61, 61)' }}>Insuring<br/>Amount </div>,
                 dataIndex: 'insuring_amount',
                 key: 'insuring_amount',
                 ellipsis: true,
@@ -245,9 +193,16 @@ class InsuranceOwnedTable extends Component {
                                 </Col>
                             </Row>
                             <Divider style={{ marginBottom: '5px', marginTop: '5px' }} />
+                            <Row><Col span={15}><p className="site-description-item-profile-p">Percentage Insured</p></Col></Row>
+                            <Row>
+                                <Col span={15}>
+                                <Progress percent={(record.percent_insured * 100).toFixed(2)} status="active" style={{marginLeft: '10%'}}/>
+                                </Col>   
+                            </Row>
+                            <Divider style={{ marginBottom: '5px', marginTop: '5px' }} />
                             <Row><Col span={15}><p className="site-description-item-profile-p">Insurers</p></Col></Row>
                             <Row>
-                                <Col style={{ width: '90%' }}>
+                                <Col style={{width: '90%'}}>
                                     <Table columns={columnsInsurers} dataSource={record.insurers} size="small" pagination={false} bordered />
                                 </Col>
                             </Row>
@@ -266,9 +221,6 @@ class InsuranceOwnedTable extends Component {
                                 <Col span={12}>
                                     <DescriptionItem title="Min Insured Amount" content={record.min_insured_amount} />
                                 </Col>
-                                <Col span={12}>
-                                    <DescriptionItem title="Percentage Insured" content={record.percent_insured} />
-                                </Col>
                             </Row>
                             <Divider style={{ marginBottom: '5px', marginTop: '15px' }} />
                             <Row><Col span={15}><p className="site-description-item-profile-p">Flight Information</p></Col></Row>
@@ -279,7 +231,7 @@ class InsuranceOwnedTable extends Component {
                                 <Col span={12}>
                                     <DescriptionItem title="Flight Number" content={record.flight_no} />
                                 </Col>
-                                <Col span={22} style={{textAlign:'right'}}>
+                                <Col span={22} style={{ textAlign: 'right' }}>
                                     <Upload >
                                         <Button icon={<UploadOutlined />}>Upload</Button>
                                     </Upload>

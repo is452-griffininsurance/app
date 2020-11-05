@@ -103,6 +103,7 @@ function TopNavbar() {
           <img src={require('../Assets/LogoName.png')} style={{height:'50px'}}/>
           <Menu.Item key="Home" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
             Home
+            <Link to="/home" />
           </Menu.Item>
           <Menu.Item key="Insurance" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
             Insurance

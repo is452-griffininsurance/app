@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Table, Tag, Tooltip, Row, Col, Divider } from 'antd';
+import { Table, Tag, Tooltip, Row, Col, Divider, Progress } from 'antd';
 import { getAllInsurance } from '../../api';
 import '../../../App.css';
 
@@ -14,10 +14,6 @@ const DescriptionItem = ({ title, content }) => (
 const typeInsuranceList = [
     { text: 'Car', value: 'Car' },
     { text: 'Flight Delay', value: 'flight_delay' }
-]
-const statusList = [
-    { text: 'Open', value: 'Open' },
-    { text: 'Close', value: 'Close' }
 ]
 
 
@@ -93,7 +89,7 @@ class InsuranceInvestedTable extends Component {
                 ),
             },
             {
-                title: 'Insurance Type',
+                title: <div>Insurance<br />Type</div>,
                 dataIndex: 'insurance_type',
                 key: 'insurance_type',
                 filters: typeInsuranceList,
@@ -113,42 +109,40 @@ class InsuranceInvestedTable extends Component {
                 title: 'Status',
                 dataIndex: 'status',
                 key: 'status',
-                dataIndex: 'status',
-                filters: statusList,
-                onFilter: (value, record) => record.status.includes(value),
                 ellipsis: true,
-                render: status => {
-                    if (status == 'open') {
-                        return <Tag color="green" key={status}>{}<Tooltip placement="topLeft" title={status.toUpperCase()}>{status.toUpperCase()}</Tooltip></Tag>;
-                    } else if (status == 'close') {
-                        return <Tag color="red" key={status}><Tooltip placement="topLeft" title={status.toUpperCase()}>{status.toUpperCase()}</Tooltip></Tag>;
+                render: (status, record) => {
+                    if (record.percent_insured === 1) {
+                        return <Tag color="red" key='COMPLETED'><Tooltip placement="topLeft" title='COMPLETED'>COMPLETED</Tooltip></Tag>;
+
+                    } else if (record.status == 'open') {
+                        return <Tag color="green" key={record.status}><Tooltip placement="topLeft" title={record.status.toUpperCase()}>{record.status.toUpperCase()}</Tooltip></Tag>;
                     }
-                    return <Tooltip placement="topLeft" title={status.toUpperCase()}>{status.toUpperCase()}</Tooltip>;
+                    return <Tooltip placement="topLeft" title={record.status}>{record.status}</Tooltip>;
                 },
-                width: '10%'
             }
         ];
 
         const columnsInsurers = [
             {
-                title: <div style={{color:'rgb(61, 61, 61)'}}>Wallet Address</div>,
+                title: <div style={{ color: 'rgb(61, 61, 61)' }}>Wallet Address</div>,
                 dataIndex: 'wallet_addr',
                 key: 'wallet_addr',
                 ellipsis: true,
                 render: wallet_addr => (
                     <Tooltip placement="topLeft" title={wallet_addr}>
-                        <div style={{color:'rgb(121, 121, 121)'}}>{wallet_addr}</div>
+                        <div style={{ color: 'rgb(121, 121, 121)' }}>{wallet_addr}</div>
                     </Tooltip>
                 ),
+                width: '80%'
             },
             {
-                title: <div style={{color:'rgb(61, 61, 61)'}}>Insuring Amount </div>,
+                title: <div style={{ color: 'rgb(61, 61, 61)' }}>Insuring<br />Amount </div>,
                 dataIndex: 'insuring_amount',
                 key: 'insuring_amount',
                 ellipsis: true,
                 render: insuring_amount => (
                     <Tooltip placement="topLeft" title={insuring_amount} >
-                        <div style={{color:'rgb(121, 121, 121)'}}>{insuring_amount}</div>
+                        <div style={{ color: 'rgb(121, 121, 121)' }}>{insuring_amount}</div>
                     </Tooltip>
                 ),
             },
@@ -167,6 +161,13 @@ class InsuranceInvestedTable extends Component {
                                 <Row>
                                     <Col span={15}>
                                         <DescriptionItem title="Insured Wallet Address" content={record.insured_wallet_addr} />
+                                    </Col>
+                                </Row>
+                                <Divider style={{ marginBottom: '5px', marginTop: '5px' }} />
+                                <Row><Col span={15}><p className="site-description-item-profile-p">Percentage Insured</p></Col></Row>
+                                <Row>
+                                    <Col span={15}>
+                                        <Progress percent={(record.percent_insured * 100).toFixed(2)} status="active" style={{ marginLeft: '10%' }} />
                                     </Col>
                                 </Row>
                                 <Divider style={{ marginBottom: '5px', marginTop: '5px' }} />
@@ -190,9 +191,6 @@ class InsuranceInvestedTable extends Component {
                                     </Col>
                                     <Col span={12}>
                                         <DescriptionItem title="Min Insured Amount" content={record.min_insured_amount} />
-                                    </Col>
-                                    <Col span={12}>
-                                        <DescriptionItem title="Percentage Insured" content={record.percent_insured} />
                                     </Col>
                                 </Row>
                                 <Divider style={{ marginBottom: '5px', marginTop: '15px' }} />

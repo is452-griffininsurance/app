@@ -82,9 +82,10 @@ class TransactionTable extends Component {
                 title: 'Transaction ID',
                 dataIndex: '_id',
                 key: '_id',
-                sorter: (a, b) => a.transactionID - b.transactionID,
-                sortOrder: sortedInfo.columnKey === 'transactionID' && sortedInfo.order,
+                sorter: (a, b) => a._id.localeCompare(b._id),
+                sortOrder: sortedInfo.columnKey === '_id' && sortedInfo.order,
                 ellipsis: true,
+                width: '15%'
             },
             {
                 title: 'Date',
@@ -93,39 +94,43 @@ class TransactionTable extends Component {
                 sorter: (a, b) => a.date - b.date,
                 sortOrder: sortedInfo.columnKey === 'date' && sortedInfo.order,
                 ellipsis: true,
+                width: '10%'
             },
             {
-                title: 'Send',
+                title: 'Sending Wallet Address',
                 dataIndex: 'sending_wallet_addr',
                 key: 'sending_wallet_addr',
-                sorter: (a, b) => a.amount - b.amount,
+                sorter: (a, b) => a.sending_wallet_addr.localeCompare(b.sending_wallet_addr),
                 sortOrder: sortedInfo.columnKey === 'sending_wallet_addr' && sortedInfo.order,
                 ellipsis: true,
+                width: '27.5%'
+
             },
             {
-                title: 'Receiving',
+                title:'Receiving Wallet Address',
                 dataIndex: 'receiving_wallet_addr',
                 key: 'receiving_wallet_addr',
-                sorter: (a, b) => a.amount - b.amount,
+                sorter: (a, b) => a.receiving_wallet_addr - b.receiving_wallet_addr,
                 sortOrder: sortedInfo.columnKey === 'receiving_wallet_addr' && sortedInfo.order,
                 ellipsis: true,
+                width: '27.5%'
+
             },
             {
                 title: 'Amount',
                 dataIndex: 'transfer_amount',
                 key: 'transfer_amount',
-                sorter: (a, b) => a.amount - b.amount,
+                sorter: (a, b) => a.transfer_amount - b.transfer_amount,
                 sortOrder: sortedInfo.columnKey === 'transfer_amount' && sortedInfo.order,
                 ellipsis: true,
+                width: '10%'
             },
             {
-                title: 'Transaction Type',
+                title: <div>Transaction<br/>Type</div>,
                 dataIndex: 'transactionType',
                 key: 'transactionType',
                 filters: typeTransactionList,
                 onFilter: (value, record) => record.transactionType.includes(value),
-                sorter: (a, b) => a.transactionType.length - b.transactionType.length,
-                sortOrder: sortedInfo.columnKey === 'transactionType' && sortedInfo.order,
                 ellipsis: true,
                 render: transactionType => {
                     if (transactionType == 'Paying') {
@@ -135,6 +140,8 @@ class TransactionTable extends Component {
                     }
                     return transactionType
                 },
+                width: '10%'
+
             },
         ];
         return (

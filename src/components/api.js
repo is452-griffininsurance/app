@@ -1,11 +1,12 @@
 import axios from 'axios'
 
 const server_url = 'https://api.is452.cloud/'
+const wallet_address = '0xfeB87197aBd18dDaBD28B58b205936dfB4569B17'.toLowerCase()
 
 
 export const getAllTransactions = () => {
     return axios
-        .get(server_url + 'get_user_transactions?user_wallet_address=5fa01c6137335e93945fcaad')
+        .get(server_url + 'get_user_transactions?user_wallet_address=' + wallet_address)
         .then(response => {
             return response.data
         })
@@ -16,7 +17,7 @@ export const getAllTransactions = () => {
 
 export const getAllInsurance = () => {
     return axios
-        .get(server_url + 'get_insurance_by_user?user_wallet_address=' + '5fa01c6137335e93945fcaad')
+        .get(server_url + 'get_insurance_by_user?user_wallet_addr=' + wallet_address)
         .then(response => {
             return response.data
         })

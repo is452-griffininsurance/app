@@ -238,20 +238,12 @@ class Insurance extends React.Component {
         title: "Status",
         dataIndex: "status",
         key: "status",
-        filters: [
-          { text: "Open", value: "Open" },
-          { text: "Closed", value: "Closed" },
-        ],
-        filteredValue: filteredInfo.status || null,
-        onFilter: (value, record) => record.status.includes(value),
-        sorter: (a, b) => a.status.localeCompare(b.status),
-        sortOrder: sortedInfo.columnKey === "status" && sortedInfo.order,
         render: (status, record) => {
           let color = "#87d068";
           let tagValue = "Open"
           if (record.percent_insured === 1) {
             color = "#FF0000";
-            tagValue = "Closed"
+            tagValue = "Completed"
           }
           return <Tag color={color}>{tagValue.toUpperCase()}</Tag>;
         },
