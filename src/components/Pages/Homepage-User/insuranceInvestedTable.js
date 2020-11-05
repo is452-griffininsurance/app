@@ -63,11 +63,11 @@ class InsuranceInvestedTable extends Component {
         insuranceOwnedFilteredInfo = insuranceOwnedFilteredInfo || {};
         const columns = [
             {
-                title: 'Insurance ID',
+                title: <div>Insurance<br/>Address</div>,
                 dataIndex: '_id',
-                key: 'insuranceID',
-                sorter: (a, b) => a.insuranceID - b.insuranceID,
-                sortOrder: sortedInfo.columnKey === 'insuranceID' && sortedInfo.order,
+                key: '_id',
+                sorter: (a, b) => a._id.localeCompare(b._id),
+                sortOrder: sortedInfo.columnKey === '_id' && sortedInfo.order,
                 ellipsis: true,
                 render: _id => (
                     <Tooltip placement="topLeft" title={_id}>
@@ -76,10 +76,10 @@ class InsuranceInvestedTable extends Component {
                 ),
             },
             {
-                title: 'Contract Address',
+                title: <div>Contract<br/>Address</div>,
                 dataIndex: 'contract_address',
                 key: 'contract_address',
-                sorter: (a, b) => a.contract_address - b.contract_address,
+                sorter: (a, b) => a.contract_address.localeCompare(b.contract_address),
                 sortOrder: sortedInfo.columnKey === 'contract_address' && sortedInfo.order,
                 ellipsis: true,
                 render: contract_address => (
