@@ -281,7 +281,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 276,
-        "sourceUnit": 807,
+        "sourceUnit": 769,
         "src": "25:24:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -292,7 +292,7 @@
         "id": 3,
         "nodeType": "ImportDirective",
         "scope": 276,
-        "sourceUnit": 587,
+        "sourceUnit": 549,
         "src": "50:31:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -307,10 +307,10 @@
               "id": 4,
               "name": "ISmartInsurance",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 586,
+              "referencedDeclaration": 548,
               "src": "109:15:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ISmartInsurance_$586",
+                "typeIdentifier": "t_contract$_ISmartInsurance_$548",
                 "typeString": "contract ISmartInsurance"
               }
             },
@@ -320,7 +320,7 @@
           }
         ],
         "contractDependencies": [
-          586
+          548
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -328,7 +328,7 @@
         "id": 275,
         "linearizedBaseContracts": [
           275,
-          586
+          548
         ],
         "name": "AutoInsurance",
         "nodeType": "ContractDefinition",
@@ -340,10 +340,10 @@
               "id": 6,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 806,
+              "referencedDeclaration": 768,
               "src": "137:8:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$806",
+                "typeIdentifier": "t_contract$_SafeMath_$768",
                 "typeString": "library SafeMath"
               }
             },
@@ -372,7 +372,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_enum$_Status_$560",
+              "typeIdentifier": "t_enum$_Status_$522",
               "typeString": "enum ISmartInsurance.Status"
             },
             "typeName": {
@@ -380,10 +380,10 @@
               "id": 9,
               "name": "Status",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 560,
+              "referencedDeclaration": 522,
               "src": "223:6:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_enum$_Status_$560",
+                "typeIdentifier": "t_enum$_Status_$522",
                 "typeString": "enum ISmartInsurance.Status"
               }
             },
@@ -874,7 +874,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "1242:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -950,10 +950,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "1234:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1030,7 +1030,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "1369:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -1106,10 +1106,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "1361:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1186,7 +1186,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "1660:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -1267,10 +1267,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "1652:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1327,7 +1327,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 821,
+                        "referencedDeclaration": 783,
                         "src": "1734:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -1576,7 +1576,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "1988:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -1625,7 +1625,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 646,
+                        "referencedDeclaration": 608,
                         "src": "1976:11:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -1674,7 +1674,7 @@
                       "referencedDeclaration": 10,
                       "src": "2008:6:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$560",
+                        "typeIdentifier": "t_enum$_Status_$522",
                         "typeString": "enum ISmartInsurance.Status"
                       }
                     },
@@ -1688,10 +1688,10 @@
                         "name": "Status",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 560,
+                        "referencedDeclaration": 522,
                         "src": "2017:6:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_enum$_Status_$560_$",
+                          "typeIdentifier": "t_type$_t_enum$_Status_$522_$",
                           "typeString": "type(enum ISmartInsurance.Status)"
                         }
                       },
@@ -1705,13 +1705,13 @@
                       "referencedDeclaration": null,
                       "src": "2017:23:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$560",
+                        "typeIdentifier": "t_enum$_Status_$522",
                         "typeString": "enum ISmartInsurance.Status"
                       }
                     },
                     "src": "2008:32:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Status_$560",
+                      "typeIdentifier": "t_enum$_Status_$522",
                       "typeString": "enum ISmartInsurance.Status"
                     }
                   },
@@ -1858,7 +1858,7 @@
           },
           {
             "baseFunctions": [
-              563
+              525
             ],
             "body": {
               "id": 181,
@@ -1888,7 +1888,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "2117:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -1969,10 +1969,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "2109:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -2021,7 +2021,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "2193:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -2097,10 +2097,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "2185:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -2152,7 +2152,7 @@
                                 "name": "msg",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 821,
+                                "referencedDeclaration": 783,
                                 "src": "2347:3:0",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_magic_message",
@@ -2201,7 +2201,7 @@
                             "lValueRequested": false,
                             "memberName": "add",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 646,
+                            "referencedDeclaration": 608,
                             "src": "2329:17:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2278,10 +2278,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "2321:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -2339,7 +2339,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 821,
+                          "referencedDeclaration": 783,
                           "src": "2479:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -2381,7 +2381,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 821,
+                        "referencedDeclaration": 783,
                         "src": "2493:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -2444,7 +2444,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 821,
+                          "referencedDeclaration": 783,
                           "src": "2522:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -2489,7 +2489,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "2561:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -2542,7 +2542,7 @@
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 821,
+                              "referencedDeclaration": 783,
                               "src": "2545:3:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
@@ -2581,7 +2581,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 646,
+                        "referencedDeclaration": 608,
                         "src": "2536:24:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2647,7 +2647,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "2615:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -2696,7 +2696,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 646,
+                        "referencedDeclaration": 608,
                         "src": "2597:17:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2764,7 +2764,7 @@
           },
           {
             "baseFunctions": [
-              568
+              530
             ],
             "body": {
               "id": 194,
@@ -2783,7 +2783,7 @@
                           "name": "this",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 839,
+                          "referencedDeclaration": 801,
                           "src": "2724:4:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_contract$_AutoInsurance_$275",
@@ -2918,7 +2918,7 @@
           },
           {
             "baseFunctions": [
-              573
+              535
             ],
             "body": {
               "id": 203,
@@ -2935,7 +2935,7 @@
                     "referencedDeclaration": 10,
                     "src": "2830:6:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Status_$560",
+                      "typeIdentifier": "t_enum$_Status_$522",
                       "typeString": "enum ISmartInsurance.Status"
                     }
                   },
@@ -2981,7 +2981,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_Status_$560",
+                    "typeIdentifier": "t_enum$_Status_$522",
                     "typeString": "enum ISmartInsurance.Status"
                   },
                   "typeName": {
@@ -2989,10 +2989,10 @@
                     "id": 198,
                     "name": "Status",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 560,
+                    "referencedDeclaration": 522,
                     "src": "2805:6:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Status_$560",
+                      "typeIdentifier": "t_enum$_Status_$522",
                       "typeString": "enum ISmartInsurance.Status"
                     }
                   },
@@ -3010,7 +3010,7 @@
           },
           {
             "baseFunctions": [
-              578
+              540
             ],
             "body": {
               "id": 214,
@@ -3034,7 +3034,7 @@
                       "referencedDeclaration": 10,
                       "src": "2914:6:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$560",
+                        "typeIdentifier": "t_enum$_Status_$522",
                         "typeString": "enum ISmartInsurance.Status"
                       }
                     },
@@ -3049,13 +3049,13 @@
                       "referencedDeclaration": 206,
                       "src": "2923:7:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$560",
+                        "typeIdentifier": "t_enum$_Status_$522",
                         "typeString": "enum ISmartInsurance.Status"
                       }
                     },
                     "src": "2914:16:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Status_$560",
+                      "typeIdentifier": "t_enum$_Status_$522",
                       "typeString": "enum ISmartInsurance.Status"
                     }
                   },
@@ -3094,7 +3094,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_Status_$560",
+                    "typeIdentifier": "t_enum$_Status_$522",
                     "typeString": "enum ISmartInsurance.Status"
                   },
                   "typeName": {
@@ -3102,10 +3102,10 @@
                     "id": 205,
                     "name": "Status",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 560,
+                    "referencedDeclaration": 522,
                     "src": "2872:6:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Status_$560",
+                      "typeIdentifier": "t_enum$_Status_$522",
                       "typeString": "enum ISmartInsurance.Status"
                     }
                   },
@@ -3129,7 +3129,7 @@
           },
           {
             "baseFunctions": [
-              585
+              547
             ],
             "body": {
               "id": 273,
@@ -3219,10 +3219,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "3165:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -3422,10 +3422,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "3330:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -3523,7 +3523,7 @@
                             "referencedDeclaration": 10,
                             "src": "3508:6:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_enum$_Status_$560",
+                              "typeIdentifier": "t_enum$_Status_$522",
                               "typeString": "enum ISmartInsurance.Status"
                             }
                           },
@@ -3537,10 +3537,10 @@
                               "name": "Status",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 560,
+                              "referencedDeclaration": 522,
                               "src": "3517:6:0",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_enum$_Status_$560_$",
+                                "typeIdentifier": "t_type$_t_enum$_Status_$522_$",
                                 "typeString": "type(enum ISmartInsurance.Status)"
                               }
                             },
@@ -3554,13 +3554,13 @@
                             "referencedDeclaration": null,
                             "src": "3517:15:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_enum$_Status_$560",
+                              "typeIdentifier": "t_enum$_Status_$522",
                               "typeString": "enum ISmartInsurance.Status"
                             }
                           },
                           "src": "3508:24:0",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$560",
+                            "typeIdentifier": "t_enum$_Status_$522",
                             "typeString": "enum ISmartInsurance.Status"
                           }
                         },
@@ -3670,7 +3670,7 @@
                             "referencedDeclaration": 10,
                             "src": "3590:6:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_enum$_Status_$560",
+                              "typeIdentifier": "t_enum$_Status_$522",
                               "typeString": "enum ISmartInsurance.Status"
                             }
                           },
@@ -3684,10 +3684,10 @@
                               "name": "Status",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 560,
+                              "referencedDeclaration": 522,
                               "src": "3599:6:0",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_enum$_Status_$560_$",
+                                "typeIdentifier": "t_type$_t_enum$_Status_$522_$",
                                 "typeString": "type(enum ISmartInsurance.Status)"
                               }
                             },
@@ -3701,13 +3701,13 @@
                             "referencedDeclaration": null,
                             "src": "3599:28:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_enum$_Status_$560",
+                              "typeIdentifier": "t_enum$_Status_$522",
                               "typeString": "enum ISmartInsurance.Status"
                             }
                           },
                           "src": "3590:37:0",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$560",
+                            "typeIdentifier": "t_enum$_Status_$522",
                             "typeString": "enum ISmartInsurance.Status"
                           }
                         },
@@ -3933,7 +3933,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 276,
-        "sourceUnit": 807,
+        "sourceUnit": 769,
         "src": "25:24:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -3944,7 +3944,7 @@
         "id": 3,
         "nodeType": "ImportDirective",
         "scope": 276,
-        "sourceUnit": 587,
+        "sourceUnit": 549,
         "src": "50:31:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -3959,10 +3959,10 @@
               "id": 4,
               "name": "ISmartInsurance",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 586,
+              "referencedDeclaration": 548,
               "src": "109:15:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ISmartInsurance_$586",
+                "typeIdentifier": "t_contract$_ISmartInsurance_$548",
                 "typeString": "contract ISmartInsurance"
               }
             },
@@ -3972,7 +3972,7 @@
           }
         ],
         "contractDependencies": [
-          586
+          548
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -3980,7 +3980,7 @@
         "id": 275,
         "linearizedBaseContracts": [
           275,
-          586
+          548
         ],
         "name": "AutoInsurance",
         "nodeType": "ContractDefinition",
@@ -3992,10 +3992,10 @@
               "id": 6,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 806,
+              "referencedDeclaration": 768,
               "src": "137:8:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$806",
+                "typeIdentifier": "t_contract$_SafeMath_$768",
                 "typeString": "library SafeMath"
               }
             },
@@ -4024,7 +4024,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_enum$_Status_$560",
+              "typeIdentifier": "t_enum$_Status_$522",
               "typeString": "enum ISmartInsurance.Status"
             },
             "typeName": {
@@ -4032,10 +4032,10 @@
               "id": 9,
               "name": "Status",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 560,
+              "referencedDeclaration": 522,
               "src": "223:6:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_enum$_Status_$560",
+                "typeIdentifier": "t_enum$_Status_$522",
                 "typeString": "enum ISmartInsurance.Status"
               }
             },
@@ -4526,7 +4526,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "1242:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -4602,10 +4602,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "1234:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -4682,7 +4682,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "1369:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -4758,10 +4758,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "1361:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -4838,7 +4838,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "1660:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -4919,10 +4919,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "1652:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -4979,7 +4979,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 821,
+                        "referencedDeclaration": 783,
                         "src": "1734:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -5228,7 +5228,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "1988:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -5277,7 +5277,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 646,
+                        "referencedDeclaration": 608,
                         "src": "1976:11:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -5326,7 +5326,7 @@
                       "referencedDeclaration": 10,
                       "src": "2008:6:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$560",
+                        "typeIdentifier": "t_enum$_Status_$522",
                         "typeString": "enum ISmartInsurance.Status"
                       }
                     },
@@ -5340,10 +5340,10 @@
                         "name": "Status",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 560,
+                        "referencedDeclaration": 522,
                         "src": "2017:6:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_enum$_Status_$560_$",
+                          "typeIdentifier": "t_type$_t_enum$_Status_$522_$",
                           "typeString": "type(enum ISmartInsurance.Status)"
                         }
                       },
@@ -5357,13 +5357,13 @@
                       "referencedDeclaration": null,
                       "src": "2017:23:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$560",
+                        "typeIdentifier": "t_enum$_Status_$522",
                         "typeString": "enum ISmartInsurance.Status"
                       }
                     },
                     "src": "2008:32:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Status_$560",
+                      "typeIdentifier": "t_enum$_Status_$522",
                       "typeString": "enum ISmartInsurance.Status"
                     }
                   },
@@ -5510,7 +5510,7 @@
           },
           {
             "baseFunctions": [
-              563
+              525
             ],
             "body": {
               "id": 181,
@@ -5540,7 +5540,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "2117:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -5621,10 +5621,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "2109:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -5673,7 +5673,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "2193:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -5749,10 +5749,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "2185:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -5804,7 +5804,7 @@
                                 "name": "msg",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 821,
+                                "referencedDeclaration": 783,
                                 "src": "2347:3:0",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_magic_message",
@@ -5853,7 +5853,7 @@
                             "lValueRequested": false,
                             "memberName": "add",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 646,
+                            "referencedDeclaration": 608,
                             "src": "2329:17:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -5930,10 +5930,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "2321:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -5991,7 +5991,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 821,
+                          "referencedDeclaration": 783,
                           "src": "2479:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -6033,7 +6033,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 821,
+                        "referencedDeclaration": 783,
                         "src": "2493:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -6096,7 +6096,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 821,
+                          "referencedDeclaration": 783,
                           "src": "2522:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -6141,7 +6141,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "2561:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -6194,7 +6194,7 @@
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 821,
+                              "referencedDeclaration": 783,
                               "src": "2545:3:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
@@ -6233,7 +6233,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 646,
+                        "referencedDeclaration": 608,
                         "src": "2536:24:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -6299,7 +6299,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 821,
+                            "referencedDeclaration": 783,
                             "src": "2615:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -6348,7 +6348,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 646,
+                        "referencedDeclaration": 608,
                         "src": "2597:17:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -6416,7 +6416,7 @@
           },
           {
             "baseFunctions": [
-              568
+              530
             ],
             "body": {
               "id": 194,
@@ -6435,7 +6435,7 @@
                           "name": "this",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 839,
+                          "referencedDeclaration": 801,
                           "src": "2724:4:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_contract$_AutoInsurance_$275",
@@ -6570,7 +6570,7 @@
           },
           {
             "baseFunctions": [
-              573
+              535
             ],
             "body": {
               "id": 203,
@@ -6587,7 +6587,7 @@
                     "referencedDeclaration": 10,
                     "src": "2830:6:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Status_$560",
+                      "typeIdentifier": "t_enum$_Status_$522",
                       "typeString": "enum ISmartInsurance.Status"
                     }
                   },
@@ -6633,7 +6633,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_Status_$560",
+                    "typeIdentifier": "t_enum$_Status_$522",
                     "typeString": "enum ISmartInsurance.Status"
                   },
                   "typeName": {
@@ -6641,10 +6641,10 @@
                     "id": 198,
                     "name": "Status",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 560,
+                    "referencedDeclaration": 522,
                     "src": "2805:6:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Status_$560",
+                      "typeIdentifier": "t_enum$_Status_$522",
                       "typeString": "enum ISmartInsurance.Status"
                     }
                   },
@@ -6662,7 +6662,7 @@
           },
           {
             "baseFunctions": [
-              578
+              540
             ],
             "body": {
               "id": 214,
@@ -6686,7 +6686,7 @@
                       "referencedDeclaration": 10,
                       "src": "2914:6:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$560",
+                        "typeIdentifier": "t_enum$_Status_$522",
                         "typeString": "enum ISmartInsurance.Status"
                       }
                     },
@@ -6701,13 +6701,13 @@
                       "referencedDeclaration": 206,
                       "src": "2923:7:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Status_$560",
+                        "typeIdentifier": "t_enum$_Status_$522",
                         "typeString": "enum ISmartInsurance.Status"
                       }
                     },
                     "src": "2914:16:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Status_$560",
+                      "typeIdentifier": "t_enum$_Status_$522",
                       "typeString": "enum ISmartInsurance.Status"
                     }
                   },
@@ -6746,7 +6746,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_Status_$560",
+                    "typeIdentifier": "t_enum$_Status_$522",
                     "typeString": "enum ISmartInsurance.Status"
                   },
                   "typeName": {
@@ -6754,10 +6754,10 @@
                     "id": 205,
                     "name": "Status",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 560,
+                    "referencedDeclaration": 522,
                     "src": "2872:6:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Status_$560",
+                      "typeIdentifier": "t_enum$_Status_$522",
                       "typeString": "enum ISmartInsurance.Status"
                     }
                   },
@@ -6781,7 +6781,7 @@
           },
           {
             "baseFunctions": [
-              585
+              547
             ],
             "body": {
               "id": 273,
@@ -6871,10 +6871,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "3165:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -7074,10 +7074,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        824,
-                        825
+                        786,
+                        787
                       ],
-                      "referencedDeclaration": 825,
+                      "referencedDeclaration": 787,
                       "src": "3330:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -7175,7 +7175,7 @@
                             "referencedDeclaration": 10,
                             "src": "3508:6:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_enum$_Status_$560",
+                              "typeIdentifier": "t_enum$_Status_$522",
                               "typeString": "enum ISmartInsurance.Status"
                             }
                           },
@@ -7189,10 +7189,10 @@
                               "name": "Status",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 560,
+                              "referencedDeclaration": 522,
                               "src": "3517:6:0",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_enum$_Status_$560_$",
+                                "typeIdentifier": "t_type$_t_enum$_Status_$522_$",
                                 "typeString": "type(enum ISmartInsurance.Status)"
                               }
                             },
@@ -7206,13 +7206,13 @@
                             "referencedDeclaration": null,
                             "src": "3517:15:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_enum$_Status_$560",
+                              "typeIdentifier": "t_enum$_Status_$522",
                               "typeString": "enum ISmartInsurance.Status"
                             }
                           },
                           "src": "3508:24:0",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$560",
+                            "typeIdentifier": "t_enum$_Status_$522",
                             "typeString": "enum ISmartInsurance.Status"
                           }
                         },
@@ -7322,7 +7322,7 @@
                             "referencedDeclaration": 10,
                             "src": "3590:6:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_enum$_Status_$560",
+                              "typeIdentifier": "t_enum$_Status_$522",
                               "typeString": "enum ISmartInsurance.Status"
                             }
                           },
@@ -7336,10 +7336,10 @@
                               "name": "Status",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 560,
+                              "referencedDeclaration": 522,
                               "src": "3599:6:0",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_enum$_Status_$560_$",
+                                "typeIdentifier": "t_type$_t_enum$_Status_$522_$",
                                 "typeString": "type(enum ISmartInsurance.Status)"
                               }
                             },
@@ -7353,13 +7353,13 @@
                             "referencedDeclaration": null,
                             "src": "3599:28:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_enum$_Status_$560",
+                              "typeIdentifier": "t_enum$_Status_$522",
                               "typeString": "enum ISmartInsurance.Status"
                             }
                           },
                           "src": "3590:37:0",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$560",
+                            "typeIdentifier": "t_enum$_Status_$522",
                             "typeString": "enum ISmartInsurance.Status"
                           }
                         },
@@ -7564,7 +7564,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.0",
-  "updatedAt": "2020-11-04T17:22:07.241Z",
+  "updatedAt": "2020-11-05T07:06:38.929Z",
   "devdoc": {
     "methods": {}
   },
