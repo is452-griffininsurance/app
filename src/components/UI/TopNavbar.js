@@ -27,9 +27,7 @@ function TopNavbar() {
         web3.eth.defaultAccount = defaultAccount;
         setCurrentAddress(defaultAccount);
         console.log(defaultAccount);
-        web3.eth
-          .getBalance("0xfeB87197aBd18dDaBD28B58b205936dfB4569B17")
-          .then(setCurrentAmount);
+        web3.eth.getBalance(defaultAccount).then(setCurrentAmount);
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -100,31 +98,76 @@ function TopNavbar() {
           selectedKeys={[current]}
           mode="horizontal"
         >
-          <img src={require('../Assets/LogoName.png')} style={{height:'50px'}}/>
-          <Menu.Item key="Home" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
+          <img
+            src={require("../Assets/LogoName.png")}
+            style={{ height: "50px" }}
+          />
+          <Menu.Item
+            key="Home"
+            style={
+              localStorage.getItem("userType") === "user"
+                ? {}
+                : { display: "none" }
+            }
+          >
             Home
             <Link to="/home" />
           </Menu.Item>
-          <Menu.Item key="Insurance" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
+          <Menu.Item
+            key="Insurance"
+            style={
+              localStorage.getItem("userType") === "user"
+                ? {}
+                : { display: "none" }
+            }
+          >
             Insurance
             <Link to="/insurance" />
           </Menu.Item>
-          <Menu.Item key="Regulator" style={localStorage.getItem('userType') === 'admin' ? {} : {display: 'none'}}>
+          <Menu.Item
+            key="Regulator"
+            style={
+              localStorage.getItem("userType") === "admin"
+                ? {}
+                : { display: "none" }
+            }
+          >
             Home
             <Link to="/regulators" />
           </Menu.Item>
-          <Menu.Item key="RegulatorTriggerPayout" style={localStorage.getItem('userType') === 'admin' ? {} : {display: 'none'}}>
+          <Menu.Item
+            key="RegulatorTriggerPayout"
+            style={
+              localStorage.getItem("userType") === "admin"
+                ? {}
+                : { display: "none" }
+            }
+          >
             Trigger Payout
             <Link to="/triggerpayout" />
           </Menu.Item>
-          <Menu.Item key="WalletConnection" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
+          <Menu.Item
+            key="WalletConnection"
+            style={
+              localStorage.getItem("userType") === "user"
+                ? {}
+                : { display: "none" }
+            }
+          >
             <MetaMaskWalletConnection />
           </Menu.Item>
-          <Menu.Item key="WalletAmount" style={localStorage.getItem('userType') === 'user' ? {} : {display: 'none'}}>
+          <Menu.Item
+            key="WalletAmount"
+            style={
+              localStorage.getItem("userType") === "user"
+                ? {}
+                : { display: "none" }
+            }
+          >
             <MetaMaskWalletAmount />
           </Menu.Item>
           <Menu.Item key="Logout">
-            Logout 
+            Logout
             <Link to="/" />
           </Menu.Item>
         </Menu>

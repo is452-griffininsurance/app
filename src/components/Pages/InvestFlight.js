@@ -11,7 +11,7 @@ import {
   Tag,
   Spin,
   Space,
-  Alert
+  Alert,
 } from "antd";
 import FlightInsurance from "../../blockchain/abis/FlightInsurance.json";
 import { API_URL } from "../../utils/utils";
@@ -44,18 +44,6 @@ class InvestFlight extends React.Component {
     await this.loadDBdata();
   }
 
-  async loadDBdata() {
-    const data = await getInsuranceByID(this.props.match.params.id);
-    console.log(data);
-    this.setState({
-      contractDetails: data.insurance,
-      id: data.insurance._id,
-      minInsuredAmount: data.insurance.min_insured_amount
-    });
-    console.log(this.state.id);
-    console.log(this.state.contractDetails);
-  }
-
   componentDidMount() {
     if (window.ethereum) {
       window.ethereum.enable().then((account) => {
@@ -74,15 +62,27 @@ class InvestFlight extends React.Component {
         ...formData,
         // Trimming any whitespace
         [e.target.name]: e.target.value.trim(),
-      }
+      },
     });
   };
+
+  async loadDBdata() {
+    const data = await getInsuranceByID(this.props.match.params.id);
+    console.log(data);
+    this.setState({
+      contractDetails: data.insurance,
+      id: data.insurance._id,
+      minInsuredAmount: data.insurance.min_insured_amount,
+    });
+    console.log(this.state.id);
+    console.log(this.state.contractDetails);
+  }
 
   calculateEarning = (e) => {
     const inputInsured = parseFloat(
       document.getElementById("insure_amount").value
     );
-    document.getElementById("premium_earned").value = inputInsured * 10; 
+    document.getElementById("premium_earned").value = inputInsured * 10;
   };
 
   InsureButton = () => {
@@ -246,7 +246,7 @@ class InvestFlight extends React.Component {
   //     </Button>
   //   );
   // };
-  
+
   render() {
     return (
       <>
@@ -254,7 +254,17 @@ class InvestFlight extends React.Component {
           <Spin spinning={this.state.loading} tip="Loading..." size="large">
             <Content style={{ padding: "0 50px", height: "100vh" }}>
               <h1 style={{ marginTop: 10 }}>
-                Invest in <Tag>{this.state.contractDetails?.contract_address}</Tag> ✈️
+                Invest in{" "}
+                <Tag>
+                  <a
+                    href={`http://rinkeby.etherscan.io/address/${this.state.contractDetails?.contract_address}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {this.state.contractDetails?.contract_address}
+                  </a>
+                </Tag>{" "}
+                ✈️
               </h1>
               <Form
                 labelCol={{ span: 2 }}
@@ -264,8 +274,12 @@ class InvestFlight extends React.Component {
                 {this.state.formMessage ? (
                   <>
                     <Alert
-                      message={(this.state.formMessage)}
-                      description={<a href="https://is452.cloud/flight">Go back to flight</a>}
+                      message={this.state.formMessage}
+                      description={
+                        <a href="https://is452.cloud/flight">
+                          Go back to flight
+                        </a>
+                      }
                       type="success"
                       showIcon
                     />
@@ -273,11 +287,13 @@ class InvestFlight extends React.Component {
                     {/* {this.state.formStatus}, {this.state.formMessage} */}
                   </>
                 ) : (
-                    <></>
-                  )}
+                  <></>
+                )}
                 <Form.Item label="Percentage insured">
                   <Progress
-                    percent={(this.state.contractDetails.percent_insured * 100).toFixed(2)}
+                    percent={(
+                      this.state.contractDetails.percent_insured * 100
+                    ).toFixed(2)}
                     status="active"
                   />
                 </Form.Item>
@@ -304,19 +320,20 @@ class InvestFlight extends React.Component {
                   <Input
                     name="insure_amount"
                     id="insure_amount"
-                    defaultValue ={0}
+                    defaultValue={0}
                     onChange={this.handleChange}
                     suffix="ETH"
                   />
                   <Space size="small">
-                    <Tag color="#87d068">Min amount to insure</Tag>{this.state.contractDetails.min_insured_amount}
-                    <Tag color="#f50">Max amount to insure</Tag>{this.state.contractDetails.max_insured_amount}
+                    <Tag color="#87d068">Min amount to insure</Tag>
+                    {this.state.contractDetails.min_insured_amount}
+                    <Tag color="#f50">Max amount to insure</Tag>
+                    {this.state.contractDetails.max_insured_amount}
                   </Space>
                 </Form.Item>
 
                 <Form.Item label="Premium Earned">
-
-                  <Search 
+                  <Search
                     id="premium_earned"
                     placeholder="Calculate premium earned"
                     enterButton="Calculate"
@@ -330,7 +347,7 @@ class InvestFlight extends React.Component {
                     <this.InsureButton />
                     <Button type="primary" danger>
                       Report
-                  </Button>
+                    </Button>
                   </Space>
                 </Form.Item>
               </Form>
